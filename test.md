@@ -1,34 +1,212 @@
 <div align="center">
 
-![Header](https://capsule-render.vercel.app/api?type=waving&color=FF79C6&height=200&section=header&text=Bulatik&fontSize=40&fontAlignY=35&fontColor=ffffff&animation=fadeIn)
+# 🚀 Полный тест Markdown
+
+**Жирный текст** | *Курсив* | `инлайн-код` | ~~зачёркнутый~~
 
 </div>
 
-<div align="center">
+---
+
+## 1. Заголовки
+
+# H1
+## H2
+### H3
+#### H4
+##### H5
+###### H6
+
+---
+
+## 2. Текст
+
+Обычный абзац с **жирным**, *курсивом*, ***жирным курсивом***, `кодом`, ~~зачёркнутым~~ и [ссылкой](https://example.com).
+
+Ссылка с тайтлом: [Google](https://google.com "Поисковик")
+
+Автоссылка: https://example.com
+
+---
+
+## 3. Списки
+
+### Ненумерованный
+- Пункт 1
+- Пункт 2
+  - Вложенный 2.1
+  - Вложенный 2.2
+    - Глубокий 2.2.1
+- Пункт 3
+
+### Нумерованный
+1. Первый
+2. Второй
+   1. Вложенный
+   2. Вложенный
+3. Третий
+
+### Смешанный
+- Пункт
+  1. Нумерованный внутри
+  2. Ещё один
+- Ещё пункт
+
+---
+
+## 4. Цитаты
+
+> Простая цитата
+> Вторая строка
+
+> Вложенная цитата
+>> Уровень 2
+>>> Уровень 3
+
+---
+
+## 5. Код
+
+### Инлайн-код
+Функция `fmt.Println("Hello")` выводит текст.
+
+### Блок кода (Go)
+```go
+package main
+
+import "fmt"
+
+func main() {
+    // Комментарий
+    name := "Bulatik"
+    fmt.Printf("Привет, %s!\n", name)
+    
+    for i := 0; i < 5; i++ {
+        fmt.Println(i)
+    }
+}
+```
+
+### Блок кода (JavaScript)
+```javascript
+function hello(name) {
+    console.log(`Привет, ${name}!`);
+}
+
+const arr = [1, 2, 3];
+arr.forEach(n => console.log(n * 2));
+```
+
+### Блок кода (Python)
+```python
+def factorial(n):
+    if n <= 1:
+        return 1
+    return n * factorial(n - 1)
+
+print(factorial(10))
+```
+
+### Блок без языка
+```
+Просто текст
+без подсветки
+```
+
+---
+
+## 6. Таблицы
+
+| Язык | Год | Создатель |
+|------|-----|-----------|
+| Go | 2009 | Google |
+| Rust | 2010 | Mozilla |
+| Python | 1991 | Guido van Rossum |
+
+Таблица с выравниванием:
+
+| Лево | Центр | Право |
+|:-----|:-----:|------:|
+| a | b | c |
+| d | e | f |
+
+---
+
+## 7. Горизонтальные линии
+
+---
+
+***
+
+___
+
+---
+
+## 8. Картинки
+
+![Go Gopher](https://go.dev/images/gophers/ladder.svg)
+
+Картинка с атрибутами:
+<img src="https://go.dev/images/gophers/motorcycle.svg" width="200" alt="Gopher на мотоцикле">
+
+---
+
+## 9. Чек-листы
+
+- [x] Сделано
+- [x] Тоже сделано
+- [ ] Не сделано
+- [ ] Ещё не начато
+
+---
+
+## 10. Спецсимволы
+
+Символы: &copy; &reg; &trade; &amp; &lt; &gt; &quot;
+
+Эмодзи: 🚀 🔥 💻 🎯 ⚡
+
+Математика: 2^10 = 1024, H~2~O
+
+---
+
+## 11. Сноски
+
+Текст со сноской[^1] и ещё одной[^2].
+
+[^1]: Это первая сноска.
+[^2]: Это вторая сноска.
+
+---
+
+## 12. HTML внутри Markdown
 
 <div align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=22&duration=3000&pause=500&color=FF79C6&center=true&vCenter=true&width=435&lines=Fullstack+Developer;16+years+old+coder;PHP+%7C+JS+%7C+HTML+%7C+CSS;Always+learning+new+things" alt="Typing SVG" />
+  <b>Это HTML</b><br>
+  <i>И это работает</i>
 </div>
 
-[![Website](https://img.shields.io/badge/bulatik.website-333333?style=for-the-badge&logoColor=white)](https://bulatik.website)
-[![Telegram](https://img.shields.io/badge/Telegram-333333?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/bulatik205)
+<details>
+<summary>Кликни чтобы раскрыть</summary>
 
-![JavaScript](https://img.shields.io/badge/JavaScript-333333?style=for-the-badge&logo=javascript&logoColor=white)
-![PHP](https://img.shields.io/badge/PHP-333333?style=for-the-badge&logo=php&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-333333?style=for-the-badge&logo=mysql&logoColor=white)
-![Linux](https://img.shields.io/badge/Linux-333333?style=for-the-badge&logo=linux&logoColor=white)
+Скрытый текст!
 
-> Полтора года пишу код. Нравится C и PHP.
+</details>
 
-</div>
+---
+
+## 13. Экранирование
+
+\*Это не курсив\*
+
+\# Это не заголовок
+
+\`Это не код\`
+
+---
 
 <div align="center">
 
-![Header](https://capsule-render.vercel.app/api?type=waving&height=100&color=FF79C6&animation=fadeIn&section=footer)
+**КОНЕЦ ТЕСТА** ✅
 
-<!-- this return scarry error. wait
-![Profile Details](https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=bulatik205&theme=dracula)
--->
-
-![Visitors](https://visitor-badge.laobi.icu/badge?page_id=bulatik205.profile&color=FF79C6)
 </div>
