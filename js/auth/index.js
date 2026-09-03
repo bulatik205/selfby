@@ -1,5 +1,5 @@
 let timerInterval;
-let countdown = 30;
+let countdown = 10;
 
 function showError(message) {
     const errorDiv = document.getElementById('errorMessage');
@@ -11,7 +11,7 @@ function showError(message) {
     timerBox.style.display = 'flex';
 
     clearInterval(timerInterval);
-    countdown = 30;
+    countdown = 10;
     document.getElementById('timerCount').textContent = countdown;
 
     timerInterval = setInterval(() => {

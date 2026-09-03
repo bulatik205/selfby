@@ -150,6 +150,7 @@ body {
   width: 100%;
   font-weight: 500;
   font-family: "Montserrat", sans-serif;
+  margin-bottom: 20px;
 }
 
 .messages-row {
