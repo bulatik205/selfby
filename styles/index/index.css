@@ -1,0 +1,112 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  min-height: 100vh;
+}
+
+.wrapper {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  background-color: #333;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+}
+
+.b-btn {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+  padding: 10px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s;
+}
+.b-btn:hover {
+  background: white;
+  color: #333;
+}
+
+.l-btn {
+  background: #fff;
+  color: #333;
+  border: 2px solid #333;
+  padding: 10px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s;
+}
+.l-btn:hover {
+  background: #333;
+  color: #fff;
+}
+
+.header {
+  background: #111;
+  color: white;
+  padding: 20px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header .logo {
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.welcome-block {
+  background: white;
+  border-radius: 12px;
+  padding: 60px 50px;
+  text-align: center;
+  max-width: 600px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+.welcome-block .welcome-title {
+  font-size: 36px;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+.welcome-block .welcome-text {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #666;
+  margin-bottom: 40px;
+}
+.welcome-block .auth-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .welcome-block {
+    padding: 40px 30px;
+  }
+  .welcome-block .welcome-title {
+    font-size: 28px;
+  }
+  .welcome-block .auth-buttons {
+    flex-direction: column;
+    gap: 15px;
+  }
+}/*# sourceMappingURL=index.css.map */
