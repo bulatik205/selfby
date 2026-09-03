@@ -49,6 +49,16 @@ func main() {
 
 	http.HandleFunc("/auth/reg", auth.RegisterUser(db))
 
+	http.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
+		if checkSession(w, r) {
+			http.Redirect(w, r, authPath, http.StatusSeeOther)
+		} else {
+			http.ServeFile(w, r, bladeDir+"/login.html")
+		}
+	})
+
+	http.HandleFunc("/auth/login", auth.LoginUser(db))
+
 	http.HandleFunc("/dashboard", func(w http.ResponseWriter, r *http.Request) {
 		if checkSession(w, r) {
 			http.ServeFile(w, r, bladeDir+"/dashboard.html")
