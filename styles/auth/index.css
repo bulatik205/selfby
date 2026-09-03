@@ -1,0 +1,224 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  min-height: 100vh;
+}
+
+.wrapper {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  background-color: #333;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+}
+
+.b-btn {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+  padding: 10px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s;
+}
+.b-btn:hover {
+  background: white;
+  color: #333;
+}
+
+.l-btn {
+  background: #fff;
+  color: #333;
+  border: 2px solid #333;
+  padding: 10px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s;
+}
+.l-btn:hover {
+  background: #333;
+  color: #fff;
+}
+
+.header {
+  background: #111;
+  color: white;
+  padding: 20px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header .logo {
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.welcome-block {
+  background: white;
+  border-radius: 12px;
+  padding: 60px 50px;
+  text-align: center;
+  max-width: 600px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+.welcome-block .welcome-title {
+  font-size: 36px;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+.welcome-block .welcome-text {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #666;
+  margin-bottom: 10px;
+}
+.welcome-block .auth-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .welcome-block {
+    padding: 40px 30px;
+  }
+  .welcome-block .welcome-title {
+    font-size: 28px;
+  }
+  .welcome-block .auth-buttons {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+.auth-form {
+  text-align: left;
+}
+.auth-form .form-group {
+  margin-bottom: 25px;
+}
+.auth-form .form-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 8px;
+}
+.auth-form .form-group input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+  transition: all 0.3s;
+}
+.auth-form .form-group input:focus {
+  outline: none;
+  border-color: #333;
+  box-shadow: 0 0 0 3px rgba(51, 51, 51, 0.1);
+}
+.auth-form .form-group input::-moz-placeholder {
+  color: #999;
+}
+.auth-form .form-group input::placeholder {
+  color: #999;
+}
+.auth-form .form-actions {
+  margin-top: 30px;
+}
+.auth-form .form-actions .submit-btn {
+  width: 100%;
+  font-weight: 500;
+  font-family: "Montserrat", sans-serif;
+  margin-bottom: 20px;
+}
+
+.messages-row {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.error-message {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff3f3;
+  border: 1px solid #ffcccc;
+  border-radius: 8px;
+  color: #cc0000;
+  padding: 12px 15px;
+  font-size: 14px;
+  flex: 1;
+  animation: slideIn 0.3s ease-out;
+}
+.error-message .error-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.error-message #errorText {
+  flex: 1;
+  text-align: left;
+}
+.error-message .error-close {
+  background: none;
+  border: none;
+  color: #cc0000;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0 5px;
+  flex-shrink: 0;
+  transition: all 0.3s;
+}
+.error-message .error-close:hover {
+  transform: scale(1.2);
+  color: #ff0000;
+}
+
+.timer-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff3f3;
+  border: 1px solid #ffcccc;
+  border-radius: 8px;
+  color: #cc0000;
+  min-width: 50px;
+  padding: 12px 10px;
+  font-size: 18px;
+  font-weight: 600;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}/*# sourceMappingURL=index.css.map */
