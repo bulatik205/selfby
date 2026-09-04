@@ -28,7 +28,7 @@
 
             <hr>
 
-            <div class="menu-projects">
+            <div class="menu-projects" id="projectsList">
                 <div class="project">
                     <a href="#" class="project-link">My Project</a>
                     <a href="#" class="project-link icon-btn"><img src="../images/view.png" alt=""></a>
@@ -73,6 +73,31 @@
             </div>
         </div>
     </main>
+
+    <div class="modal" id="newProjectModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Новый проект</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="text" placeholder="Название проекта" class="project-name-input" id="projectName">
+                
+                <select class="project-type-select" id="projectType">
+                    <option value="">Выберите тип проекта</option>
+                    <option value="private">Закрытый</option>
+                    <option value="public">Открытый</option>
+                </select>
+                
+                <textarea placeholder="Описание проекта" rows="4" id="projectDescription"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="create-btn l-btn" id="createProjectBtn">Создать</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/dashboard/index.js"></script>
 </body>
 
 </html>
