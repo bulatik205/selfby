@@ -217,12 +217,43 @@ body {
   flex-direction: column;
   gap: 15px;
 }
-.modal-body input, .modal-body textarea {
+.modal-body input,
+.modal-body textarea {
   padding: 12px;
   border: 1px solid #ddd;
   border-radius: 8px;
   font-family: inherit;
   font-size: 14px;
+}
+.modal-body select,
+.modal-body textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+.modal-body select:focus,
+.modal-body textarea:focus {
+  outline: none;
+  border-color: #4CAF50;
+}
+.modal-body select {
+  cursor: pointer;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px;
+  padding-right: 40px;
+}
+.modal-body textarea {
+  resize: vertical;
+  min-height: 100px;
 }
 .modal-footer {
   display: flex;
@@ -249,5 +280,15 @@ body {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
   }
 }/*# sourceMappingURL=index.css.map */
