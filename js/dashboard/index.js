@@ -7,6 +7,31 @@ const projectTypeSelect = document.getElementById('projectType');
 const projectDescriptionInput = document.getElementById('projectDescription');
 const projectsList = document.getElementById('projectsList');
 
+document.addEventListener('DOMContentLoaded', loadProjects);
+
+async function loadProjects() {
+    try {
+        const response = await fetch('/api/v1/getProjects');
+        const data = await response.json();
+
+        if (response.ok) {
+            projectsList.innerHTML = '';
+            
+            if (data.length === 0) {
+                showEmptyState();
+            } else {
+                data.forEach(project => {
+                    addProjectToList(project);
+                });
+            }
+        } else {
+            console.error('Ошибка загрузки проектов:', data.error);
+        }
+    } catch (error) {
+        console.error('Ошибка:', error);
+    }
+}
+
 newProjectBtn.addEventListener('click', () => {
     modal.classList.add('active');
     clearModalFields();
@@ -53,6 +78,9 @@ createProjectBtn.addEventListener('click', async () => {
         if (response.ok) {
             modal.classList.remove('active');
             clearModalFields();
+            
+            removeEmptyState();
+            
             addProjectToList(data);
         } else {
             showError(data.error || 'Ошибка при создании проекта');
@@ -66,6 +94,7 @@ createProjectBtn.addEventListener('click', async () => {
 function addProjectToList(project) {
     const projectDiv = document.createElement('div');
     projectDiv.className = 'project';
+    
     projectDiv.innerHTML = `
         <a href="/project/${project.id}" class="project-link">${project.name}</a>
         <a href="/project/${project.id}" class="project-link icon-btn">
@@ -73,7 +102,7 @@ function addProjectToList(project) {
         </a>
     `;
     
-    projectsList.insertBefore(projectDiv, projectsList.firstChild);
+    projectsList.appendChild(projectDiv);
 }
 
 function clearModalFields() {
@@ -98,6 +127,26 @@ function showError(message) {
         text-align: center;
     `;
     document.querySelector('.modal-body').appendChild(errorDiv);
+}
+
+function showEmptyState() {
+    const emptyDiv = document.createElement('div');
+    emptyDiv.className = 'empty-state';
+    emptyDiv.textContent = 'У вас пока нет проектов';
+    emptyDiv.style.cssText = `
+        color: #999;
+        font-size: 14px;
+        text-align: center;
+        padding: 20px;
+    `;
+    projectsList.appendChild(emptyDiv);
+}
+
+function removeEmptyState() {
+    const emptyState = document.querySelector('.empty-state');
+    if (emptyState) {
+        emptyState.remove();
+    }
 }
 
 function removeError() {

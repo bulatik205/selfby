@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"selfby/config"
-	new_projects "selfby/handlers/api"
+	"selfby/handlers/api"
 	"selfby/handlers/auth"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -69,7 +69,8 @@ func main() {
 		}
 	})
 
-	http.HandleFunc("/api/v1/newProject", new_projects.NewProject(db))
+	http.HandleFunc("/api/v1/newProject", api.NewProject(db))
+	http.HandleFunc("/api/v1/getProjects", api.GetProjects(db))
 
 	fmt.Printf("Сервер запущен на http://localhost:%s\n", cfg.ServerPort)
 	http.ListenAndServe(":"+cfg.ServerPort, nil)

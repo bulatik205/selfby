@@ -1,4 +1,4 @@
-package new_projects
+package api
 
 import (
 	"database/sql"
