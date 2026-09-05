@@ -30,7 +30,6 @@ async function loadUserData() {
         const user = await response.json();
 
         userData = user;
-        console.log(userData);
         
         usernameSpan.textContent = user.username;
         profileBtn.textContent = user.username;
