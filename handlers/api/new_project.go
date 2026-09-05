@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"regexp"
 	"strings"
 	"time"
 )
@@ -46,14 +47,25 @@ func NewProject(db *sql.DB) http.HandlerFunc {
 			return
 		}
 
+		req.Name = strings.TrimSpace(req.Name)
+		req.Description = strings.TrimSpace(req.Description)
+		req.Type = strings.TrimSpace(req.Type)
+
 		if errMsg := validateProject(req); errMsg != "" {
 			respondWithError(w, http.StatusBadRequest, errMsg)
 			return
 		}
 
-		req.Name = strings.TrimSpace(req.Name)
-		req.Description = strings.TrimSpace(req.Description)
-		req.Type = strings.TrimSpace(req.Type)
+		exists, err := checkProjectNameExists(db, req.Name)
+		if err != nil {
+			log.Println("Ошибка проверки уникальности:", err)
+			respondWithError(w, http.StatusInternalServerError, "Ошибка сервера")
+			return
+		}
+		if exists {
+			respondWithError(w, http.StatusConflict, "Проект с таким названием уже существует")
+			return
+		}
 
 		projectID, err := saveProject(db, userID, req)
 		if err != nil {
@@ -103,16 +115,43 @@ func validateProject(req ProjectRequest) string {
 	if req.Name == "" {
 		return "Название проекта обязательно"
 	}
-	if len(req.Name) > 255 {
-		return "Название проекта слишком длинное"
+
+	if len(req.Name) < 3 {
+		return "Название должно быть не менее 3 символов"
 	}
+
+	if len(req.Name) > 50 {
+		return "Название должно быть не более 50 символов"
+	}
+
+	validNameRegex := regexp.MustCompile(`^[a-zA-Z0-9_-]+$`)
+	if !validNameRegex.MatchString(req.Name) {
+		return "Название может содержать только английские буквы, цифры, дефисы и подчеркивания (без пробелов)"
+	}
+
 	if req.Type == "" {
 		return "Тип проекта обязателен"
 	}
-	if len(req.Type) > 255 {
-		return "Тип проекта слишком длинный"
+
+	if req.Type != "private" && req.Type != "public" {
+		return "Тип проекта может быть только 'private' или 'public'"
 	}
+
 	return ""
+}
+
+func checkProjectNameExists(db *sql.DB, name string) (bool, error) {
+	var count int
+	err := db.QueryRow(
+		"SELECT COUNT(*) FROM projects WHERE LOWER(name) = LOWER(?)",
+		name,
+	).Scan(&count)
+
+	if err != nil {
+		return false, err
+	}
+
+	return count > 0, nil
 }
 
 func saveProject(db *sql.DB, userID int64, req ProjectRequest) (int64, error) {
