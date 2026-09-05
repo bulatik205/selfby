@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"net/url"
+	"regexp"
 	"strings"
 	"time"
 
@@ -25,22 +26,34 @@ func RegisterUser(db *sql.DB) http.HandlerFunc {
 			return
 		}
 
+		username := strings.TrimSpace(r.FormValue("username"))
 		email := strings.ToLower(strings.TrimSpace(r.FormValue("email")))
 		password := r.FormValue("password")
 
-		if errMsg := validateRegistration(email, password); errMsg != "" {
+		if errMsg := validateRegistration(username, email, password); errMsg != "" {
 			RedirectWithError(w, r, errMsg)
 			return
 		}
 
-		exists, err := checkUserExists(db, email)
+		exists, err := checkUserExistsByEmail(db, email)
 		if err != nil {
-			log.Println("Ошибка проверки пользователя:", err)
+			log.Println("Ошибка проверки email:", err)
 			RedirectWithError(w, r, "Ошибка сервера")
 			return
 		}
 		if exists {
 			RedirectWithError(w, r, "Пользователь с таким email уже существует")
+			return
+		}
+
+		exists, err = checkUserExistsByUsername(db, username)
+		if err != nil {
+			log.Println("Ошибка проверки username:", err)
+			RedirectWithError(w, r, "Ошибка сервера")
+			return
+		}
+		if exists {
+			RedirectWithError(w, r, "Имя пользователя уже занято")
 			return
 		}
 
@@ -51,7 +64,7 @@ func RegisterUser(db *sql.DB) http.HandlerFunc {
 			return
 		}
 
-		userID, err := saveUser(db, email, string(hashedPassword))
+		userID, err := saveUser(db, username, email, string(hashedPassword))
 		if err != nil {
 			log.Println("Ошибка сохранения пользователя:", err)
 			RedirectWithError(w, r, "Ошибка при регистрации")
@@ -67,7 +80,7 @@ func RegisterUser(db *sql.DB) http.HandlerFunc {
 
 		setSessionCookie(w, sessionToken)
 
-		log.Printf("Зарегистрирован новый пользователь: %s (ID: %d)", email, userID)
+		log.Printf("Зарегистрирован новый пользователь: %s (ID: %d, username: %s)", email, userID, username)
 		http.Redirect(w, r, "/dashboard", http.StatusSeeOther)
 	}
 }
@@ -101,7 +114,19 @@ func RedirectWithError(w http.ResponseWriter, r *http.Request, message string) {
 	http.Redirect(w, r, "/reg?error="+url.QueryEscape(message), http.StatusSeeOther)
 }
 
-func validateRegistration(email, password string) string {
+func validateRegistration(username, email, password string) string {
+	if username == "" {
+		return "Имя пользователя обязательно для заполнения"
+	}
+	if !isValidUsername(username) {
+		return "Имя пользователя может содержать только буквы, цифры и символы _ -"
+	}
+	if len(username) < 3 {
+		return "Имя пользователя должно быть не менее 3 символов"
+	}
+	if len(username) > 30 {
+		return "Имя пользователя должно быть не более 30 символов"
+	}
 	if email == "" || password == "" {
 		return "Все поля обязательны для заполнения"
 	}
@@ -112,6 +137,11 @@ func validateRegistration(email, password string) string {
 		return "Пароль должен быть не менее 6 символов"
 	}
 	return ""
+}
+
+func isValidUsername(username string) bool {
+	validUsernameRegex := regexp.MustCompile(`^[a-zA-Z0-9_-]+$`)
+	return validUsernameRegex.MatchString(username)
 }
 
 func isValidEmail(email string) bool {
@@ -125,7 +155,7 @@ func isValidEmail(email string) bool {
 	return true
 }
 
-func checkUserExists(db *sql.DB, email string) (bool, error) {
+func checkUserExistsByEmail(db *sql.DB, email string) (bool, error) {
 	var count int
 	err := db.QueryRow("SELECT COUNT(*) FROM users WHERE email = ?", email).Scan(&count)
 	if err != nil {
@@ -134,10 +164,19 @@ func checkUserExists(db *sql.DB, email string) (bool, error) {
 	return count > 0, nil
 }
 
-func saveUser(db *sql.DB, email, passwordHash string) (int64, error) {
+func checkUserExistsByUsername(db *sql.DB, username string) (bool, error) {
+	var count int
+	err := db.QueryRow("SELECT COUNT(*) FROM users WHERE username = ?", username).Scan(&count)
+	if err != nil {
+		return false, err
+	}
+	return count > 0, nil
+}
+
+func saveUser(db *sql.DB, username, email, passwordHash string) (int64, error) {
 	result, err := db.Exec(
-		"INSERT INTO users (email, password_hash) VALUES (?, ?)",
-		email, passwordHash,
+		"INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)",
+		username, email, passwordHash,
 	)
 	if err != nil {
 		return 0, err

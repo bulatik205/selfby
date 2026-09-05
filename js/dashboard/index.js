@@ -6,8 +6,42 @@ const projectNameInput = document.getElementById('projectName');
 const projectTypeSelect = document.getElementById('projectType');
 const projectDescriptionInput = document.getElementById('projectDescription');
 const projectsList = document.getElementById('projectsList');
+const profileBtn = document.getElementById('profileBtn');
+const usernameSpan = document.getElementById('username');
+let userData = [];
 
-document.addEventListener('DOMContentLoaded', loadProjects);
+document.addEventListener('DOMContentLoaded', () => {
+    loadProjects();
+    loadUserData();
+});
+
+async function loadUserData() {
+    try {
+        const response = await fetch('/api/v1/getUser');
+        
+        if (!response.ok) {
+            if (response.status === 401) {
+                window.location.href = '/login';
+                return;
+            }
+            throw new Error('Ошибка загрузки данных пользователя');
+        }
+        
+        const user = await response.json();
+
+        userData = user;
+        console.log(userData);
+        
+        usernameSpan.textContent = user.username;
+        profileBtn.textContent = user.username;
+        
+        return user;
+    } catch (error) {
+        console.error('Ошибка:', error);
+        usernameSpan.textContent = 'Пользователь';
+        profileBtn.textContent = 'Profile';
+    }
+}
 
 async function loadProjects() {
     try {
@@ -21,7 +55,7 @@ async function loadProjects() {
                 showEmptyState();
             } else {
                 data.forEach(project => {
-                    addProjectToList(project);
+                    addProjectToList(project, userData);
                 });
             }
         } else {
@@ -81,7 +115,7 @@ createProjectBtn.addEventListener('click', async () => {
             
             removeEmptyState();
             
-            addProjectToList(data);
+            addProjectToList(data, userData);
         } else {
             showError(data.error || 'Ошибка при создании проекта');
         }
@@ -91,13 +125,13 @@ createProjectBtn.addEventListener('click', async () => {
     }
 });
 
-function addProjectToList(project) {
+function addProjectToList(project, userData) {
     const projectDiv = document.createElement('div');
     projectDiv.className = 'project';
     
     projectDiv.innerHTML = `
-        <a href="/project/${project.id}" class="project-link">${project.name}</a>
-        <a href="/project/${project.id}" class="project-link icon-btn">
+        <a href="/editor/${project.id}" class="project-link">${project.name}</a>
+        <a href="/${userData.username}/${project.id}" class="project-link icon-btn">
             <img src="../images/view.png" alt="Просмотр">
         </a>
     `;

@@ -71,6 +71,7 @@ func main() {
 
 	http.HandleFunc("/api/v1/newProject", api.NewProject(db))
 	http.HandleFunc("/api/v1/getProjects", api.GetProjects(db))
+	http.HandleFunc("/api/v1/getUser", api.GetCurrentUser(db))
 
 	fmt.Printf("Сервер запущен на http://localhost:%s\n", cfg.ServerPort)
 	http.ListenAndServe(":"+cfg.ServerPort, nil)
