@@ -65,7 +65,6 @@ func NewWork(db *sql.DB) http.HandlerFunc {
 			return
 		}
 
-		// Получаем ID проекта по имени и проверяем владение
 		var projectID int64
 		err = db.QueryRow(
 			"SELECT id FROM projects WHERE owner_id = ? AND name = ?",
@@ -82,7 +81,6 @@ func NewWork(db *sql.DB) http.HandlerFunc {
 			return
 		}
 
-		// Генерируем slug
 		baseSlug := generateSlug(req.Title)
 		slug, err := makeUniqueSlug(db, userID, baseSlug)
 		if err != nil {
@@ -90,7 +88,6 @@ func NewWork(db *sql.DB) http.HandlerFunc {
 			return
 		}
 
-		// Сохраняем
 		result, err := db.Exec(
 			"INSERT INTO works (owner_id, at_project, title, slug, content_md, content_html) VALUES (?, ?, ?, ?, '', '')",
 			userID, projectID, req.Title, slug,
@@ -155,7 +152,6 @@ func CheckSlug(db *sql.DB) http.HandlerFunc {
 			return
 		}
 
-		// Проверяем, что проект принадлежит пользователю
 		var projectID int64
 		err = db.QueryRow(
 			"SELECT id FROM projects WHERE owner_id = ? AND name = ?",
