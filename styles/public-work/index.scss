@@ -232,6 +232,24 @@ body {
     }
 }
 
+.edit-btn {
+    background: #18A64A;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s;
+
+    &:hover {
+        background: #128a3a;
+        transform: translateY(-1px);
+    }
+}
+
 @media (max-width: 768px) {
     .work-title {
         font-size: 28px;

@@ -15,6 +15,7 @@
         </div>
 
         <div class="header-nav">
+            <a href="#" class="view-btn" id="viewWorkBtn" target="_blank">Просмотр</a>
             <button class="save-btn" id="saveWorkBtn">Сохранить</button>
             <button class="b-btn" id="profileBtn">Profile</button>
         </div>
@@ -44,15 +45,43 @@
                 <span class="topic-label">Создана</span>
                 <span class="topic-value" id="workCreatedAt">-</span>
             </div>
+
+            <a href="#" class="view-btn" id="viewWorkBtn" target="_blank">Просмотр</a>
+        </div>
+
+        <hr>
+
+        <div class="tips" id="tipsBlock" style="display: none;">
+            <div class="tips-header">
+                <h3>Подсказка</h3>
+                <button class="tips-close" onclick="closeTips('work')">Закрыть подсказки</button>
+            </div>
+
+            <div class="tip">
+                <span class="tip-icon">📝</span>
+                <p>Это ваша работа. Вы можете изменять и сохранять её. Поддерживается вся разметка Markdown, кроме HTML
+                    тегов.</p>
+            </div>
+
+            <div class="tip">
+                <span class="tip-icon">👁</span>
+                <p>Вы можете посмотреть, как выглядит работа нажав на кнопку "Просмотр": откроется новое окно с вашей
+                    работой - так эту страницу видят все.</p>
+            </div>
+
+            <div class="tip">
+                <span class="tip-icon">👀</span>
+                <p>Сверху есть плашки со всей информацией о этой работе: от названия до количества лайков.</p>
+            </div>
         </div>
 
         <div class="editor-area">
             <textarea id="contentMD" placeholder="Пишите вашу работу в Markdown..."></textarea>
-            <div class="editor-hint">Поддерживается Markdown формат</div>
         </div>
     </main>
 
     <script src="../../js/editor/work/index.js"></script>
+    <script src="../../js/editor/work/tips.js"></script>
     <script src="../../js/profile.js"></script>
 </body>
 

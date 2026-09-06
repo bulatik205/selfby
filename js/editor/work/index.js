@@ -9,7 +9,6 @@ const saveWorkBtn = document.getElementById('saveWorkBtn');
 const viewWorkBtn = document.getElementById('viewWorkBtn');
 const profileBtn = document.getElementById('profileBtn');
 
-// Получаем параметры из URL
 const pathParts = window.location.pathname.split('/');
 const workSlug = pathParts[pathParts.length - 1];
 const projectName = pathParts[pathParts.length - 2];
@@ -35,7 +34,6 @@ async function loadWork() {
         const work = await response.json();
         currentWork = work;
         
-        // Заполняем поля
         document.title = `${work.owner_name}: ${work.project_name} - ${work.title}`;
         workTitle.textContent = work.title;
         projectNameEl.textContent = work.project_name;
@@ -45,7 +43,6 @@ async function loadWork() {
         workCreatedAt.textContent = new Date(work.created_at).toLocaleDateString('ru-RU');
         contentMD.value = work.content_md || '';
         
-        // Устанавливаем ссылку на просмотр
         viewWorkBtn.href = `/u/${work.owner_name}/${work.project_name}/${work.slug}`;
         
     } catch (error) {
@@ -104,7 +101,6 @@ function showSaveError(message) {
     }, 2000);
 }
 
-// Сохранение по Ctrl+S
 document.addEventListener('keydown', (e) => {
     if ((e.ctrlKey || e.metaKey) && e.key === 's') {
         e.preventDefault();
