@@ -120,14 +120,20 @@ func main() {
 			return
 		}
 
-		http.ServeFile(w, r, bladeDir+"/work-editor.html")
+		http.ServeFile(w, r, bladeDir+"/work.html")
 	})
 
 	http.HandleFunc("POST /api/v1/newProject", api.NewProject(db))
 	http.HandleFunc("GET /api/v1/getProjects", api.GetProjects(db))
+
 	http.HandleFunc("GET /api/v1/getUser", api.GetCurrentUser(db))
+
 	http.HandleFunc("POST /api/v1/newWork", api.NewWork(db))
+	http.HandleFunc("GET /api/v1/getWork", api.GetWork(db))
+	http.HandleFunc("PUT /api/v1/updateWork", api.UpdateWork(db))
+
 	http.HandleFunc("GET /api/v1/getWorks", api.GetWorks(db))
+
 	http.HandleFunc("POST /api/v1/checkSlug", api.CheckSlug(db))
 
 	fmt.Printf("Сервер запущен на http://localhost:%s\n", cfg.ServerPort)
