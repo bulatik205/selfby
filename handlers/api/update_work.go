@@ -8,6 +8,9 @@ import (
 	"strings"
 
 	"github.com/yuin/goldmark"
+	"github.com/yuin/goldmark/extension"
+	"github.com/yuin/goldmark/parser"
+	"github.com/yuin/goldmark/renderer/html"
 )
 
 type UpdateWorkRequest struct {
@@ -56,8 +59,25 @@ func UpdateWork(db *sql.DB) http.HandlerFunc {
 			return
 		}
 
+		md := goldmark.New(
+			goldmark.WithExtensions(
+				extension.GFM,
+				extension.Footnote,
+				extension.Typographer,
+				extension.CJK,
+			),
+			goldmark.WithParserOptions(
+				parser.WithAutoHeadingID(),
+				parser.WithAttribute(),
+			),
+			goldmark.WithRendererOptions(
+				html.WithHardWraps(),
+				html.WithXHTML(),
+			),
+		)
+
 		var buf strings.Builder
-		if err := goldmark.Convert([]byte(req.ContentMD), &buf); err != nil {
+		if err := md.Convert([]byte(req.ContentMD), &buf); err != nil {
 			log.Println("Ошибка конвертации Markdown:", err)
 			respondWithError(w, http.StatusInternalServerError, "Ошибка обработки Markdown")
 			return
