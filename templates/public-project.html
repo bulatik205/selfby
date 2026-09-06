@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SelfBy: Проект</title>
+    <link rel="stylesheet" href="../../styles/public-project/index.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-logo">
+            <h1>SelfBy</h1>
+        </div>
+
+        <div class="header-nav">
+            <button class="b-btn" id="profileBtn">Profile</button>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="project-header">
+            <h1 class="project-title" id="projectTitle">Загрузка...</h1>
+            <p class="project-description" id="projectDescription"></p>
+        </div>
+
+        <div class="project-meta">
+            <a href="#" class="owner-link" id="ownerLink">
+                <span class="owner-avatar" id="ownerAvatar">U</span>
+                <span class="owner-name" id="ownerName">-</span>
+            </a>
+            <span class="project-type" id="projectType">-</span>
+            <span class="project-date" id="projectDate">-</span>
+        </div>
+
+        <div class="works-section">
+            <h2 class="section-title">Работы</h2>
+            <div class="works-list" id="worksList">
+
+            </div>
+        </div>
+
+        <div class="nav-footer">
+            <button onclick="window.history.back()">Вернуться назад</button>
+        </div>
+    </main>
+
+    <script src="../../js/profile.js"></script>
+    <script src="../../js/public-project/index.js"></script>
+</body>
+
+</html>

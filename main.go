@@ -127,8 +127,13 @@ func main() {
 		http.ServeFile(w, r, bladeDir+"/profile.html")
 	})
 
+	http.HandleFunc("/u/{username}/{projectName}", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, bladeDir+"/public-project.html")
+	})
+
 	http.HandleFunc("POST /api/v1/newProject", api.NewProject(db))
 	http.HandleFunc("GET /api/v1/getProjects", api.GetProjects(db))
+	http.HandleFunc("GET /api/v1/getPublicProject", api.GetPublicProject(db))
 
 	http.HandleFunc("GET /api/v1/getUser", api.GetCurrentUser(db))
 
