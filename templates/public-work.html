@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SelfBy</title>
+    <link rel="stylesheet" href="../../../styles/public-work/index.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-logo">
+            <h1>SelfBy</h1>
+        </div>
+
+        <div class="header-nav">
+            <button class="b-btn" id="profileBtn">Profile</button>
+        </div>
+    </header>
+
+    <main class="main">
+        <nav class="breadcrumbs">
+            <a href="/u/" id="ownerLink" class="breadcrumb-link">
+                <span id="ownerName">-</span>
+            </a>
+            <span class="breadcrumb-sep">/</span>
+            <a href="#" id="projectLink" class="breadcrumb-link">
+                <span id="projectName">-</span>
+            </a>
+            <span class="breadcrumb-sep">/</span>
+            <span class="breadcrumb-current" id="workTitle">-</span>
+        </nav>
+
+        <h1 class="work-title" id="workTitleMain">Загрузка...</h1>
+
+        <div class="work-meta">
+            <span class="work-views">👁 <span id="workViews">0</span></span>
+            <span class="work-likes">❤ <span id="workLikes">0</span></span>
+            <span class="work-date" id="workDate">-</span>
+        </div>
+
+        <div class="work-content" id="workContent">
+            
+        </div>
+
+        <div class="nav-footer">
+            <button onclick="window.history.back()">Вернуться назад</button>
+        </div>
+    </main>
+
+    <script src="../../../js/profile.js"></script>
+    <script src="../../../js/public-work/index.js"></script>
+</body>
+
+</html>
