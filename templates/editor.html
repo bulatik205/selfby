@@ -1,0 +1,46 @@
+</html><!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor</title>
+    <link rel="stylesheet" href="../styles/editor/index.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-logo">
+            <h1>SelfBy</h1>
+        </div>
+
+        <div class="header-nav">
+            <button class="n-btn">Новая работа</button>
+            <button class="b-btn" id="profileBtn">Profile</button>
+        </div>
+    </header>
+
+    <main class="main">
+        <div id="worksList"></div>
+    </main>
+
+    <div class="modal" id="newWorkModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Новая работа</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="text" placeholder="Название работы" class="project-name-input" id="workTitle">
+                <p id="work-slug">Введите название...</p>
+            </div>
+            <div class="modal-footer">
+                <button class="create-btn l-btn" id="createWorkBtn">Создать</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/editor/index.js"></script>
+</body>
+
+</html>
