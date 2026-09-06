@@ -33,14 +33,17 @@ func main() {
 	var authPath = "dashboard"
 	var bladeDir = "templates"
 
+	// Статика
 	http.Handle("/styles/", http.StripPrefix("/styles/", http.FileServer(http.Dir("styles"))))
 	http.Handle("/js/", http.StripPrefix("/js/", http.FileServer(http.Dir("js"))))
 	http.Handle("/images/", http.StripPrefix("/images/", http.FileServer(http.Dir("images"))))
 
+	// Главная
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, bladeDir+"/index.html")
 	})
 
+	// Регистрация & Вход
 	http.HandleFunc("/reg", func(w http.ResponseWriter, r *http.Request) {
 		if checkSession(w, r) {
 			http.Redirect(w, r, authPath, http.StatusSeeOther)
@@ -48,8 +51,6 @@ func main() {
 			http.ServeFile(w, r, bladeDir+"/reg.html")
 		}
 	})
-
-	http.HandleFunc("/auth/reg", auth.RegisterUser(db))
 
 	http.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
 		if checkSession(w, r) {
@@ -59,8 +60,11 @@ func main() {
 		}
 	})
 
-	http.HandleFunc("/auth/login", auth.LoginUser(db))
+	// Обработчики Регистрации & Входа
+	http.HandleFunc("POST /auth/reg", auth.RegisterUser(db))
+	http.HandleFunc("POST /auth/login", auth.LoginUser(db))
 
+	// Дашборд
 	http.HandleFunc("/dashboard", func(w http.ResponseWriter, r *http.Request) {
 		if checkSession(w, r) {
 			http.ServeFile(w, r, bladeDir+"/dashboard.html")
@@ -69,12 +73,84 @@ func main() {
 		}
 	})
 
-	http.HandleFunc("/api/v1/newProject", api.NewProject(db))
-	http.HandleFunc("/api/v1/getProjects", api.GetProjects(db))
-	http.HandleFunc("/api/v1/getUser", api.GetCurrentUser(db))
+	// Редактор
+	http.HandleFunc("/editor/{projectName}", func(w http.ResponseWriter, r *http.Request) {
+		if !checkSession(w, r) {
+			http.Redirect(w, r, "/reg", http.StatusSeeOther)
+			return
+		}
+
+		projectName := r.PathValue("projectName")
+
+		userID := getCurrentUserID(r)
+		var projectID int64
+		err := db.QueryRow(
+			"SELECT id FROM projects WHERE owner_id = ? AND name = ?",
+			userID, projectName,
+		).Scan(&projectID)
+
+		if err != nil {
+			http.NotFound(w, r)
+			return
+		}
+
+		http.ServeFile(w, r, bladeDir+"/editor.html")
+	})
+
+	http.HandleFunc("/editor/{projectName}/{workSlug}", func(w http.ResponseWriter, r *http.Request) {
+		if !checkSession(w, r) {
+			http.Redirect(w, r, "/reg", http.StatusSeeOther)
+			return
+		}
+
+		projectName := r.PathValue("projectName")
+		workSlug := r.PathValue("workSlug")
+
+		userID := getCurrentUserID(r)
+		var workID int64
+		err := db.QueryRow(`
+			SELECT w.id 
+			FROM works w
+			JOIN projects p ON w.at_project = p.id
+			WHERE p.owner_id = ? AND p.name = ? AND w.slug = ?
+		`, userID, projectName, workSlug).Scan(&workID)
+
+		if err != nil {
+			http.NotFound(w, r)
+			return
+		}
+
+		http.ServeFile(w, r, bladeDir+"/work-editor.html")
+	})
+
+	http.HandleFunc("POST /api/v1/newProject", api.NewProject(db))
+	http.HandleFunc("GET /api/v1/getProjects", api.GetProjects(db))
+	http.HandleFunc("GET /api/v1/getUser", api.GetCurrentUser(db))
+	http.HandleFunc("POST /api/v1/newWork", api.NewWork(db))
+	http.HandleFunc("GET /api/v1/getWorks", api.GetWorks(db))
+	http.HandleFunc("POST /api/v1/checkSlug", api.CheckSlug(db))
 
 	fmt.Printf("Сервер запущен на http://localhost:%s\n", cfg.ServerPort)
 	http.ListenAndServe(":"+cfg.ServerPort, nil)
+}
+
+func getCurrentUserID(r *http.Request) int64 {
+	cookie, err := r.Cookie("session_token")
+	if err != nil {
+		return 0
+	}
+
+	var userID int64
+	err = db.QueryRow(
+		"SELECT id FROM users WHERE session_token = ? AND session_expires > NOW()",
+		cookie.Value,
+	).Scan(&userID)
+
+	if err != nil {
+		return 0
+	}
+
+	return userID
 }
 
 func checkSession(w http.ResponseWriter, r *http.Request) bool {
