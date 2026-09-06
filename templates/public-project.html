@@ -26,24 +26,31 @@
         </div>
 
         <div class="project-meta">
-            <a href="#" class="owner-link" id="ownerLink">
-                <span class="owner-avatar" id="ownerAvatar">U</span>
-                <span class="owner-name" id="ownerName">-</span>
-            </a>
-            <span class="project-type" id="projectType">-</span>
-            <span class="project-date" id="projectDate">-</span>
-        </div>
+            <nav class="breadcrumbs">
+                <a href="/u/" id="ownerLink" class="breadcrumb-link">
+                    <span id="ownerName">-</span>
+                </a>
+                <span class="breadcrumb-sep">/</span>
+                <a href="#" id="projectLink" class="breadcrumb-link">
+                    <span id="projectName">-</span>
+                </a>
+                <span class="breadcrumb-sep">/</span>
+                <span class="breadcrumb-current" id="workTitle">-</span>
+            </nav>
 
-        <div class="works-section">
-            <h2 class="section-title">Работы</h2>
-            <div class="works-list" id="worksList">
+            <h1 class="work-title" id="workTitleMain">Загрузка...</h1>
 
+            <div class="work-meta">
+                <span class="work-views">👁 <span id="workViews">0</span></span>
+                <span class="work-likes">❤ <span id="workLikes">0</span></span>
+                <span class="work-date" id="workDate">-</span>
             </div>
-        </div>
 
-        <div class="nav-footer">
-            <button onclick="window.history.back()">Вернуться назад</button>
-        </div>
+            <div class="work-content" id="workContent"></div>
+
+            <div class="nav-footer">
+                <button onclick="window.history.back()">Вернуться назад</button>
+            </div>
     </main>
 
     <script src="../../js/profile.js"></script>
