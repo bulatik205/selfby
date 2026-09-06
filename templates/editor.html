@@ -1,4 +1,5 @@
-</html><!DOCTYPE html>
+</html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -19,6 +20,24 @@
             <button class="b-btn" id="profileBtn">Profile</button>
         </div>
     </header>
+
+    <div class="tips" id="tipsBlock" style="display: none; margin-top: 20px;">
+        <div class="tips-header">
+            <h3>Подсказка</h3>
+            <button class="tips-close" onclick="closeTips()">Закрыть подсказки</button>
+        </div>
+
+        <div class="tip">
+            <span class="tip-icon">🌿</span>
+            <p>Это страница вашего проекта с работами. <span>Работы</span> - это файлы в формате Markdown, которые вы
+                пишите</p>
+        </div>
+
+        <div class="tip">
+            <span class="tip-icon">🧩</span>
+            <p><span>Проект</span> является лишь входной точкой и соединителем всех работ</p>
+        </div>
+    </div>
 
     <main class="main">
         <div id="worksList"></div>
@@ -41,6 +60,8 @@
     </div>
 
     <script src="../js/editor/index.js"></script>
+    <script>const pageName = "editor";</script>
+    <script src="../js/tips.js"></script>
     <script src="../js/profile.js"></script>
 </body>
 
