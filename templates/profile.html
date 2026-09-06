@@ -36,6 +36,18 @@
             </div>
         </div>
 
+        <div class="tips" id="tipsBlock" style="display: none;">
+            <div class="tips-header">
+                <h3>Подсказка</h3>
+                <button class="tips-close" onclick="closeTips()">Закрыть подсказки</button>
+            </div>
+
+            <div class="tip">
+                <span class="tip-icon">🫶</span>
+                <p>Это профиль пользователя. Тут видна статистика о нём и все его проекты</p>
+            </div>
+        </div>
+
         <div class="stats-grid">
             <div class="stat-card">
                 <span class="stat-number" id="projectsCount">0</span>
@@ -74,6 +86,8 @@
     </div>
 
     <script src="../js/profile/index.js"></script>
+    <script>const pageName = "profile";</script>
+    <script src="../js/tips.js"></script>
     <script src="../js/profile.js"></script>
 </body>
 

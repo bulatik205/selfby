@@ -36,6 +36,19 @@
 
         <div class="works-section">
             <h2 class="section-title">Работы</h2>
+
+            <div class="tips" id="tipsBlock" style="display: none;">
+                <div class="tips-header">
+                    <h3>Подсказка</h3>
+                    <button class="tips-close" onclick="closeTips()">Закрыть подсказки</button>
+                </div>
+
+                <div class="tip">
+                    <span class="tip-icon">🏛️</span>
+                    <p>Это проект пользователя. Здесь собраны все работы принадлежащие этому проекту</p>
+                </div>
+            </div>
+
             <div class="works-list" id="worksList"></div>
         </div>
 
@@ -45,6 +58,8 @@
     </main>
 
     <script src="../../js/profile.js"></script>
+    <script>const pageName = "public-project";</script>
+    <script src="../../js/tips.js"></script>
     <script src="../../js/public-project/index.js"></script>
 </body>
 

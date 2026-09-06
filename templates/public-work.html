@@ -41,8 +41,25 @@
             <span class="work-date" id="workDate">-</span>
         </div>
 
+        <div class="tips" id="tipsBlock" style="display: none;">
+            <div class="tips-header">
+                <h3>Подсказка</h3>
+                <button class="tips-close" onclick="closeTips()">Закрыть подсказки</button>
+            </div>
+
+            <div class="tip">
+                <span class="tip-icon">🧸</span>
+                <p>Это работа пользователя. Тут может остуствовать контент, но если он есть, то это Markdown</p>
+            </div>
+
+            <div class="tip">
+                <span class="tip-icon">💕</span>
+                <p>Кроме контента тут есть статистика по просмотрам, лайки и дата выхода</p>
+            </div>
+        </div>
+
         <div class="work-content" id="workContent">
-            
+
         </div>
 
         <div class="nav-footer">
@@ -51,6 +68,8 @@
     </main>
 
     <script src="../../../js/profile.js"></script>
+    <script>const pageName = "public-works";</script>
+    <script src="../../../js/tips.js"></script>
     <script src="../../../js/public-work/index.js"></script>
 </body>
 
