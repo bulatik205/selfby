@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактор работы</title>
+    <link rel="stylesheet" href="../../styles/editor/work/index.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-logo">
+            <h1>SelfBy</h1>
+        </div>
+
+        <div class="header-nav">
+            <button class="save-btn" id="saveWorkBtn">Сохранить</button>
+            <button class="b-btn" id="profileBtn">Profile</button>
+        </div>
+    </header>
+
+    <main class="main">
+        <h1 class="work-title" id="workTitle">Загрузка...</h1>
+
+        <div class="topics">
+            <div class="topic">
+                <span class="topic-label">Проект</span>
+                <span class="topic-value" id="projectName">-</span>
+            </div>
+            <div class="topic">
+                <span class="topic-label">Slug</span>
+                <span class="topic-value" id="workSlug">-</span>
+            </div>
+            <div class="topic">
+                <span class="topic-label">Просмотры</span>
+                <span class="topic-value" id="workViews">0</span>
+            </div>
+            <div class="topic">
+                <span class="topic-label">Лайки</span>
+                <span class="topic-value" id="workLikes">0</span>
+            </div>
+            <div class="topic">
+                <span class="topic-label">Создана</span>
+                <span class="topic-value" id="workCreatedAt">-</span>
+            </div>
+        </div>
+
+        <div class="editor-area">
+            <textarea id="contentMD" placeholder="Пишите вашу работу в Markdown..."></textarea>
+            <div class="editor-hint">Поддерживается Markdown формат</div>
+        </div>
+    </main>
+
+    <script src="../../js/editor/work/index.js"></script>
+</body>
+
+</html>
