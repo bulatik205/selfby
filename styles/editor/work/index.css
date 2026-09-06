@@ -1,0 +1,168 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  max-width: 2000px;
+  margin: 0 auto;
+  padding: 0 10px;
+  background: #f5f5f5;
+}
+
+.b-btn {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+  padding: 5px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.3s;
+}
+.b-btn:hover {
+  background: white;
+  color: #333;
+}
+
+.save-btn {
+  background: #18A64A;
+  color: white;
+  border: none;
+  padding: 8px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+.save-btn:hover {
+  background: #128a3a;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(24, 166, 74, 0.3);
+}
+
+.header {
+  width: 100%;
+  background-color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-radius: 0 0 20px 20px;
+}
+.header-logo {
+  font-size: 14px;
+  color: #fff;
+}
+.header-nav {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.main {
+  width: 100%;
+  max-width: 900px;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.work-title {
+  font-size: 32px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.topics .topic {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 20px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  min-width: 100px;
+  transition: all 0.3s;
+}
+.topics .topic:hover {
+  border-color: #18A64A;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+.topics .topic-label {
+  font-size: 11px;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+.topics .topic-value {
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+}
+
+.editor-area {
+  position: relative;
+  flex: 1;
+}
+.editor-area textarea {
+  width: 100%;
+  min-height: 400px;
+  padding: 20px;
+  border: 2px solid #ddd;
+  border-radius: 16px;
+  font-family: "Source Code Pro", monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  resize: vertical;
+  transition: border-color 0.3s;
+  background: #fff;
+}
+.editor-area textarea:focus {
+  outline: none;
+  border-color: #18A64A;
+}
+.editor-area .editor-hint {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(51, 51, 51, 0.8);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 11px;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .work-title {
+    font-size: 24px;
+  }
+  .topics .topic {
+    min-width: 80px;
+    padding: 8px 15px;
+  }
+  .editor-area textarea {
+    min-height: 300px;
+    font-size: 13px;
+  }
+}/*# sourceMappingURL=index.css.map */
