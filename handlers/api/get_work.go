@@ -31,7 +31,6 @@ func GetWork(db *sql.DB) http.HandlerFunc {
 
 		w.Header().Set("Content-Type", "application/json")
 
-		// Получаем параметры
 		projectName := r.URL.Query().Get("project")
 		workSlug := r.URL.Query().Get("slug")
 
@@ -40,7 +39,6 @@ func GetWork(db *sql.DB) http.HandlerFunc {
 			return
 		}
 
-		// Получаем work вместе с информацией о проекте и владельце
 		var work WorkDetail
 		err := db.QueryRow(`
 			SELECT 
