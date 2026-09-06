@@ -1,0 +1,228 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  max-width: 2000px;
+  margin: 0 auto;
+  padding: 0 10px;
+  background: #f5f5f5;
+}
+
+.b-btn {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+  padding: 5px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.3s;
+}
+.b-btn:hover {
+  background: white;
+  color: #333;
+}
+
+.header {
+  width: 100%;
+  background-color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-radius: 0 0 20px 20px;
+}
+.header-logo {
+  font-size: 14px;
+  color: #fff;
+}
+.header-nav {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.main {
+  width: 100%;
+  max-width: 800px;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  flex-wrap: wrap;
+}
+.breadcrumbs .breadcrumb-link {
+  color: #666;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.breadcrumbs .breadcrumb-link:hover {
+  color: #18A64A;
+}
+.breadcrumbs .breadcrumb-sep {
+  color: #ccc;
+}
+.breadcrumbs .breadcrumb-current {
+  color: #333;
+  font-weight: 600;
+}
+
+.work-title {
+  font-size: 36px;
+  color: #333;
+  text-align: center;
+}
+
+.work-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 15px;
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+}
+.work-meta span {
+  font-size: 14px;
+  color: #666;
+}
+
+.work-content {
+  padding: 30px;
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid #e0e0e0;
+  line-height: 1.6;
+  color: #333;
+  overflow-wrap: break-word;
+}
+.work-content h1, .work-content h2, .work-content h3, .work-content h4, .work-content h5, .work-content h6 {
+  margin: 20px 0 10px;
+  color: #333;
+}
+.work-content h1 {
+  font-size: 28px;
+}
+.work-content h2 {
+  font-size: 24px;
+}
+.work-content h3 {
+  font-size: 20px;
+}
+.work-content h4 {
+  font-size: 18px;
+}
+.work-content h5 {
+  font-size: 16px;
+}
+.work-content h6 {
+  font-size: 14px;
+}
+.work-content p {
+  margin: 10px 0;
+}
+.work-content a {
+  color: #18A64A;
+  text-decoration: none;
+}
+.work-content a:hover {
+  text-decoration: underline;
+}
+.work-content img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+.work-content code {
+  background: #f5f5f5;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: "Source Code Pro", monospace;
+  font-size: 13px;
+}
+.work-content pre {
+  background: #f5f5f5;
+  padding: 15px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 15px 0;
+}
+.work-content pre code {
+  background: none;
+  padding: 0;
+}
+.work-content blockquote {
+  border-left: 4px solid #18A64A;
+  padding-left: 15px;
+  margin: 15px 0;
+  color: #666;
+}
+.work-content ul, .work-content ol {
+  margin: 10px 0;
+  padding-left: 25px;
+}
+.work-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 15px 0;
+}
+.work-content table th, .work-content table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+.work-content table th {
+  background: #f5f5f5;
+}
+
+.nav-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+.nav-footer button {
+  background: #333;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s;
+  font-family: "Montserrat", sans-serif;
+}
+.nav-footer button:hover {
+  background: #555;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.nav-footer button:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .work-title {
+    font-size: 28px;
+  }
+  .work-content {
+    padding: 20px;
+  }
+}/*# sourceMappingURL=index.css.map */
