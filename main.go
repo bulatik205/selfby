@@ -123,6 +123,10 @@ func main() {
 		http.ServeFile(w, r, bladeDir+"/work.html")
 	})
 
+	http.HandleFunc("/u/{username}", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, bladeDir+"/profile.html")
+	})
+
 	http.HandleFunc("POST /api/v1/newProject", api.NewProject(db))
 	http.HandleFunc("GET /api/v1/getProjects", api.GetProjects(db))
 
@@ -133,6 +137,7 @@ func main() {
 	http.HandleFunc("PUT /api/v1/updateWork", api.UpdateWork(db))
 
 	http.HandleFunc("GET /api/v1/getWorks", api.GetWorks(db))
+	http.HandleFunc("GET /api/v1/getProfile", api.GetProfile(db))
 
 	http.HandleFunc("POST /api/v1/checkSlug", api.CheckSlug(db))
 
