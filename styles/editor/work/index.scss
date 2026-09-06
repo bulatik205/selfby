@@ -39,10 +39,10 @@ body {
     background: #18A64A;
     color: white;
     border: none;
-    padding: 8px 25px;
+    padding: 5px 20px;
     border-radius: 25px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
     transition: all 0.3s;
 
@@ -90,10 +90,29 @@ body {
     margin-bottom: 10px;
 }
 
+.view-btn {
+    background: transparent;
+    color: white;
+    border: 2px solid #18A64A;
+    padding: 5px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s;
+
+    &:hover {
+        background: #18A64A;
+        transform: translateY(-1px);
+    }
+}
+
 .topics {
     display: flex;
+    align-items: center;
+    gap: 20px;
     flex-wrap: wrap;
-    gap: 10px;
     justify-content: center;
     margin-bottom: 20px;
 
@@ -127,6 +146,25 @@ body {
             font-weight: 500;
         }
     }
+
+    .view-btn {
+        background: transparent;
+        color: #333;
+        border: 2px solid #18A64A;
+        padding: 8px 20px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s;
+        white-space: nowrap;
+
+        &:hover {
+            background: #18A64A;
+            color: white;
+        }
+    }
 }
 
 .editor-area {
@@ -151,17 +189,69 @@ body {
             border-color: #18A64A;
         }
     }
+}
 
-    .editor-hint {
-        position: absolute;
-        bottom: 20px;
-        right: 20px;
-        background: rgba(51, 51, 51, 0.8);
-        color: #fff;
-        padding: 5px 10px;
-        border-radius: 8px;
-        font-size: 11px;
-        pointer-events: none;
+.tips {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    background: #f0f8f0;
+    border: 2px solid #18A64A;
+    border-radius: 16px;
+    margin-bottom: 20px;
+
+    .tips-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #c8e6c9;
+
+        h3 {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .tips-close {
+            background: transparent;
+            color: #666;
+            border: 1px solid #ccc;
+            padding: 5px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s;
+            font-family: "Montserrat", sans-serif;
+
+            &:hover {
+                background: #fff;
+                border-color: #999;
+                color: #333;
+            }
+        }
+    }
+
+    .tip {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        padding: 15px;
+        background: #fff;
+        border-radius: 12px;
+        border: 1px solid #e0e0e0;
+
+        .tip-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        p {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.6;
+            margin: 0;
+        }
     }
 }
 
