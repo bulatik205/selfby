@@ -11,11 +11,9 @@ const totalViewsEl = document.getElementById('totalViews');
 const profileBtn = document.getElementById('profileBtn');
 const projectsListEl = document.getElementById('projectsList');
 
-// Получаем username из URL
 const pathParts = window.location.pathname.split('/');
 const username = pathParts[pathParts.length - 1];
 
-// Глобальная переменная для профиля
 let profile = null;
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -37,7 +35,6 @@ function displayProjects(projects) {
 
         const typeLabel = project.type === 'public' ? 'Открытый' : 'Закрытый';
 
-        // Форматируем дату
         const createdDate = new Date(project.created_at);
         const formattedDate = createdDate.toLocaleDateString('ru-RU', {
             year: 'numeric',
@@ -73,13 +70,11 @@ async function loadProfile() {
 
         profile = await response.json();
 
-        // Заполняем данные
         document.title = `SelfBy: ${profile.username}`;
         usernameEl.textContent = profile.username;
         avatarEl.textContent = profile.username.charAt(0).toUpperCase();
         userIdEl.textContent = profile.id;
 
-        // Форматируем дату
         const createdDate = new Date(profile.created_at);
         createdAtEl.textContent = createdDate.toLocaleDateString('ru-RU', {
             year: 'numeric',
@@ -87,7 +82,6 @@ async function loadProfile() {
             day: 'numeric'
         });
 
-        // Статистика
         projectsCountEl.textContent = profile.projects_count;
         publicProjectsEl.textContent = profile.public_projects;
         privateProjectsEl.textContent = profile.private_projects;
@@ -95,7 +89,6 @@ async function loadProfile() {
         totalLikesEl.textContent = profile.total_likes;
         totalViewsEl.textContent = profile.total_views;
 
-        // Отображаем проекты
         displayProjects(profile.projects);
 
     } catch (error) {
@@ -112,14 +105,12 @@ async function loadCurrentUser() {
         const user = await response.json();
         profileBtn.textContent = user.username;
 
-        // Если это профиль текущего пользователя, делаем кнопку ссылкой на dashboard
         if (user.username === username) {
             profileBtn.textContent = 'Dashboard';
             profileBtn.onclick = () => {
                 window.location.href = '/dashboard';
             };
         } else {
-            // Если чужой профиль, делаем кнопку ссылкой на свой профиль
             profileBtn.onclick = () => {
                 window.location.href = `/u/${user.username}`;
             };

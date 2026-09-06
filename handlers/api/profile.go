@@ -44,7 +44,6 @@ func GetProfile(db *sql.DB) http.HandlerFunc {
 			return
 		}
 
-		// Получаем основную информацию о пользователе
 		var profile UserProfile
 		err := db.QueryRow(`
 			SELECT id, username, created_at
@@ -66,7 +65,6 @@ func GetProfile(db *sql.DB) http.HandlerFunc {
 			return
 		}
 
-		// Получаем количество проектов
 		err = db.QueryRow(`
 			SELECT 
 				COUNT(*) as total,
@@ -87,7 +85,6 @@ func GetProfile(db *sql.DB) http.HandlerFunc {
 			profile.PrivateProjects = 0
 		}
 
-		// Получаем количество работ
 		err = db.QueryRow(`
 			SELECT COUNT(*)
 			FROM works
@@ -99,7 +96,6 @@ func GetProfile(db *sql.DB) http.HandlerFunc {
 			profile.WorksCount = 0
 		}
 
-		// Получаем суммарные лайки и просмотры
 		err = db.QueryRow(`
 			SELECT 
 				COALESCE(SUM(likes), 0) as total_likes,
@@ -117,7 +113,6 @@ func GetProfile(db *sql.DB) http.HandlerFunc {
 			profile.TotalViews = 0
 		}
 
-		// Получаем список проектов пользователя
 		rows, err := db.Query(`
 			SELECT 
 				p.id,

@@ -29,7 +29,6 @@ body {
     padding: 0 10px 0 10px;
 }
 
-// Кнопки
 .b-btn {
     background: transparent;
     color: white;
@@ -77,7 +76,6 @@ body {
     }
 }
 
-// Шапка
 .header {
     width: 100%;
     max-width: 2000px;
@@ -99,7 +97,6 @@ body {
     width: 100%;
     padding: 20px;
 
-    // Список работ
     #worksList {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -172,7 +169,6 @@ body {
     }
 }
 
-// Модальное окно
 .modal {
     display: none;
     position: fixed;
@@ -242,7 +238,6 @@ body {
             }
         }
 
-        // Сообщение о slug
         #work-slug {
             font-size: 13px;
             color: #666;
@@ -277,7 +272,6 @@ body {
     }
 }
 
-// Сообщения об ошибках
 .error-message {
     color: #e74c3c;
     font-size: 12px;
@@ -288,7 +282,6 @@ body {
     animation: fadeIn 0.3s ease;
 }
 
-// Анимации
 @keyframes slideIn {
     from {
         transform: translateY(-20px);

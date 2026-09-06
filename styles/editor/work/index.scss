@@ -19,7 +19,6 @@ body {
     background: #f5f5f5;
 }
 
-// Кнопки
 .b-btn {
     background: transparent;
     color: white;
@@ -54,7 +53,6 @@ body {
     }
 }
 
-// Шапка
 .header {
     width: 100%;
     background-color: #333;
@@ -76,7 +74,6 @@ body {
     }
 }
 
-// Основной контент
 .main {
     width: 100%;
     max-width: 900px;
@@ -86,7 +83,6 @@ body {
     gap: 20px;
 }
 
-// Заголовок работы
 .work-title {
     font-size: 32px;
     color: #333;
@@ -94,7 +90,6 @@ body {
     margin-bottom: 10px;
 }
 
-// Topic плашки
 .topics {
     display: flex;
     flex-wrap: wrap;
@@ -134,7 +129,6 @@ body {
     }
 }
 
-// Область редактора
 .editor-area {
     position: relative;
     flex: 1;
@@ -171,7 +165,6 @@ body {
     }
 }
 
-// Адаптивность
 @media (max-width: 768px) {
     .work-title {
         font-size: 24px;
