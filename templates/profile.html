@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SelfBy: Профиль</title>
+    <link rel="stylesheet" href="../styles/profile/index.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-logo">
+            <h1>SelfBy</h1>
+        </div>
+
+        <div class="header-nav">
+            <button class="b-btn" id="profileBtn">Profile</button>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="profile-header">
+            <div class="avatar" id="avatar">U</div>
+            <h1 class="username" id="username">Загрузка...</h1>
+        </div>
+
+        <div class="profile-info">
+            <div class="info-card">
+                <span class="info-label">ID</span>
+                <span class="info-value" id="userId">-</span>
+            </div>
+            <div class="info-card">
+                <span class="info-label">В SelfBy с</span>
+                <span class="info-value" id="createdAt">-</span>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-number" id="projectsCount">0</span>
+                <span class="stat-label">Проектов</span>
+                <div class="stat-details">
+                    <span class="stat-detail public">
+                        <span class="dot"></span>
+                        <span id="publicProjects">0</span> открытых
+                    </span>
+                    <span class="stat-detail private">
+                        <span class="dot"></span>
+                        <span id="privateProjects">0</span> закрытых
+                    </span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number" id="worksCount">0</span>
+                <span class="stat-label">Работ</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number" id="totalLikes">0</span>
+                <span class="stat-label">Лайков</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number" id="totalViews">0</span>
+                <span class="stat-label">Просмотров</span>
+            </div>
+        </div>
+    </main>
+
+    <div class="projects-section">
+        <h2 class="section-title">Проекты пользователя</h2>
+        <div class="projects-list" id="projectsList">
+
+        </div>
+    </div>
+
+    <script src="../js/profile/index.js"></script>
+    <script src="../js/profile.js"></script>
+</body>
+
+</html>

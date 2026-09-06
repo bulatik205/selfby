@@ -37,7 +37,6 @@ func UpdateWork(db *sql.DB) http.HandlerFunc {
 			return
 		}
 
-		// Проверяем, что работа принадлежит пользователю
 		var workID int64
 		var projectID int64
 		err = db.QueryRow(`
@@ -57,7 +56,6 @@ func UpdateWork(db *sql.DB) http.HandlerFunc {
 			return
 		}
 
-		// Конвертируем Markdown в HTML
 		var buf strings.Builder
 		if err := goldmark.Convert([]byte(req.ContentMD), &buf); err != nil {
 			log.Println("Ошибка конвертации Markdown:", err)
@@ -66,7 +64,6 @@ func UpdateWork(db *sql.DB) http.HandlerFunc {
 		}
 		contentHTML := buf.String()
 
-		// Обновляем
 		_, err = db.Exec(
 			"UPDATE works SET content_md = ?, content_html = ? WHERE id = ?",
 			req.ContentMD, contentHTML, workID,
