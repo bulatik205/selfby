@@ -129,8 +129,8 @@ function addProjectToList(project, userData) {
     projectDiv.className = 'project';
     
     projectDiv.innerHTML = `
-        <a href="/editor/${project.id}" class="project-link">${project.name}</a>
-        <a href="/${userData.username}/${project.id}" class="project-link icon-btn">
+        <a href="/editor/${project.name}" class="project-link">${project.name}</a>
+        <a href="/${userData.username}/${project.name}" class="project-link icon-btn">
             <img src="../images/view.png" alt="Просмотр">
         </a>
     `;
