@@ -6,6 +6,7 @@ const workLikes = document.getElementById('workLikes');
 const workCreatedAt = document.getElementById('workCreatedAt');
 const contentMD = document.getElementById('contentMD');
 const saveWorkBtn = document.getElementById('saveWorkBtn');
+const viewWorkBtn = document.getElementById('viewWorkBtn');
 const profileBtn = document.getElementById('profileBtn');
 
 const pathParts = window.location.pathname.split('/');
@@ -15,21 +16,8 @@ const projectName = pathParts[pathParts.length - 2];
 let currentWork = null;
 
 document.addEventListener('DOMContentLoaded', () => {
-    loadUserData();
     loadWork();
 });
-
-async function loadUserData() {
-    try {
-        const response = await fetch('/api/v1/getUser');
-        if (!response.ok) throw new Error('Ошибка загрузки');
-        
-        const user = await response.json();
-        profileBtn.textContent = user.username;
-    } catch (error) {
-        profileBtn.textContent = 'Profile';
-    }
-}
 
 async function loadWork() {
     try {
@@ -54,6 +42,8 @@ async function loadWork() {
         workLikes.textContent = work.likes;
         workCreatedAt.textContent = new Date(work.created_at).toLocaleDateString('ru-RU');
         contentMD.value = work.content_md || '';
+        
+        viewWorkBtn.href = `/u/${work.owner_name}/${work.project_name}/${work.slug}`;
         
     } catch (error) {
         console.error('Ошибка загрузки работы:', error);
