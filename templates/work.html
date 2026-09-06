@@ -54,7 +54,7 @@
         <div class="tips" id="tipsBlock" style="display: none;">
             <div class="tips-header">
                 <h3>Подсказка</h3>
-                <button class="tips-close" onclick="closeTips('work')">Закрыть подсказки</button>
+                <button class="tips-close" onclick="closeTips()">Закрыть подсказки</button>
             </div>
 
             <div class="tip">
@@ -81,7 +81,8 @@
     </main>
 
     <script src="../../js/editor/work/index.js"></script>
-    <script src="../../js/editor/work/tips.js"></script>
+    <script>const pageName = "work";</script>
+    <script src="../../js/tips.js"></script>
     <script src="../../js/profile.js"></script>
 </body>
 
