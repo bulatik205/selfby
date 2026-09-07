@@ -5,7 +5,6 @@ const projectName = document.getElementById('projectName');
 const workTitle = document.getElementById('workTitle');
 const workTitleMain = document.getElementById('workTitleMain');
 const workViews = document.getElementById('workViews');
-const workLikes = document.getElementById('workLikes');
 const workDate = document.getElementById('workDate');
 const workContent = document.getElementById('workContent');
 const editBtn = document.getElementById('editBtn');
@@ -52,7 +51,6 @@ async function loadWork() {
         workTitleMain.textContent = work.title;
 
         workViews.textContent = work.views;
-        workLikes.textContent = work.likes;
 
         const createdDate = new Date(work.created_at);
         workDate.textContent = createdDate.toLocaleDateString('ru-RU', {
@@ -93,7 +91,6 @@ function showError(message) {
     ownerName.textContent = '-';
     projectName.textContent = '-';
     workViews.textContent = '0';
-    workLikes.textContent = '0';
     workDate.textContent = '-';
     workContent.innerHTML = '';
     document.querySelector('.work-meta').style.display = 'none';

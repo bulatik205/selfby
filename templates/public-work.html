@@ -36,9 +36,15 @@
         <h1 class="work-title" id="workTitleMain">Загрузка...</h1>
 
         <div class="work-meta">
-            <span class="work-views">👁 <span id="workViews">0</span></span>
-            <span class="work-likes">❤ <span id="workLikes">0</span></span>
+            <span class="work-views">
+                👁 <span data-view-count id="workViews">0</span>
+            </span>
+            <div data-view data-element-type="work"></div>
             <span class="work-date" id="workDate">-</span>
+            <button class="like-btn" data-like-btn data-element-type="work">
+                <span data-like-icon>🤍</span>
+                <span data-like-count>0</span>
+            </button>
         </div>
 
         <div class="tips" id="tipsBlock" style="display: none;">
@@ -70,6 +76,8 @@
     <script src="../../../js/profile.js"></script>
     <script>const pageName = "public-works";</script>
     <script src="../../../js/tips.js"></script>
+    <script src="../../../js/likes.js"></script>
+    <script src="../../../js/views.js"></script>
     <script src="../../../js/public-work/index.js"></script>
 </body>
 
