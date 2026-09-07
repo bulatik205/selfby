@@ -297,6 +297,38 @@ body {
     }
 }
 
+@media (max-width: 768px) {
+    .main {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto; 
+
+        &-menu {
+            order: 1;
+        }
+
+        &-base {
+            order: 2;
+
+            .base-title {
+                h2 {
+                    text-align: center;
+                    font-size: 18px;
+                }
+            }
+
+            .simple {
+                grid-template-columns: 1fr; 
+            }
+        }
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .main {
+        grid-template-columns: 1fr 2fr;
+    }
+}
+
 @keyframes slideIn {
     from {
         transform: translateY(-20px);
