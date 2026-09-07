@@ -9,7 +9,6 @@ const totalViewsEl = document.getElementById('totalViews');
 const profileBtn = document.getElementById('profileBtn');
 const projectsListEl = document.getElementById('projectsList');
 
-// Получаем username из URL
 const pathParts = window.location.pathname.split('/');
 const username = pathParts[pathParts.length - 1];
 
@@ -69,13 +68,11 @@ async function loadProfile() {
         
         profile = await response.json();
         
-        // Заполняем данные
         document.title = `SelfBy: ${profile.username}`;
         usernameEl.textContent = profile.username;
         avatarEl.textContent = profile.username.charAt(0).toUpperCase();
         userIdEl.textContent = profile.id;
         
-        // Форматируем дату
         const createdDate = new Date(profile.created_at);
         createdAtEl.textContent = createdDate.toLocaleDateString('ru-RU', {
             year: 'numeric',
@@ -83,13 +80,11 @@ async function loadProfile() {
             day: 'numeric'
         });
         
-        // Статистика (без разделения на public/private)
         projectsCountEl.textContent = profile.projects_count;
         worksCountEl.textContent = profile.works_count;
         totalLikesEl.textContent = profile.total_likes;
         totalViewsEl.textContent = profile.total_views;
         
-        // Отображаем проекты
         displayProjects(profile.projects);
         
     } catch (error) {
