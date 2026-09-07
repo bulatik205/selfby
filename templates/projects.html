@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SelfBy: Ваши проекты</title>
+    <link rel="stylesheet" href="../styles/projects/index.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-logo">
+            <h1>SelfBy</h1>
+        </div>
+
+        <button class="burger-btn" id="burgerBtn" aria-label="Меню">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav class="header-nav" id="headerNav">
+            <button class="n-btn" id="newProjectBtn">Новый проект</button>
+            <button class="b-btn" id="profileBtn">Profile</button>
+        </nav>
+    </header>
+
+    <main class="main">
+        <h1 class="page-title">Ваши проекты</h1>
+
+        <!-- Табы сортировки -->
+        <div class="sort-tabs">
+            <button class="sort-tab active" data-sort="created">🕐 По дате</button>
+            <button class="sort-tab" data-sort="views">👁 По просмотрам</button>
+            <button class="sort-tab" data-sort="likes">❤ По лайкам</button>
+            <button class="sort-tab" data-sort="works">📄 По работам</button>
+            <button class="sort-tab" data-sort="name">🔤 По имени</button>
+        </div>
+
+        <div class="tips" id="tipsBlock" style="display: none;">
+            <div class="tips-header">
+                <h3>Подсказка</h3>
+                <button class="tips-close" onclick="closeTips()">Закрыть подсказки</button>
+            </div>
+
+            <div class="tip">
+                <span class="tip-icon">📂</span>
+                <p>Здесь все ваши проекты. Выберите способ сортировки</p>
+            </div>
+
+            <div class="tip">
+                <span class="tip-icon">⚒️</span>
+                <p>Нажмите на проект, чтобы открыть его в редакторе</p>
+            </div>
+        </div>
+
+        <div class="projects-list" id="projectsList">
+            <!-- Проекты будут загружены через JS -->
+        </div>
+    </main>
+
+    <!-- Модальное окно для нового проекта -->
+    <div class="modal" id="newProjectModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Новый проект</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="text" placeholder="Название проекта" class="project-name-input" id="projectName">
+                <select class="project-type-select" id="projectType">
+                    <option value="">Выберите тип проекта</option>
+                    <option value="private">Закрытый</option>
+                    <option value="public">Открытый</option>
+                </select>
+                <textarea placeholder="Описание проекта" rows="4" id="projectDescription"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="create-btn l-btn" id="createProjectBtn">Создать</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/projects/index.js"></script>
+    <script>const pageName = "projects";</script>
+    <script src="../js/tips.js"></script>
+    <script src="../js/menu.js"></script>
+    <script src="../js/profile.js"></script>
+</body>
+
+</html>

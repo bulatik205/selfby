@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SelfBy: Топ пользователей</title>
+    <link rel="stylesheet" href="../styles/users/index.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-logo">
+            <h1>SelfBy</h1>
+        </div>
+
+        <button class="burger-btn" id="burgerBtn" aria-label="Меню">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav class="header-nav" id="headerNav">
+            <button class="b-btn" id="profileBtn">Profile</button>
+        </nav>
+    </header>
+
+    <main class="main">
+        <h1 class="page-title">Топ пользователей</h1>
+
+        <div class="sort-tabs">
+            <button class="sort-tab active" data-sort="views">👁 По просмотрам</button>
+            <button class="sort-tab" data-sort="likes">❤ По лайкам</button>
+            <button class="sort-tab" data-sort="works">📄 По работам</button>
+            <button class="sort-tab" data-sort="projects">📂 По проектам</button>
+        </div>
+
+        <div class="tips" id="tipsBlock" style="display: none;">
+            <div class="tips-header">
+                <h3>Подсказка</h3>
+                <button class="tips-close" onclick="closeTips()">Закрыть подсказки</button>
+            </div>
+
+            <div class="tip">
+                <span class="tip-icon">🏆</span>
+                <p>Здесь собраны лучшие пользователи SelfBy</p>
+            </div>
+
+            <div class="tip">
+                <span class="tip-icon">📊</span>
+                <p>Нажмите на пользователя, чтобы посмотреть его профиль</p>
+            </div>
+        </div>
+
+        <div class="users-list" id="usersList"></div>
+    </main>
+
+    <script src="../js/users/index.js"></script>
+    <script>const pageName = "users";</script>
+    <script src="../js/tips.js"></script>
+    <script src="../js/menu.js"></script>
+    <script src="../js/profile.js"></script>
+</body>
+
+</html>
