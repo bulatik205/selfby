@@ -65,18 +65,39 @@ func GetProfile(db *sql.DB) http.HandlerFunc {
 			return
 		}
 
-		err = db.QueryRow(`
-			SELECT 
-				COUNT(*) as total,
-				COALESCE(SUM(CASE WHEN type = 'public' THEN 1 ELSE 0 END), 0) as public_count,
-				COALESCE(SUM(CASE WHEN type = 'private' THEN 1 ELSE 0 END), 0) as private_count
-			FROM projects
-			WHERE owner_id = ?
-		`, profile.ID).Scan(
-			&profile.ProjectsCount,
-			&profile.PublicProjects,
-			&profile.PrivateProjects,
-		)
+		isOwner := false
+		currentUserID, err := getUserIDFromSession(db, r)
+		if err == nil && currentUserID == profile.ID {
+			isOwner = true
+		}
+
+		if isOwner {
+			err = db.QueryRow(`
+				SELECT 
+					COUNT(*) as total,
+					COALESCE(SUM(CASE WHEN type = 'public' THEN 1 ELSE 0 END), 0) as public_count,
+					COALESCE(SUM(CASE WHEN type = 'private' THEN 1 ELSE 0 END), 0) as private_count
+				FROM projects
+				WHERE owner_id = ?
+			`, profile.ID).Scan(
+				&profile.ProjectsCount,
+				&profile.PublicProjects,
+				&profile.PrivateProjects,
+			)
+		} else {
+			err = db.QueryRow(`
+				SELECT 
+					COUNT(*) as total,
+					COUNT(*) as public_count,
+					0 as private_count
+				FROM projects
+				WHERE owner_id = ? AND type = 'public'
+			`, profile.ID).Scan(
+				&profile.ProjectsCount,
+				&profile.PublicProjects,
+				&profile.PrivateProjects,
+			)
+		}
 
 		if err != nil {
 			log.Println("Ошибка получения проектов:", err)
@@ -85,27 +106,74 @@ func GetProfile(db *sql.DB) http.HandlerFunc {
 			profile.PrivateProjects = 0
 		}
 
-		err = db.QueryRow(`
-			SELECT COUNT(*)
-			FROM works
-			WHERE owner_id = ?
-		`, profile.ID).Scan(&profile.WorksCount)
+		if isOwner {
+			err = db.QueryRow(`
+				SELECT COUNT(*)
+				FROM works
+				WHERE owner_id = ?
+			`, profile.ID).Scan(&profile.WorksCount)
+		} else {
+			err = db.QueryRow(`
+				SELECT COUNT(w.id)
+				FROM works w
+				JOIN projects p ON w.at_project = p.id
+				WHERE w.owner_id = ? AND p.type = 'public'
+			`, profile.ID).Scan(&profile.WorksCount)
+		}
 
 		if err != nil {
 			log.Println("Ошибка получения работ:", err)
 			profile.WorksCount = 0
 		}
 
-		err = db.QueryRow(`
-			SELECT 
-				COALESCE(SUM(likes), 0) as total_likes,
-				COALESCE(SUM(views), 0) as total_views
-			FROM works
-			WHERE owner_id = ?
-		`, profile.ID).Scan(
-			&profile.TotalLikes,
-			&profile.TotalViews,
-		)
+		if isOwner {
+			err = db.QueryRow(`
+				SELECT 
+					COALESCE(SUM(l.likes_count), 0) as total_likes,
+					COALESCE(SUM(v.views_count), 0) as total_views
+				FROM works w
+				LEFT JOIN (
+					SELECT element_id, COUNT(*) as likes_count
+					FROM likes
+					WHERE element_type = 'work'
+					GROUP BY element_id
+				) l ON l.element_id = w.id
+				LEFT JOIN (
+					SELECT element_id, COUNT(*) as views_count
+					FROM views
+					WHERE element_type = 'work'
+					GROUP BY element_id
+				) v ON v.element_id = w.id
+				WHERE w.owner_id = ?
+			`, profile.ID).Scan(
+				&profile.TotalLikes,
+				&profile.TotalViews,
+			)
+		} else {
+			err = db.QueryRow(`
+				SELECT 
+					COALESCE(SUM(l.likes_count), 0) as total_likes,
+					COALESCE(SUM(v.views_count), 0) as total_views
+				FROM works w
+				JOIN projects p ON w.at_project = p.id
+				LEFT JOIN (
+					SELECT element_id, COUNT(*) as likes_count
+					FROM likes
+					WHERE element_type = 'work'
+					GROUP BY element_id
+				) l ON l.element_id = w.id
+				LEFT JOIN (
+					SELECT element_id, COUNT(*) as views_count
+					FROM views
+					WHERE element_type = 'work'
+					GROUP BY element_id
+				) v ON v.element_id = w.id
+				WHERE w.owner_id = ? AND p.type = 'public'
+			`, profile.ID).Scan(
+				&profile.TotalLikes,
+				&profile.TotalViews,
+			)
+		}
 
 		if err != nil {
 			log.Println("Ошибка получения статистики:", err)
@@ -113,43 +181,83 @@ func GetProfile(db *sql.DB) http.HandlerFunc {
 			profile.TotalViews = 0
 		}
 
-		rows, err := db.Query(`
-			SELECT 
-				p.id,
-				p.name,
-				p.description,
-				p.type,
-				p.created_at,
-				COUNT(w.id) as works_count
-			FROM projects p
-			LEFT JOIN works w ON w.at_project = p.id
-			WHERE p.owner_id = ?
-			GROUP BY p.id, p.name, p.description, p.type, p.created_at
-			ORDER BY p.created_at DESC
-		`, profile.ID)
+		if isOwner {
+			rows, err := db.Query(`
+				SELECT 
+					p.id,
+					p.name,
+					p.description,
+					p.type,
+					p.created_at,
+					COUNT(w.id) as works_count
+				FROM projects p
+				LEFT JOIN works w ON w.at_project = p.id
+				WHERE p.owner_id = ?
+				GROUP BY p.id, p.name, p.description, p.type, p.created_at
+				ORDER BY p.created_at DESC
+			`, profile.ID)
 
-		if err != nil {
-			log.Println("Ошибка получения списка проектов:", err)
-			profile.Projects = []ProjectItem{}
-		} else {
-			defer rows.Close()
-
-			profile.Projects = []ProjectItem{}
-			for rows.Next() {
-				var project ProjectItem
-				err := rows.Scan(
-					&project.ID,
-					&project.Name,
-					&project.Description,
-					&project.Type,
-					&project.CreatedAt,
-					&project.WorksCount,
-				)
-				if err != nil {
-					log.Println("Ошибка сканирования проекта:", err)
-					continue
+			if err != nil {
+				log.Println("Ошибка получения списка проектов:", err)
+				profile.Projects = []ProjectItem{}
+			} else {
+				defer rows.Close()
+				profile.Projects = []ProjectItem{}
+				for rows.Next() {
+					var project ProjectItem
+					err := rows.Scan(
+						&project.ID,
+						&project.Name,
+						&project.Description,
+						&project.Type,
+						&project.CreatedAt,
+						&project.WorksCount,
+					)
+					if err != nil {
+						log.Println("Ошибка сканирования проекта:", err)
+						continue
+					}
+					profile.Projects = append(profile.Projects, project)
 				}
-				profile.Projects = append(profile.Projects, project)
+			}
+		} else {
+			rows, err := db.Query(`
+				SELECT 
+					p.id,
+					p.name,
+					p.description,
+					p.type,
+					p.created_at,
+					COUNT(w.id) as works_count
+				FROM projects p
+				LEFT JOIN works w ON w.at_project = p.id
+				WHERE p.owner_id = ? AND p.type = 'public'
+				GROUP BY p.id, p.name, p.description, p.type, p.created_at
+				ORDER BY p.created_at DESC
+			`, profile.ID)
+
+			if err != nil {
+				log.Println("Ошибка получения списка проектов:", err)
+				profile.Projects = []ProjectItem{}
+			} else {
+				defer rows.Close()
+				profile.Projects = []ProjectItem{}
+				for rows.Next() {
+					var project ProjectItem
+					err := rows.Scan(
+						&project.ID,
+						&project.Name,
+						&project.Description,
+						&project.Type,
+						&project.CreatedAt,
+						&project.WorksCount,
+					)
+					if err != nil {
+						log.Println("Ошибка сканирования проекта:", err)
+						continue
+					}
+					profile.Projects = append(profile.Projects, project)
+				}
 			}
 		}
 
