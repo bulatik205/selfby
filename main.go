@@ -123,6 +123,23 @@ func main() {
 		http.ServeFile(w, r, bladeDir+"/work.html")
 	})
 
+	http.HandleFunc("/u/", func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path == "/u/" {
+			http.ServeFile(w, r, bladeDir+"/users.html")
+			return
+		}
+
+		http.ServeFile(w, r, bladeDir+"/profile.html")
+	})
+
+	http.HandleFunc("/editor", func(w http.ResponseWriter, r *http.Request) {
+		if !checkSession(w, r) {
+			http.Redirect(w, r, "/reg", http.StatusSeeOther)
+			return
+		}
+		http.ServeFile(w, r, bladeDir+"/projects.html")
+	})
+
 	http.HandleFunc("/u/{username}", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, bladeDir+"/profile.html")
 	})
@@ -138,8 +155,10 @@ func main() {
 	http.HandleFunc("POST /api/v1/newProject", api.NewProject(db))
 	http.HandleFunc("GET /api/v1/getProjects", api.GetProjects(db))
 	http.HandleFunc("GET /api/v1/getPublicProject", api.GetPublicProject(db))
+	http.HandleFunc("GET /api/v1/getProjectsWithStats", api.GetProjectsWithStats(db))
 
 	http.HandleFunc("GET /api/v1/getUser", api.GetCurrentUser(db))
+	http.HandleFunc("GET /api/v1/getUsers", api.GetTopUsers(db))
 
 	http.HandleFunc("POST /api/v1/newWork", api.NewWork(db))
 	http.HandleFunc("GET /api/v1/getWork", api.GetWork(db))
