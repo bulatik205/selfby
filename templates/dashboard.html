@@ -14,10 +14,16 @@
             <h1>SelfBy</h1>
         </div>
 
-        <div class="header-nav">
+        <button class="burger-btn" id="burgerBtn" aria-label="Меню">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav class="header-nav" id="headerNav">
             <button class="n-btn">Новый проект</button>
             <button class="b-btn" id="profileBtn">Profile</button>
-        </div>
+        </nav>
     </header>
 
     <main class="main">
@@ -46,12 +52,14 @@
 
                 <div class="tip">
                     <span class="tip-icon">⚒️</span>
-                    <p>Это ваша админ-панель. Здесь вы можете создать проекты, смотреть статистику, посмотреть свои проекты</p>
+                    <p>Это ваша админ-панель. Здесь вы можете создать проекты, смотреть статистику, посмотреть свои
+                        проекты</p>
                 </div>
 
                 <div class="tip">
                     <span class="tip-icon">💎</span>
-                    <p>Нажмите на кнопку <span>Новый проект</span>, чтобы создать проект. В него можно будет загрузить работы</p>
+                    <p>Нажмите на кнопку <span>Новый проект</span>, чтобы создать проект. В него можно будет загрузить
+                        работы</p>
                 </div>
 
                 <div class="tip">
@@ -61,7 +69,8 @@
 
                 <div class="tip">
                     <span class="tip-icon"><img src="../images/view-black.png" alt="" width="20px"></span>
-                    <p>Рядом с каждым проектом есть иконка, нажав на которую вы попадете на страницу проекта, которая видна другим людям. </p>
+                    <p>Рядом с каждым проектом есть иконка, нажав на которую вы попадете на страницу проекта, которая
+                        видна другим людям. </p>
                 </div>
             </div>
 
@@ -104,6 +113,7 @@
     <script src="../js/dashboard/index.js"></script>
     <script>const pageName = "dashboard";</script>
     <script src="../js/tips.js"></script>
+    <script src="../js/menu.js"></script>
     <script src="../js/profile.js"></script>
 </body>
 
