@@ -114,7 +114,12 @@ body {
   color: #333;
   overflow-wrap: break-word;
 }
-.work-content h1, .work-content h2, .work-content h3, .work-content h4, .work-content h5, .work-content h6 {
+.work-content h1,
+.work-content h2,
+.work-content h3,
+.work-content h4,
+.work-content h5,
+.work-content h6 {
   margin: 20px 0 10px;
   color: #333;
 }
@@ -174,7 +179,8 @@ body {
   margin: 15px 0;
   color: #666;
 }
-.work-content ul, .work-content ol {
+.work-content ul,
+.work-content ol {
   margin: 10px 0;
   padding-left: 25px;
 }
@@ -183,13 +189,26 @@ body {
   border-collapse: collapse;
   margin: 15px 0;
 }
-.work-content table th, .work-content table td {
+.work-content table th,
+.work-content table td {
   padding: 10px;
   border: 1px solid #ddd;
   text-align: left;
 }
 .work-content table th {
   background: #f5f5f5;
+}
+.work-content .center {
+  text-align: center;
+}
+.work-content img {
+  display: block;
+  margin: 20px auto;
+  max-width: 100%;
+}
+.work-content img.center {
+  display: block;
+  margin: 20px auto;
 }
 
 .nav-footer {
