@@ -22,8 +22,8 @@ type PublicWork struct {
 	ID        int64     `json:"id"`
 	Title     string    `json:"title"`
 	Slug      string    `json:"slug"`
-	Views     int       `json:"views"`
 	Likes     int       `json:"likes"`
+	Views     int       `json:"views"`
 	CreatedAt time.Time `json:"created_at"`
 }
 
@@ -86,10 +86,28 @@ func GetPublicProject(db *sql.DB) http.HandlerFunc {
 		}
 
 		rows, err := db.Query(`
-			SELECT id, title, slug, views, likes, created_at
-			FROM works
-			WHERE at_project = ?
-			ORDER BY created_at DESC
+			SELECT 
+				w.id,
+				w.title,
+				w.slug,
+				w.created_at,
+				COALESCE(l.likes_count, 0) as likes_count,
+				COALESCE(v.views_count, 0) as views_count
+			FROM works w
+			LEFT JOIN (
+				SELECT element_id, COUNT(*) as likes_count
+				FROM likes
+				WHERE element_type = 'work'
+				GROUP BY element_id
+			) l ON l.element_id = w.id
+			LEFT JOIN (
+				SELECT element_id, COUNT(*) as views_count
+				FROM views
+				WHERE element_type = 'work'
+				GROUP BY element_id
+			) v ON v.element_id = w.id
+			WHERE w.at_project = ?
+			ORDER BY w.created_at DESC
 		`, project.ID)
 
 		if err != nil {
@@ -106,9 +124,9 @@ func GetPublicProject(db *sql.DB) http.HandlerFunc {
 				&work.ID,
 				&work.Title,
 				&work.Slug,
-				&work.Views,
-				&work.Likes,
 				&work.CreatedAt,
+				&work.Likes,
+				&work.Views,
 			)
 			if err != nil {
 				log.Println("Ошибка сканирования работы:", err)
