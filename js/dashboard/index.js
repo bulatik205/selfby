@@ -8,11 +8,11 @@ const projectDescriptionInput = document.getElementById('projectDescription');
 const projectsList = document.getElementById('projectsList');
 const profileBtn = document.getElementById('profileBtn');
 const usernameSpan = document.getElementById('username');
-let userData = [];
+let userData = null;
 
-document.addEventListener('DOMContentLoaded', () => {
-    loadProjects();
-    loadUserData();
+document.addEventListener('DOMContentLoaded', async () => {
+    await loadUserData();
+    await loadProjects();
 });
 
 async function loadUserData() {
@@ -28,7 +28,6 @@ async function loadUserData() {
         }
         
         const user = await response.json();
-
         userData = user;
         
         usernameSpan.textContent = user.username;
@@ -111,9 +110,7 @@ createProjectBtn.addEventListener('click', async () => {
         if (response.ok) {
             modal.classList.remove('active');
             clearModalFields();
-            
             removeEmptyState();
-            
             addProjectToList(data, userData);
         } else {
             showError(data.error || 'Ошибка при создании проекта');
@@ -128,9 +125,11 @@ function addProjectToList(project, userData) {
     const projectDiv = document.createElement('div');
     projectDiv.className = 'project';
     
+    const username = userData?.username || '';
+    
     projectDiv.innerHTML = `
         <a href="/editor/${project.name}" class="project-link">${project.name}</a>
-        <a href="/${userData.username}/${project.name}" class="project-link icon-btn">
+        <a href="/u/${username}/${project.name}" class="project-link icon-btn">
             <img src="../images/view.png" alt="Просмотр">
         </a>
     `;
