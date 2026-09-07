@@ -33,7 +33,7 @@ func LoginUser(db *sql.DB) http.HandlerFunc {
 		user, err := getUserByEmail(db, email)
 		if err != nil {
 			if err == sql.ErrNoRows {
-				LoginRedirectWithError(w, r, "Пользователь с таким email не найден")
+				LoginRedirectWithError(w, r, "Неверный логин или пароль")
 				return
 			}
 			log.Println("Ошибка получения пользователя:", err)
@@ -42,7 +42,7 @@ func LoginUser(db *sql.DB) http.HandlerFunc {
 		}
 
 		if err := bcrypt.CompareHashAndPassword([]byte(user.PasswordHash), []byte(password)); err != nil {
-			LoginRedirectWithError(w, r, "Неверный пароль")
+			LoginRedirectWithError(w, r, "Неверный логин или пароль")
 			return
 		}
 

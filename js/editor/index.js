@@ -6,13 +6,23 @@ const workTitleInput = document.getElementById('workTitle');
 const workSlugDisplay = document.getElementById('work-slug');
 const worksList = document.getElementById('worksList');
 const profileBtn = document.getElementById('profileBtn');
+const projectTitle = document.getElementById('projectTitle');
+const worksCountEl = document.getElementById('worksCount');
+const totalViewsEl = document.getElementById('totalViews');
+const totalLikesEl = document.getElementById('totalLikes');
+const projectDateEl = document.getElementById('projectDate');
+const viewProjectBtn = document.getElementById('viewProjectBtn');
 
 const pathParts = window.location.pathname.split('/');
 const projectName = pathParts[pathParts.length - 1];
 
 let slugCheckTimeout;
+let currentWorks = [];
 
 document.addEventListener('DOMContentLoaded', () => {
+    projectTitle.textContent = projectName;
+    document.title = `SelfBy: ${projectName}`;
+    
     loadUserData();
     loadWorks();
 });
@@ -24,6 +34,8 @@ async function loadUserData() {
         
         const user = await response.json();
         profileBtn.textContent = user.username;
+
+        viewProjectBtn.href = `/u/${user.username}/${projectName}`;
     } catch (error) {
         profileBtn.textContent = 'Profile';
     }
@@ -35,6 +47,8 @@ async function loadWorks() {
         if (!response.ok) throw new Error('Ошибка загрузки работ');
         
         const works = await response.json();
+        currentWorks = works;
+        
         worksList.innerHTML = '';
         
         if (works.length === 0) {
@@ -42,8 +56,28 @@ async function loadWorks() {
         } else {
             works.forEach(addWorkToList);
         }
+        
+        updateProjectStats(works);
+        
     } catch (error) {
         worksList.innerHTML = '<div class="empty-state">Ошибка загрузки работ</div>';
+    }
+}
+
+function updateProjectStats(works) {
+    worksCountEl.textContent = works.length;
+    
+    const totalViews = works.reduce((sum, work) => sum + (work.views || 0), 0);
+    totalViewsEl.textContent = totalViews;
+    
+    const totalLikes = works.reduce((sum, work) => sum + (work.likes || 0), 0);
+    totalLikesEl.textContent = totalLikes;
+    
+    if (works.length > 0 && works[0].created_at) {
+        const firstWorkDate = new Date(works[0].created_at);
+        projectDateEl.textContent = firstWorkDate.toLocaleDateString('ru-RU');
+    } else {
+        projectDateEl.textContent = '-';
     }
 }
 
@@ -140,6 +174,9 @@ createWorkBtn.addEventListener('click', async () => {
             clearModalFields();
             removeEmptyState();
             addWorkToList(data);
+            
+            currentWorks.push(data);
+            updateProjectStats(currentWorks);
         } else {
             showError(data.error || 'Ошибка при создании работы');
         }

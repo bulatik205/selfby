@@ -14,15 +14,23 @@
             <h1>SelfBy</h1>
         </div>
 
-        <div class="header-nav">
+        <button class="burger-btn" id="burgerBtn" aria-label="Меню">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav class="header-nav" id="headerNav">
             <a href="#" class="view-btn" id="viewWorkBtn" target="_blank">Просмотр</a>
-            <button class="save-btn" id="saveWorkBtn">Сохранить</button>
+            <button class="save-btn work-save-btn" id="saveWorkBtnHeader">Сохранить</button>
             <button class="b-btn" id="profileBtn">Profile</button>
-        </div>
+        </nav>
     </header>
 
     <main class="main">
         <h1 class="work-title" id="workTitle">Загрузка...</h1>
+
+        <nav class="breadcrumbs" id="breadcrumbs"></nav>
 
         <div class="topics">
             <div class="topic">
@@ -45,8 +53,6 @@
                 <span class="topic-label">Создана</span>
                 <span class="topic-value" id="workCreatedAt">-</span>
             </div>
-
-            <a href="#" class="view-btn" id="viewWorkBtn" target="_blank">Просмотр</a>
         </div>
 
         <hr>
@@ -65,7 +71,8 @@
 
             <div class="tip">
                 <span class="tip-icon">👁</span>
-                <p>Вы можете посмотреть, как выглядит работа нажав на кнопку <span>Просмотр</span>: откроется новое окно с вашей
+                <p>Вы можете посмотреть, как выглядит работа нажав на кнопку <span>Просмотр</span>: откроется новое окно
+                    с вашей
                     работой - так эту страницу видят все.</p>
             </div>
 
@@ -78,11 +85,17 @@
         <div class="editor-area">
             <textarea id="contentMD" placeholder="Пишите вашу работу в Markdown..."></textarea>
         </div>
+
+        <div class="editor-actions">
+            <button class="save-btn work-save-btn" id="saveWorkBtnBottom">Сохранить</button>
+        </div>
     </main>
 
     <script src="../../js/editor/work/index.js"></script>
     <script>const pageName = "work";</script>
     <script src="../../js/tips.js"></script>
+    <script src="../../js/breadcrumbs.js"></script>
+    <script src="../../js/menu.js"></script>
     <script src="../../js/profile.js"></script>
 </body>
 

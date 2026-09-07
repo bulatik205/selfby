@@ -3,8 +3,6 @@ const avatarEl = document.getElementById('avatar');
 const userIdEl = document.getElementById('userId');
 const createdAtEl = document.getElementById('createdAt');
 const projectsCountEl = document.getElementById('projectsCount');
-const publicProjectsEl = document.getElementById('publicProjects');
-const privateProjectsEl = document.getElementById('privateProjects');
 const worksCountEl = document.getElementById('worksCount');
 const totalLikesEl = document.getElementById('totalLikes');
 const totalViewsEl = document.getElementById('totalViews');
@@ -26,22 +24,22 @@ function displayProjects(projects) {
         projectsListEl.innerHTML = '<div class="empty-state">Нет проектов</div>';
         return;
     }
-
+    
     projectsListEl.innerHTML = '';
-
+    
     projects.forEach(project => {
         const projectCard = document.createElement('div');
         projectCard.className = 'project-card';
-
+        
         const typeLabel = project.type === 'public' ? 'Открытый' : 'Закрытый';
-
+        
         const createdDate = new Date(project.created_at);
         const formattedDate = createdDate.toLocaleDateString('ru-RU', {
             year: 'numeric',
             month: 'long',
             day: 'numeric'
         });
-
+        
         projectCard.innerHTML = `
             <div class="project-info">
                 <a href="/u/${username}/${project.name}" class="project-name">${project.name}</a>
@@ -55,7 +53,7 @@ function displayProjects(projects) {
                 Создан: ${formattedDate}
             </div>
         `;
-
+        
         projectsListEl.appendChild(projectCard);
     });
 }
@@ -63,34 +61,32 @@ function displayProjects(projects) {
 async function loadProfile() {
     try {
         const response = await fetch(`/api/v1/getProfile?username=${encodeURIComponent(username)}`);
-
+        
         if (!response.ok) {
             throw new Error('Ошибка загрузки профиля');
         }
-
+        
         profile = await response.json();
-
+        
         document.title = `SelfBy: ${profile.username}`;
         usernameEl.textContent = profile.username;
         avatarEl.textContent = profile.username.charAt(0).toUpperCase();
         userIdEl.textContent = profile.id;
-
+        
         const createdDate = new Date(profile.created_at);
         createdAtEl.textContent = createdDate.toLocaleDateString('ru-RU', {
             year: 'numeric',
             month: 'long',
             day: 'numeric'
         });
-
+        
         projectsCountEl.textContent = profile.projects_count;
-        publicProjectsEl.textContent = profile.public_projects;
-        privateProjectsEl.textContent = profile.private_projects;
         worksCountEl.textContent = profile.works_count;
         totalLikesEl.textContent = profile.total_likes;
         totalViewsEl.textContent = profile.total_views;
-
+        
         displayProjects(profile.projects);
-
+        
     } catch (error) {
         console.error('Ошибка загрузки профиля:', error);
         usernameEl.textContent = 'Пользователь не найден';
@@ -101,10 +97,10 @@ async function loadCurrentUser() {
     try {
         const response = await fetch('/api/v1/getUser');
         if (!response.ok) return;
-
+        
         const user = await response.json();
         profileBtn.textContent = user.username;
-
+        
         if (user.username === username) {
             profileBtn.textContent = 'Dashboard';
             profileBtn.onclick = () => {

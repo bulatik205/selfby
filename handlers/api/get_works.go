@@ -54,10 +54,32 @@ func GetWorks(db *sql.DB) http.HandlerFunc {
 			return
 		}
 
-		rows, err := db.Query(
-			"SELECT id, title, slug, at_project, views, likes, created_at FROM works WHERE at_project = ? ORDER BY created_at DESC",
-			projectID,
-		)
+		rows, err := db.Query(`
+			SELECT 
+				w.id,
+				w.title,
+				w.slug,
+				w.at_project,
+				w.created_at,
+				COALESCE(l.likes_count, 0) as likes_count,
+				COALESCE(v.views_count, 0) as views_count
+			FROM works w
+			LEFT JOIN (
+				SELECT element_id, COUNT(*) as likes_count
+				FROM likes
+				WHERE element_type = 'work'
+				GROUP BY element_id
+			) l ON l.element_id = w.id
+			LEFT JOIN (
+				SELECT element_id, COUNT(*) as views_count
+				FROM views
+				WHERE element_type = 'work'
+				GROUP BY element_id
+			) v ON v.element_id = w.id
+			WHERE w.at_project = ?
+			ORDER BY w.created_at DESC
+		`, projectID)
+
 		if err != nil {
 			log.Println("Ошибка получения работ:", err)
 			respondWithError(w, http.StatusInternalServerError, "Ошибка при получении работ")
@@ -65,7 +87,7 @@ func GetWorks(db *sql.DB) http.HandlerFunc {
 		}
 		defer rows.Close()
 
-		var works []WorkListItem
+		works := []WorkListItem{}
 		for rows.Next() {
 			var work WorkListItem
 			err := rows.Scan(
@@ -73,19 +95,15 @@ func GetWorks(db *sql.DB) http.HandlerFunc {
 				&work.Title,
 				&work.Slug,
 				&work.ProjectID,
-				&work.Views,
-				&work.Likes,
 				&work.CreatedAt,
+				&work.Likes,
+				&work.Views,
 			)
 			if err != nil {
 				log.Println("Ошибка сканирования работы:", err)
 				continue
 			}
 			works = append(works, work)
-		}
-
-		if works == nil {
-			works = []WorkListItem{}
 		}
 
 		respondWithJSON(w, http.StatusOK, works)

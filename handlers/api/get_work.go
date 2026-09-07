@@ -16,8 +16,8 @@ type WorkDetail struct {
 	Slug        string    `json:"slug"`
 	ContentMD   string    `json:"content_md"`
 	ContentHTML string    `json:"content_html"`
-	Views       int       `json:"views"`
 	Likes       int       `json:"likes"`
+	Views       int       `json:"views"`
 	CreatedAt   time.Time `json:"created_at"`
 	OwnerName   string    `json:"owner_name"`
 }
@@ -50,13 +50,25 @@ func GetWork(db *sql.DB) http.HandlerFunc {
 				w.slug,
 				w.content_md,
 				w.content_html,
-				w.views,
-				w.likes,
 				w.created_at,
-				u.username as owner_name
+				u.username as owner_name,
+				COALESCE(l.likes_count, 0) as likes_count,
+				COALESCE(v.views_count, 0) as views_count
 			FROM works w
 			JOIN projects p ON w.at_project = p.id
 			JOIN users u ON w.owner_id = u.id
+			LEFT JOIN (
+				SELECT element_id, COUNT(*) as likes_count
+				FROM likes
+				WHERE element_type = 'work'
+				GROUP BY element_id
+			) l ON l.element_id = w.id
+			LEFT JOIN (
+				SELECT element_id, COUNT(*) as views_count
+				FROM views
+				WHERE element_type = 'work'
+				GROUP BY element_id
+			) v ON v.element_id = w.id
 			WHERE p.name = ? AND w.slug = ?
 		`, projectName, workSlug).Scan(
 			&work.ID,
@@ -67,10 +79,10 @@ func GetWork(db *sql.DB) http.HandlerFunc {
 			&work.Slug,
 			&work.ContentMD,
 			&work.ContentHTML,
-			&work.Views,
-			&work.Likes,
 			&work.CreatedAt,
 			&work.OwnerName,
+			&work.Likes,
+			&work.Views,
 		)
 
 		if err != nil {

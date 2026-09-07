@@ -1,8 +1,3 @@
-const ownerLink = document.getElementById('ownerLink');
-const ownerName = document.getElementById('ownerName');
-const projectLink = document.getElementById('projectLink');
-const projectName = document.getElementById('projectName');
-const workTitle = document.getElementById('workTitle');
 const workTitleMain = document.getElementById('workTitleMain');
 const workViews = document.getElementById('workViews');
 const workDate = document.getElementById('workDate');
@@ -41,13 +36,6 @@ async function loadWork() {
         currentWork = work;
 
         document.title = `SelfBy: ${work.owner_name} - ${work.project_name} - ${work.title}`;
-
-        ownerLink.href = `/u/${work.owner_name}`;
-        ownerName.textContent = work.owner_name;
-        projectLink.href = `/u/${work.owner_name}/${work.project_name}`;
-        projectName.textContent = work.project_name;
-        workTitle.textContent = work.title;
-
         workTitleMain.textContent = work.title;
 
         workViews.textContent = work.views;
@@ -87,12 +75,12 @@ async function checkEditAccess() {
 
 function showError(message) {
     workTitleMain.textContent = message;
-    workTitle.textContent = message;
-    ownerName.textContent = '-';
-    projectName.textContent = '-';
     workViews.textContent = '0';
     workDate.textContent = '-';
     workContent.innerHTML = '';
-    document.querySelector('.work-meta').style.display = 'none';
+    
+    const workMeta = document.querySelector('.work-meta');
+    if (workMeta) workMeta.style.display = 'none';
+    
     editBtn.style.display = 'none';
 }

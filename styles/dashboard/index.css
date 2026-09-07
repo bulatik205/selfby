@@ -262,6 +262,30 @@ body {
   margin-top: 20px;
 }
 
+@media (max-width: 768px) {
+  .main {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+  }
+  .main-menu {
+    order: 1;
+  }
+  .main-base {
+    order: 2;
+  }
+  .main-base .base-title h2 {
+    text-align: center;
+    font-size: 18px;
+  }
+  .main-base .simple {
+    grid-template-columns: 1fr;
+  }
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+  .main {
+    grid-template-columns: 1fr 2fr;
+  }
+}
 @keyframes slideIn {
   from {
     transform: translateY(-20px);

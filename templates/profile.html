@@ -20,6 +20,8 @@
     </header>
 
     <main class="main">
+        <nav class="breadcrumbs" id="breadcrumbs"></nav>
+
         <div class="profile-header">
             <div class="avatar" id="avatar">U</div>
             <h1 class="username" id="username">Загрузка...</h1>
@@ -52,16 +54,6 @@
             <div class="stat-card">
                 <span class="stat-number" id="projectsCount">0</span>
                 <span class="stat-label">Проектов</span>
-                <div class="stat-details">
-                    <span class="stat-detail public">
-                        <span class="dot"></span>
-                        <span id="publicProjects">0</span> открытых
-                    </span>
-                    <span class="stat-detail private">
-                        <span class="dot"></span>
-                        <span id="privateProjects">0</span> закрытых
-                    </span>
-                </div>
             </div>
             <div class="stat-card">
                 <span class="stat-number" id="worksCount">0</span>
@@ -88,6 +80,7 @@
     <script src="../js/profile/index.js"></script>
     <script>const pageName = "profile";</script>
     <script src="../js/tips.js"></script>
+    <script src="../js/breadcrumbs.js"></script>
     <script src="../js/profile.js"></script>
 </body>
 
