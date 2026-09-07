@@ -1,4 +1,3 @@
-</html>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,32 +21,54 @@
         </button>
 
         <nav class="header-nav" id="headerNav">
+            <a href="#" class="view-btn" id="viewProjectBtn" target="_blank">Просмотр</a>
             <button class="n-btn">Новая работа</button>
             <button class="b-btn" id="profileBtn">Profile</button>
         </nav>
     </header>
 
-    <nav class="breadcrumbs" id="breadcrumbs"></nav>
-
-    <div class="tips" id="tipsBlock" style="display: none; margin-top: 20px;">
-        <div class="tips-header">
-            <h3>Подсказка</h3>
-            <button class="tips-close" onclick="closeTips()">Закрыть подсказки</button>
-        </div>
-
-        <div class="tip">
-            <span class="tip-icon">🌿</span>
-            <p>Это страница вашего проекта с работами. <span>Работы</span> - это файлы в формате Markdown, которые вы
-                пишите</p>
-        </div>
-
-        <div class="tip">
-            <span class="tip-icon">🧩</span>
-            <p><span>Проект</span> является лишь входной точкой и соединителем всех работ</p>
-        </div>
-    </div>
-
     <main class="main">
+        <nav class="breadcrumbs" id="breadcrumbs"></nav>
+
+        <h1 class="project-title" id="projectTitle">Загрузка...</h1>
+
+        <div class="project-stats">
+            <div class="topic">
+                <span class="topic-label">Работ</span>
+                <span class="topic-value" id="worksCount">0</span>
+            </div>
+            <div class="topic">
+                <span class="topic-label">Просмотры</span>
+                <span class="topic-value" id="totalViews">0</span>
+            </div>
+            <div class="topic">
+                <span class="topic-label">Лайки</span>
+                <span class="topic-value" id="totalLikes">0</span>
+            </div>
+            <div class="topic">
+                <span class="topic-label">Создан</span>
+                <span class="topic-value" id="projectDate">-</span>
+            </div>
+        </div>
+
+        <div class="tips" id="tipsBlock" style="display: none; margin-top: 20px;">
+            <div class="tips-header">
+                <h3>Подсказка</h3>
+                <button class="tips-close" onclick="closeTips()">Закрыть подсказки</button>
+            </div>
+
+            <div class="tip">
+                <span class="tip-icon">🌿</span>
+                <p>Это страница вашего проекта с работами. <span>Работы</span> - это файлы в формате Markdown, которые
+                    вы пишите</p>
+            </div>
+
+            <div class="tip">
+                <span class="tip-icon">🧩</span>
+                <p><span>Проект</span> является лишь входной точкой и соединителем всех работ</p>
+            </div>
+        </div>
+
         <div id="worksList"></div>
     </main>
 
