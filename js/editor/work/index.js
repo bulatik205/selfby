@@ -5,9 +5,8 @@ const workViews = document.getElementById('workViews');
 const workLikes = document.getElementById('workLikes');
 const workCreatedAt = document.getElementById('workCreatedAt');
 const contentMD = document.getElementById('contentMD');
-const saveWorkBtn = document.getElementById('saveWorkBtn');
 const viewWorkBtn = document.getElementById('viewWorkBtn');
-const profileBtn = document.getElementById('profileBtn');
+const saveButtons = document.querySelectorAll('.work-save-btn');
 
 const pathParts = window.location.pathname.split('/');
 const workSlug = pathParts[pathParts.length - 1];
@@ -51,7 +50,7 @@ async function loadWork() {
     }
 }
 
-saveWorkBtn.addEventListener('click', async () => {
+async function saveWork() {
     if (!currentWork) return;
     
     const content = contentMD.value;
@@ -80,30 +79,45 @@ saveWorkBtn.addEventListener('click', async () => {
         console.error('Ошибка сохранения:', error);
         showSaveError('Ошибка соединения с сервером');
     }
+}
+
+saveButtons.forEach(btn => {
+    btn.addEventListener('click', saveWork);
 });
 
 function showSaveSuccess() {
-    saveWorkBtn.textContent = '✓ Сохранено';
-    saveWorkBtn.style.background = '#18A64A';
+    saveButtons.forEach(btn => {
+        btn.textContent = '✓ Сохранено';
+        btn.style.background = '#18A64A';
+    });
+    
     setTimeout(() => {
-        saveWorkBtn.textContent = 'Сохранить';
-        saveWorkBtn.style.background = '';
+        saveButtons.forEach(btn => {
+            btn.textContent = 'Сохранить';
+            btn.style.background = '';
+        });
     }, 2000);
 }
 
 function showSaveError(message) {
-    saveWorkBtn.textContent = '✗ Ошибка';
-    saveWorkBtn.style.background = '#e74c3c';
+    saveButtons.forEach(btn => {
+        btn.textContent = '✗ Ошибка';
+        btn.style.background = '#e74c3c';
+    });
+    
     alert(message);
+    
     setTimeout(() => {
-        saveWorkBtn.textContent = 'Сохранить';
-        saveWorkBtn.style.background = '';
+        saveButtons.forEach(btn => {
+            btn.textContent = 'Сохранить';
+            btn.style.background = '';
+        });
     }, 2000);
 }
 
 document.addEventListener('keydown', (e) => {
     if ((e.ctrlKey || e.metaKey) && e.key === 's') {
         e.preventDefault();
-        saveWorkBtn.click();
+        saveWork();
     }
 });
