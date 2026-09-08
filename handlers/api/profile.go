@@ -8,16 +8,22 @@ import (
 )
 
 type UserProfile struct {
-	ID              int64         `json:"id"`
-	Username        string        `json:"username"`
-	CreatedAt       time.Time     `json:"created_at"`
-	ProjectsCount   int           `json:"projects_count"`
-	PublicProjects  int           `json:"public_projects"`
-	PrivateProjects int           `json:"private_projects"`
-	WorksCount      int           `json:"works_count"`
-	TotalLikes      int           `json:"total_likes"`
-	TotalViews      int           `json:"total_views"`
-	Projects        []ProjectItem `json:"projects"`
+	ID            int64         `json:"id"`
+	Username      string        `json:"username"`
+	CreatedAt     time.Time     `json:"created_at"`
+	ProjectsCount int           `json:"projects_count"`
+	WorksCount    int           `json:"works_count"`
+	TotalLikes    int           `json:"total_likes"`
+	TotalViews    int           `json:"total_views"`
+	IndexWork     *IndexWork    `json:"index_work,omitempty"`
+	Projects      []ProjectItem `json:"projects"`
+}
+
+type IndexWork struct {
+	ID          int64  `json:"id"`
+	Title       string `json:"title"`
+	Slug        string `json:"slug"`
+	ContentHTML string `json:"content_html"`
 }
 
 type ProjectItem struct {
@@ -73,37 +79,21 @@ func GetProfile(db *sql.DB) http.HandlerFunc {
 
 		if isOwner {
 			err = db.QueryRow(`
-				SELECT 
-					COUNT(*) as total,
-					COALESCE(SUM(CASE WHEN type = 'public' THEN 1 ELSE 0 END), 0) as public_count,
-					COALESCE(SUM(CASE WHEN type = 'private' THEN 1 ELSE 0 END), 0) as private_count
+				SELECT COUNT(*)
 				FROM projects
 				WHERE owner_id = ?
-			`, profile.ID).Scan(
-				&profile.ProjectsCount,
-				&profile.PublicProjects,
-				&profile.PrivateProjects,
-			)
+			`, profile.ID).Scan(&profile.ProjectsCount)
 		} else {
 			err = db.QueryRow(`
-				SELECT 
-					COUNT(*) as total,
-					COUNT(*) as public_count,
-					0 as private_count
+				SELECT COUNT(*)
 				FROM projects
 				WHERE owner_id = ? AND type = 'public'
-			`, profile.ID).Scan(
-				&profile.ProjectsCount,
-				&profile.PublicProjects,
-				&profile.PrivateProjects,
-			)
+			`, profile.ID).Scan(&profile.ProjectsCount)
 		}
 
 		if err != nil {
 			log.Println("Ошибка получения проектов:", err)
 			profile.ProjectsCount = 0
-			profile.PublicProjects = 0
-			profile.PrivateProjects = 0
 		}
 
 		if isOwner {
@@ -181,8 +171,28 @@ func GetProfile(db *sql.DB) http.HandlerFunc {
 			profile.TotalViews = 0
 		}
 
+		var indexWork IndexWork
+		err = db.QueryRow(`
+			SELECT w.id, w.title, w.slug, w.content_html
+			FROM works w
+			JOIN projects p ON w.at_project = p.id
+			WHERE p.owner_id = ? AND p.name = 'index' AND w.slug = 'index'
+		`, profile.ID).Scan(
+			&indexWork.ID,
+			&indexWork.Title,
+			&indexWork.Slug,
+			&indexWork.ContentHTML,
+		)
+
+		if err == nil {
+			profile.IndexWork = &indexWork
+		} else if err != sql.ErrNoRows {
+			log.Println("Ошибка получения index работы:", err)
+		}
+
+		var query string
 		if isOwner {
-			rows, err := db.Query(`
+			query = `
 				SELECT 
 					p.id,
 					p.name,
@@ -192,36 +202,12 @@ func GetProfile(db *sql.DB) http.HandlerFunc {
 					COUNT(w.id) as works_count
 				FROM projects p
 				LEFT JOIN works w ON w.at_project = p.id
-				WHERE p.owner_id = ?
+				WHERE p.owner_id = ? AND p.name != 'index'
 				GROUP BY p.id, p.name, p.description, p.type, p.created_at
 				ORDER BY p.created_at DESC
-			`, profile.ID)
-
-			if err != nil {
-				log.Println("Ошибка получения списка проектов:", err)
-				profile.Projects = []ProjectItem{}
-			} else {
-				defer rows.Close()
-				profile.Projects = []ProjectItem{}
-				for rows.Next() {
-					var project ProjectItem
-					err := rows.Scan(
-						&project.ID,
-						&project.Name,
-						&project.Description,
-						&project.Type,
-						&project.CreatedAt,
-						&project.WorksCount,
-					)
-					if err != nil {
-						log.Println("Ошибка сканирования проекта:", err)
-						continue
-					}
-					profile.Projects = append(profile.Projects, project)
-				}
-			}
+			`
 		} else {
-			rows, err := db.Query(`
+			query = `
 				SELECT 
 					p.id,
 					p.name,
@@ -231,33 +217,34 @@ func GetProfile(db *sql.DB) http.HandlerFunc {
 					COUNT(w.id) as works_count
 				FROM projects p
 				LEFT JOIN works w ON w.at_project = p.id
-				WHERE p.owner_id = ? AND p.type = 'public'
+				WHERE p.owner_id = ? AND p.type = 'public' AND p.name != 'index'
 				GROUP BY p.id, p.name, p.description, p.type, p.created_at
 				ORDER BY p.created_at DESC
-			`, profile.ID)
+			`
+		}
 
-			if err != nil {
-				log.Println("Ошибка получения списка проектов:", err)
-				profile.Projects = []ProjectItem{}
-			} else {
-				defer rows.Close()
-				profile.Projects = []ProjectItem{}
-				for rows.Next() {
-					var project ProjectItem
-					err := rows.Scan(
-						&project.ID,
-						&project.Name,
-						&project.Description,
-						&project.Type,
-						&project.CreatedAt,
-						&project.WorksCount,
-					)
-					if err != nil {
-						log.Println("Ошибка сканирования проекта:", err)
-						continue
-					}
-					profile.Projects = append(profile.Projects, project)
+		rows, err := db.Query(query, profile.ID)
+		if err != nil {
+			log.Println("Ошибка получения списка проектов:", err)
+			profile.Projects = []ProjectItem{}
+		} else {
+			defer rows.Close()
+			profile.Projects = []ProjectItem{}
+			for rows.Next() {
+				var project ProjectItem
+				err := rows.Scan(
+					&project.ID,
+					&project.Name,
+					&project.Description,
+					&project.Type,
+					&project.CreatedAt,
+					&project.WorksCount,
+				)
+				if err != nil {
+					log.Println("Ошибка сканирования проекта:", err)
+					continue
 				}
+				profile.Projects = append(profile.Projects, project)
 			}
 		}
 
