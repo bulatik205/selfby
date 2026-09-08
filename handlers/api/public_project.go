@@ -15,6 +15,7 @@ type PublicProject struct {
 	CreatedAt   time.Time    `json:"created_at"`
 	OwnerID     int64        `json:"owner_id"`
 	OwnerName   string       `json:"owner_name"`
+	IndexWork   *IndexWork   `json:"index_work,omitempty"`
 	Works       []PublicWork `json:"works"`
 }
 
@@ -85,6 +86,24 @@ func GetPublicProject(db *sql.DB) http.HandlerFunc {
 			}
 		}
 
+		var indexWork IndexWork
+		err = db.QueryRow(`
+			SELECT id, title, slug, content_html
+			FROM works
+			WHERE at_project = ? AND slug = 'index'
+		`, project.ID).Scan(
+			&indexWork.ID,
+			&indexWork.Title,
+			&indexWork.Slug,
+			&indexWork.ContentHTML,
+		)
+
+		if err == nil {
+			project.IndexWork = &indexWork
+		} else if err != sql.ErrNoRows {
+			log.Println("Ошибка получения index работы:", err)
+		}
+
 		rows, err := db.Query(`
 			SELECT 
 				w.id,
@@ -106,7 +125,7 @@ func GetPublicProject(db *sql.DB) http.HandlerFunc {
 				WHERE element_type = 'work'
 				GROUP BY element_id
 			) v ON v.element_id = w.id
-			WHERE w.at_project = ?
+			WHERE w.at_project = ? AND w.slug != 'index'
 			ORDER BY w.created_at DESC
 		`, project.ID)
 

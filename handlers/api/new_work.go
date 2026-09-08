@@ -82,7 +82,7 @@ func NewWork(db *sql.DB) http.HandlerFunc {
 		}
 
 		baseSlug := generateSlug(req.Title)
-		slug, err := makeUniqueSlug(db, userID, baseSlug)
+		slug, err := makeUniqueSlug(db, projectID, baseSlug)
 		if err != nil {
 			respondWithError(w, http.StatusInternalServerError, "Ошибка сервера")
 			return
@@ -179,7 +179,7 @@ func CheckSlug(db *sql.DB) http.HandlerFunc {
 			return
 		}
 
-		exists, err := checkSlugExists(db, userID, baseSlug)
+		exists, err := checkSlugExists(db, projectID, baseSlug)
 		if err != nil {
 			respondWithError(w, http.StatusInternalServerError, "Ошибка сервера")
 			return
@@ -249,12 +249,12 @@ func generateSlug(title string) string {
 	return slug
 }
 
-func makeUniqueSlug(db *sql.DB, ownerID int64, baseSlug string) (string, error) {
+func makeUniqueSlug(db *sql.DB, projectID int64, baseSlug string) (string, error) {
 	slug := baseSlug
 	counter := 1
 
 	for {
-		exists, err := checkSlugExists(db, ownerID, slug)
+		exists, err := checkSlugExists(db, projectID, slug)
 		if err != nil {
 			return "", err
 		}
@@ -268,11 +268,11 @@ func makeUniqueSlug(db *sql.DB, ownerID int64, baseSlug string) (string, error) 
 	}
 }
 
-func checkSlugExists(db *sql.DB, ownerID int64, slug string) (bool, error) {
+func checkSlugExists(db *sql.DB, projectID int64, slug string) (bool, error) {
 	var count int
 	err := db.QueryRow(
-		"SELECT COUNT(*) FROM works WHERE owner_id = ? AND slug = ?",
-		ownerID, slug,
+		"SELECT COUNT(*) FROM works WHERE at_project = ? AND slug = ?",
+		projectID, slug,
 	).Scan(&count)
 
 	if err != nil {

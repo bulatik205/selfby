@@ -7,6 +7,7 @@ const projectType = document.getElementById('projectType');
 const projectDate = document.getElementById('projectDate');
 const worksList = document.getElementById('worksList');
 const worksSection = document.querySelector('.works-section');
+const indexContent = document.getElementById('indexContent');
 
 const pathParts = window.location.pathname.split('/');
 const projectName = pathParts[pathParts.length - 1];
@@ -52,6 +53,13 @@ async function loadProject() {
             month: 'long',
             day: 'numeric'
         })}`;
+        
+        if (project.index_work && project.index_work.content_html) {
+            if (indexContent) {
+                indexContent.innerHTML = project.index_work.content_html;
+                indexContent.style.display = 'block';
+            }
+        }
         
         displayWorks(project.works);
         
@@ -101,5 +109,6 @@ function showError(message) {
     projectType.style.display = 'none';
     projectDate.style.display = 'none';
     worksList.innerHTML = '';
+    if (indexContent) indexContent.style.display = 'none';
     worksSection.classList.add('hidden');
 }
