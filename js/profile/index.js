@@ -8,6 +8,7 @@ const totalLikesEl = document.getElementById('totalLikes');
 const totalViewsEl = document.getElementById('totalViews');
 const profileBtn = document.getElementById('profileBtn');
 const projectsListEl = document.getElementById('projectsList');
+const indexContent = document.getElementById('indexContent');
 
 const pathParts = window.location.pathname.split('/');
 const username = pathParts[pathParts.length - 1];
@@ -84,6 +85,13 @@ async function loadProfile() {
         worksCountEl.textContent = profile.works_count;
         totalLikesEl.textContent = profile.total_likes;
         totalViewsEl.textContent = profile.total_views;
+        
+        if (profile.index_work && profile.index_work.content_html) {
+            if (indexContent) {
+                indexContent.innerHTML = profile.index_work.content_html;
+                indexContent.style.display = 'block';
+            }
+        }
         
         displayProjects(profile.projects);
         
