@@ -8,17 +8,20 @@ const projectDescriptionInput = document.getElementById('projectDescription');
 const projectsList = document.getElementById('projectsList');
 const profileBtn = document.getElementById('profileBtn');
 const usernameSpan = document.getElementById('username');
+
 let userData = null;
+let currentProjects = [];
 
 document.addEventListener('DOMContentLoaded', async () => {
     await loadUserData();
     await loadProjects();
+    await loadDashboardStats();
 });
 
 async function loadUserData() {
     try {
         const response = await fetch('/api/v1/getUser');
-        
+
         if (!response.ok) {
             if (response.status === 401) {
                 window.location.href = '/login';
@@ -26,13 +29,18 @@ async function loadUserData() {
             }
             throw new Error('Ошибка загрузки данных пользователя');
         }
-        
+
         const user = await response.json();
         userData = user;
-        
+
         usernameSpan.textContent = user.username;
         profileBtn.textContent = user.username;
-        
+
+        const myProfileLink = document.getElementById('myProfileLink');
+        if (myProfileLink) {
+            myProfileLink.href = `/u/${user.username}`;
+        }
+
         return user;
     } catch (error) {
         console.error('Ошибка:', error);
@@ -43,25 +51,46 @@ async function loadUserData() {
 
 async function loadProjects() {
     try {
-        const response = await fetch('/api/v1/getProjects');
+        const response = await fetch('/api/v1/getProjectsWithStats');
         const data = await response.json();
 
-        if (response.ok) {
-            projectsList.innerHTML = '';
-            
-            if (data.length === 0) {
-                showEmptyState();
-            } else {
-                data.forEach(project => {
-                    addProjectToList(project, userData);
-                });
-            }
-        } else {
+        if (!response.ok) {
             console.error('Ошибка загрузки проектов:', data.error);
+            return;
         }
+
+        currentProjects = data;
+        projectsList.innerHTML = '';
+
+        if (data.length === 0) {
+            showEmptyState();
+        } else {
+            data.forEach(project => {
+                addProjectToList(project, userData);
+            });
+        }
+
+        updateStats(data);
     } catch (error) {
         console.error('Ошибка:', error);
     }
+}
+
+function updateStats(projects) {
+    let totalWorks = 0;
+    let totalViews = 0;
+    let totalLikes = 0;
+
+    projects.forEach(p => {
+        totalWorks += p.works_count || 0;
+        totalViews += p.total_views || 0;
+        totalLikes += p.total_likes || 0;
+    });
+
+    document.getElementById('statProjects').textContent = projects.length;
+    document.getElementById('statWorks').textContent = totalWorks;
+    document.getElementById('statViews').textContent = totalViews;
+    document.getElementById('statLikes').textContent = totalLikes;
 }
 
 newProjectBtn.addEventListener('click', () => {
@@ -78,6 +107,92 @@ modal.addEventListener('click', (e) => {
         modal.classList.remove('active');
     }
 });
+
+async function loadDashboardStats() {
+    try {
+        const response = await fetch('/api/v1/getDashboardStats');
+        if (!response.ok) return;
+
+        const data = await response.json();
+
+        displayTopProjects(data.top_projects || []);
+        displayRecentLikes(data.recent_likes || []);
+    } catch (error) {
+        console.error('Ошибка загрузки статистики:', error);
+    }
+}
+
+function displayTopProjects(projects) {
+    const container = document.getElementById('topProjectsList');
+    if (!container) return;
+
+    if (projects.length === 0) {
+        container.innerHTML = '<div class="widget-empty">Нет данных</div>';
+        return;
+    }
+
+    container.innerHTML = '';
+
+    projects.forEach((project, index) => {
+        const item = document.createElement('a');
+        item.className = 'widget-item';
+        item.href = `/editor/${project.name}`;
+
+        const medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `${index + 1}.`;
+
+        item.innerHTML = `
+            <span class="widget-rank">${medal}</span>
+            <span class="widget-title">${project.name}</span>
+            <span class="widget-stats">
+                <span>👁 ${project.total_views}</span>
+                <span>❤ ${project.total_likes}</span>
+            </span>
+        `;
+
+        container.appendChild(item);
+    });
+}
+
+function displayRecentLikes(likes) {
+    const container = document.getElementById('recentLikesList');
+    if (!container) return;
+
+    if (likes.length === 0) {
+        container.innerHTML = '<div class="widget-empty">Пока нет лайков</div>';
+        return;
+    }
+
+    container.innerHTML = '';
+
+    likes.forEach(like => {
+        const item = document.createElement('a');
+        item.className = 'widget-item';
+
+        if (like.element_type === 'work' && like.work_slug) {
+            item.href = `/editor/${like.project_name}/${like.work_slug}`;
+        } else {
+            item.href = `/editor/${like.project_name}`;
+        }
+
+        const date = new Date(like.created_at);
+        const formattedDate = date.toLocaleDateString('ru-RU', {
+            day: 'numeric',
+            month: 'short'
+        });
+
+        const target = like.element_type === 'work' && like.work_title
+            ? `→ ${like.work_title}`
+            : `→ проект ${like.project_name}`;
+
+        item.innerHTML = `
+            <span class="widget-title">${like.liker_name}</span>
+            <span class="widget-subtitle">${target}</span>
+            <span class="widget-date">${formattedDate}</span>
+        `;
+
+        container.appendChild(item);
+    });
+}
 
 createProjectBtn.addEventListener('click', async () => {
     const projectData = {
@@ -111,7 +226,21 @@ createProjectBtn.addEventListener('click', async () => {
             modal.classList.remove('active');
             clearModalFields();
             removeEmptyState();
-            addProjectToList(data, userData);
+
+            const newProject = {
+                id: data.id,
+                name: data.name,
+                description: data.description,
+                type: data.type,
+                created_at: data.created_at,
+                works_count: 0,
+                total_views: 0,
+                total_likes: 0
+            };
+
+            currentProjects.push(newProject);
+            addProjectToList(newProject, userData);
+            updateStats(currentProjects);
         } else {
             showError(data.error || 'Ошибка при создании проекта');
         }
@@ -124,24 +253,27 @@ createProjectBtn.addEventListener('click', async () => {
 async function deleteProject(projectName, event) {
     event.preventDefault();
     event.stopPropagation();
-    
+
     if (!confirm(`Удалить проект "${projectName}"? Все работы будут удалены. Это действие нельзя отменить.`)) {
         return;
     }
-    
+
     try {
         const response = await fetch(`/api/v1/deleteProject?name=${encodeURIComponent(projectName)}`, {
             method: 'DELETE'
         });
-        
+
         const data = await response.json();
-        
+
         if (response.ok) {
             event.target.closest('.project').remove();
-            
+            currentProjects = currentProjects.filter(p => p.name !== projectName);
+
             if (projectsList.children.length === 0) {
                 showEmptyState();
             }
+
+            updateStats(currentProjects);
         } else {
             alert(data.error || 'Ошибка удаления');
         }
@@ -154,30 +286,12 @@ async function deleteProject(projectName, event) {
 function addProjectToList(project, userData) {
     const projectDiv = document.createElement('div');
     projectDiv.className = 'project';
-    
-    const username = userData?.username || '';
-    
-    projectDiv.innerHTML = `
-        <a href="/editor/${project.name}" class="project-link">${project.name}</a>
-        <a href="/u/${username}/${project.name}" class="project-link icon-btn">
-            <img src="../images/view.png" alt="Просмотр">
-        </a>
-        <button class="project-link icon-btn" onclick="deleteProject('${project.name}', event)" title="Удалить проект">
-            🗑️
-        </button>
-    `;
-    
-    projectsList.appendChild(projectDiv);
-}
 
-function addProjectToList(project, userData) {
-    const projectDiv = document.createElement('div');
-    projectDiv.className = 'project';
-    
     const username = userData?.username || '';
-    const lockIcon = project.type === 'public' ? '🔓' : '🔒';
-    const lockTitle = project.type === 'public' ? 'Сделать закрытым' : 'Сделать открытым';
-    
+    const isPublic = project.type === 'public';
+    const lockIcon = isPublic ? '🔓' : '🔒';
+    const lockTitle = isPublic ? 'Сделать закрытым' : 'Сделать открытым';
+
     projectDiv.innerHTML = `
         <a href="/editor/${project.name}" class="project-link">${project.name}</a>
         <a href="/u/${username}/${project.name}" class="project-link icon-btn">
@@ -190,14 +304,14 @@ function addProjectToList(project, userData) {
             🗑️
         </button>
     `;
-    
+
     projectsList.appendChild(projectDiv);
 }
 
 async function toggleProjectType(projectName, button, event) {
     event.preventDefault();
     event.stopPropagation();
-    
+
     try {
         const response = await fetch('/api/v1/toggleProjectType', {
             method: 'POST',
@@ -208,9 +322,9 @@ async function toggleProjectType(projectName, button, event) {
                 project_name: projectName
             })
         });
-        
+
         const data = await response.json();
-        
+
         if (response.ok) {
             if (data.type === 'public') {
                 button.textContent = '🔓';
@@ -218,6 +332,11 @@ async function toggleProjectType(projectName, button, event) {
             } else {
                 button.textContent = '🔒';
                 button.title = 'Сделать открытым';
+            }
+
+            const project = currentProjects.find(p => p.name === projectName);
+            if (project) {
+                project.type = data.type;
             }
         } else {
             alert(data.error || 'Ошибка изменения типа');

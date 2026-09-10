@@ -190,6 +190,8 @@ func main() {
 
 	http.HandleFunc("POST /api/v1/toggleProjectType", api.ToggleProjectType(db))
 
+	http.HandleFunc("GET /api/v1/getDashboardStats", api.GetDashboardStats(db))
+
 	fmt.Printf("Сервер запущен на http://localhost:%s\n", cfg.ServerPort)
 	http.ListenAndServe(":"+cfg.ServerPort, nil)
 }
