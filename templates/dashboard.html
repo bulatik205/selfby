@@ -76,13 +76,37 @@
 
             <hr>
 
-            <div class="simple">
-                <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur veritatis nam quam corporis
-                    error, consequatur magnam, quidem blanditiis placeat voluptatem quaerat voluptate quae laudantium in
-                    aperiam, saepe facere? Esse, est!</div>
-                <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt rem earum voluptates nihil iure
-                    sapiente sunt nulla impedit culpa placeat, ipsa maiores quas, architecto ducimus, tempore harum
-                    optio voluptatibus illum!</div>
+            <div class="simple" id="statsBlock">
+                <div>
+                    <h3>Статистика</h3>
+                    <p>Проектов: <span id="statProjects">0</span></p>
+                    <p>Работ: <span id="statWorks">0</span></p>
+                    <p>Просмотров: <span id="statViews">0</span></p>
+                    <p>Лайков: <span id="statLikes">0</span></p>
+                </div>
+                <div>
+                    <h3>Ссылки</h3>
+                    <p><a href="/editor" id="allProjectsLink">Все проекты</a></p>
+                    <p><a href="/u/" id="topUsersLink">Топ пользователей</a></p>
+                    <p><a href="/u/help/getting/start">Как это работает?</a></p>
+                    <p><a href="#" id="myProfileLink">Мой профиль</a></p>
+                </div>
+            </div>
+
+            <div class="dashboard-widgets">
+                <div class="widget">
+                    <h3>Топ-5 проектов</h3>
+                    <div class="widget-list" id="topProjectsList">
+                        <div class="widget-empty">Загрузка...</div>
+                    </div>
+                </div>
+
+                <div class="widget">
+                    <h3>Последние лайки</h3>
+                    <div class="widget-list" id="recentLikesList">
+                        <div class="widget-empty">Загрузка...</div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
