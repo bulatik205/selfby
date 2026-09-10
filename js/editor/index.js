@@ -12,12 +12,16 @@ const totalViewsEl = document.getElementById('totalViews');
 const totalLikesEl = document.getElementById('totalLikes');
 const projectDateEl = document.getElementById('projectDate');
 const viewProjectBtn = document.getElementById('viewProjectBtn');
+const deleteProjectBtn = document.getElementById('deleteProjectBtn');
+const toggleTypeBtn = document.getElementById('toggleTypeBtn');
+const projectTypeEl = document.getElementById('projectType');
 
 const pathParts = window.location.pathname.split('/');
 const projectName = pathParts[pathParts.length - 1];
 
 let slugCheckTimeout;
 let currentWorks = [];
+let currentUser = null;
 
 document.addEventListener('DOMContentLoaded', () => {
     projectTitle.textContent = projectName;
@@ -33,11 +37,60 @@ async function loadUserData() {
         if (!response.ok) throw new Error('Ошибка загрузки');
         
         const user = await response.json();
+        currentUser = user;
         profileBtn.textContent = user.username;
-
-        viewProjectBtn.href = `/u/${user.username}/${projectName}`;
+        
+        if (viewProjectBtn) {
+            viewProjectBtn.href = `/u/${user.username}/${projectName}`;
+        }
+        
+        loadProjectType(user.username);
     } catch (error) {
         profileBtn.textContent = 'Profile';
+    }
+}
+
+async function loadProjectType(username) {
+    try {
+        const response = await fetch(`/api/v1/getPublicProject?username=${encodeURIComponent(username)}&project=${encodeURIComponent(projectName)}`);
+        if (!response.ok) return;
+        
+        const project = await response.json();
+        
+        updateProjectTypeUI(project.type);
+        
+        if (project.created_at) {
+            const createdDate = new Date(project.created_at);
+            projectDateEl.textContent = createdDate.toLocaleDateString('ru-RU');
+        }
+    } catch (error) {
+        console.error('Ошибка загрузки типа проекта:', error);
+    }
+}
+
+function updateProjectTypeUI(type) {
+    if (toggleTypeBtn) {
+        if (type === 'public') {
+            toggleTypeBtn.textContent = '🔓';
+            toggleTypeBtn.title = 'Сделать закрытым';
+            toggleTypeBtn.classList.add('public');
+            toggleTypeBtn.classList.remove('private');
+        } else {
+            toggleTypeBtn.textContent = '🔒';
+            toggleTypeBtn.title = 'Сделать открытым';
+            toggleTypeBtn.classList.add('private');
+            toggleTypeBtn.classList.remove('public');
+        }
+    }
+    
+    if (projectTypeEl) {
+        if (type === 'public') {
+            projectTypeEl.textContent = 'Открытый';
+            projectTypeEl.className = 'topic-value public';
+        } else {
+            projectTypeEl.textContent = 'Закрытый';
+            projectTypeEl.className = 'topic-value private';
+        }
     }
 }
 
@@ -211,9 +264,113 @@ function addWorkToList(work) {
             <span>👁 ${work.views}</span>
             <span>❤ ${work.likes}</span>
         </span>
+        <button class="delete-btn" onclick="deleteWork('${work.slug}', event)" title="Удалить">
+            🗑️
+        </button>
     `;
     
     worksList.appendChild(workDiv);
+}
+
+async function deleteWork(slug, event) {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    if (!confirm(`Удалить работу "${slug}"? Это действие нельзя отменить.`)) {
+        return;
+    }
+    
+    try {
+        const response = await fetch(`/api/v1/deleteWork?project=${encodeURIComponent(projectName)}&slug=${encodeURIComponent(slug)}`, {
+            method: 'DELETE'
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+            currentWorks = currentWorks.filter(w => w.slug !== slug);
+            
+            worksList.innerHTML = '';
+            if (currentWorks.length === 0) {
+                showEmptyState();
+            } else {
+                currentWorks.forEach(addWorkToList);
+            }
+            
+            updateProjectStats(currentWorks);
+        } else {
+            alert(data.error || 'Ошибка удаления');
+        }
+    } catch (error) {
+        console.error('Ошибка удаления:', error);
+        alert('Ошибка соединения с сервером');
+    }
+}
+
+if (deleteProjectBtn) {
+    deleteProjectBtn.addEventListener('click', async () => {
+        if (!confirm(`Удалить проект "${projectName}"? Все работы будут удалены. Это действие нельзя отменить.`)) {
+            return;
+        }
+        
+        try {
+            const response = await fetch(`/api/v1/deleteProject?name=${encodeURIComponent(projectName)}`, {
+                method: 'DELETE'
+            });
+            
+            const data = await response.json();
+            
+            if (response.ok) {
+                window.location.href = '/editor';
+            } else {
+                alert(data.error || 'Ошибка удаления');
+            }
+        } catch (error) {
+            console.error('Ошибка удаления:', error);
+            alert('Ошибка соединения с сервером');
+        }
+    });
+}
+
+if (toggleTypeBtn) {
+    toggleTypeBtn.addEventListener('click', async () => {
+        try {
+            const response = await fetch('/api/v1/toggleProjectType', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    project_name: projectName
+                })
+            });
+            
+            const data = await response.json();
+            
+            if (response.ok) {
+                updateProjectTypeUI(data.type);
+                showToast(data.message);
+            } else {
+                alert(data.error || 'Ошибка изменения типа');
+            }
+        } catch (error) {
+            console.error('Ошибка:', error);
+            alert('Ошибка соединения с сервером');
+        }
+    });
+}
+
+function showToast(message) {
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => toast.classList.add('show'), 10);
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    }, 2000);
 }
 
 function clearModalFields() {

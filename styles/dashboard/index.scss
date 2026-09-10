@@ -102,6 +102,8 @@ body {
     gap: 10px;
 
     &-menu {
+        align-self: start;
+        height: fit-content;
         padding: 10px;
         border-radius: 20px;
         background-color: #333;
@@ -127,7 +129,6 @@ body {
             .project {
                 display: flex;
                 gap: 5px;
-                align-items: stretch;
 
                 &-link {
                     display: flex;

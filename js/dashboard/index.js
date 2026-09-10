@@ -121,6 +121,36 @@ createProjectBtn.addEventListener('click', async () => {
     }
 });
 
+async function deleteProject(projectName, event) {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    if (!confirm(`Удалить проект "${projectName}"? Все работы будут удалены. Это действие нельзя отменить.`)) {
+        return;
+    }
+    
+    try {
+        const response = await fetch(`/api/v1/deleteProject?name=${encodeURIComponent(projectName)}`, {
+            method: 'DELETE'
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+            event.target.closest('.project').remove();
+            
+            if (projectsList.children.length === 0) {
+                showEmptyState();
+            }
+        } else {
+            alert(data.error || 'Ошибка удаления');
+        }
+    } catch (error) {
+        console.error('Ошибка удаления:', error);
+        alert('Ошибка соединения с сервером');
+    }
+}
+
 function addProjectToList(project, userData) {
     const projectDiv = document.createElement('div');
     projectDiv.className = 'project';
@@ -132,9 +162,70 @@ function addProjectToList(project, userData) {
         <a href="/u/${username}/${project.name}" class="project-link icon-btn">
             <img src="../images/view.png" alt="Просмотр">
         </a>
+        <button class="project-link icon-btn" onclick="deleteProject('${project.name}', event)" title="Удалить проект">
+            🗑️
+        </button>
     `;
     
     projectsList.appendChild(projectDiv);
+}
+
+function addProjectToList(project, userData) {
+    const projectDiv = document.createElement('div');
+    projectDiv.className = 'project';
+    
+    const username = userData?.username || '';
+    const lockIcon = project.type === 'public' ? '🔓' : '🔒';
+    const lockTitle = project.type === 'public' ? 'Сделать закрытым' : 'Сделать открытым';
+    
+    projectDiv.innerHTML = `
+        <a href="/editor/${project.name}" class="project-link">${project.name}</a>
+        <a href="/u/${username}/${project.name}" class="project-link icon-btn">
+            <img src="../images/view.png" alt="Просмотр">
+        </a>
+        <button class="project-link icon-btn" onclick="toggleProjectType('${project.name}', this, event)" title="${lockTitle}">
+            ${lockIcon}
+        </button>
+        <button class="project-link icon-btn" onclick="deleteProject('${project.name}', event)" title="Удалить проект">
+            🗑️
+        </button>
+    `;
+    
+    projectsList.appendChild(projectDiv);
+}
+
+async function toggleProjectType(projectName, button, event) {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    try {
+        const response = await fetch('/api/v1/toggleProjectType', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                project_name: projectName
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+            if (data.type === 'public') {
+                button.textContent = '🔓';
+                button.title = 'Сделать закрытым';
+            } else {
+                button.textContent = '🔒';
+                button.title = 'Сделать открытым';
+            }
+        } else {
+            alert(data.error || 'Ошибка изменения типа');
+        }
+    } catch (error) {
+        console.error('Ошибка:', error);
+        alert('Ошибка соединения с сервером');
+    }
 }
 
 function clearModalFields() {
