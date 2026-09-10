@@ -56,14 +56,14 @@ func NewProject(db *sql.DB) http.HandlerFunc {
 			return
 		}
 
-		exists, err := checkProjectNameExists(db, req.Name)
+		exists, err := checkProjectNameExists(db, userID, req.Name)
 		if err != nil {
 			log.Println("Ошибка проверки уникальности:", err)
 			respondWithError(w, http.StatusInternalServerError, "Ошибка сервера")
 			return
 		}
 		if exists {
-			respondWithError(w, http.StatusConflict, "Проект с таким названием уже существует")
+			respondWithError(w, http.StatusConflict, "У вас уже есть проект с таким названием")
 			return
 		}
 
@@ -140,11 +140,11 @@ func validateProject(req ProjectRequest) string {
 	return ""
 }
 
-func checkProjectNameExists(db *sql.DB, name string) (bool, error) {
+func checkProjectNameExists(db *sql.DB, ownerID int64, name string) (bool, error) {
 	var count int
 	err := db.QueryRow(
-		"SELECT COUNT(*) FROM projects WHERE LOWER(name) = LOWER(?)",
-		name,
+		"SELECT COUNT(*) FROM projects WHERE owner_id = ? AND LOWER(name) = LOWER(?)",
+		ownerID, name,
 	).Scan(&count)
 
 	if err != nil {
