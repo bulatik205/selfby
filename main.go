@@ -177,6 +177,9 @@ func main() {
 	http.HandleFunc("POST /api/v1/addView", api.AddView(db))
 	http.HandleFunc("GET /api/v1/getViews", api.GetViews(db))
 
+	http.HandleFunc("DELETE /api/v1/deleteWork", api.DeleteWork(db))
+	http.HandleFunc("DELETE /api/v1/deleteProject", api.DeleteProject(db))
+
 	fmt.Printf("Сервер запущен на http://localhost:%s\n", cfg.ServerPort)
 	http.ListenAndServe(":"+cfg.ServerPort, nil)
 }

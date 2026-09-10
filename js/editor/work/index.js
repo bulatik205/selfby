@@ -7,6 +7,7 @@ const workCreatedAt = document.getElementById('workCreatedAt');
 const contentMD = document.getElementById('contentMD');
 const viewWorkBtn = document.getElementById('viewWorkBtn');
 const saveButtons = document.querySelectorAll('.work-save-btn');
+const deleteWorkBtn = document.getElementById('deleteWorkBtn');
 
 const pathParts = window.location.pathname.split('/');
 const workSlug = pathParts[pathParts.length - 1];
@@ -121,3 +122,28 @@ document.addEventListener('keydown', (e) => {
         saveWork();
     }
 });
+
+if (deleteWorkBtn) {
+    deleteWorkBtn.addEventListener('click', async () => {
+        if (!confirm(`Удалить работу "${workSlug}"? Это действие нельзя отменить.`)) {
+            return;
+        }
+        
+        try {
+            const response = await fetch(`/api/v1/deleteWork?project=${encodeURIComponent(projectName)}&slug=${encodeURIComponent(workSlug)}`, {
+                method: 'DELETE'
+            });
+            
+            const data = await response.json();
+            
+            if (response.ok) {
+                window.location.href = `/editor/${projectName}`;
+            } else {
+                alert(data.error || 'Ошибка удаления');
+            }
+        } catch (error) {
+            console.error('Ошибка удаления:', error);
+            alert('Ошибка соединения с сервером');
+        }
+    });
+}

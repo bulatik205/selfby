@@ -121,6 +121,36 @@ createProjectBtn.addEventListener('click', async () => {
     }
 });
 
+async function deleteProject(projectName, event) {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    if (!confirm(`Удалить проект "${projectName}"? Все работы будут удалены. Это действие нельзя отменить.`)) {
+        return;
+    }
+    
+    try {
+        const response = await fetch(`/api/v1/deleteProject?name=${encodeURIComponent(projectName)}`, {
+            method: 'DELETE'
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+            event.target.closest('.project').remove();
+            
+            if (projectsList.children.length === 0) {
+                showEmptyState();
+            }
+        } else {
+            alert(data.error || 'Ошибка удаления');
+        }
+    } catch (error) {
+        console.error('Ошибка удаления:', error);
+        alert('Ошибка соединения с сервером');
+    }
+}
+
 function addProjectToList(project, userData) {
     const projectDiv = document.createElement('div');
     projectDiv.className = 'project';
@@ -132,6 +162,9 @@ function addProjectToList(project, userData) {
         <a href="/u/${username}/${project.name}" class="project-link icon-btn">
             <img src="../images/view.png" alt="Просмотр">
         </a>
+        <button class="project-link icon-btn" onclick="deleteProject('${project.name}', event)" title="Удалить проект">
+            🗑️
+        </button>
     `;
     
     projectsList.appendChild(projectDiv);

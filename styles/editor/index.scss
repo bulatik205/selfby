@@ -146,6 +146,31 @@ body {
     }
 }
 
+.delete-btn {
+    background: transparent;
+    border: 2px solid #fff;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 5px;
+    border-radius: 25px;
+    transition: all 0.3s;
+
+    &:hover {
+        opacity: 1;
+        background: rgba(231, 76, 60, 0.1);
+    }
+}
+
+.work {
+    position: relative;
+    
+    .delete-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+}
+
 .view-btn {
     background: transparent;
     color: white;
