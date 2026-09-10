@@ -22,8 +22,9 @@
 
         <nav class="header-nav" id="headerNav">
             <a href="#" class="view-btn" id="viewProjectBtn" target="_blank">Просмотр</a>
-            <button class="delete-btn b-btn" id="deleteProjectBtn" title="Удалить проект">🗑️</button>
             <button class="n-btn">Новая работа</button>
+            <button class="i-btn b-btn" id="deleteProjectBtn" title="Удалить проект">🗑️</button>
+            <button class="i-btn b-btn" id="toggleTypeBtn" title="Изменить тип проекта">🔓</button>
             <button class="b-btn" id="profileBtn">Profile</button>
         </nav>
     </header>
@@ -45,6 +46,10 @@
             <div class="topic">
                 <span class="topic-label">Лайки</span>
                 <span class="topic-value" id="totalLikes">0</span>
+            </div>
+            <div class="topic">
+                <span class="topic-label">Тип</span>
+                <span class="topic-value" id="projectType">-</span>
             </div>
             <div class="topic">
                 <span class="topic-label">Создан</span>

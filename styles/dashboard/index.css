@@ -91,6 +91,9 @@ body {
   gap: 10px;
 }
 .main-menu {
+  align-self: start;
+  height: -moz-fit-content;
+  height: fit-content;
   padding: 10px;
   border-radius: 20px;
   background-color: #333;
@@ -114,7 +117,6 @@ body {
 .main-menu .menu-projects .project {
   display: flex;
   gap: 5px;
-  align-items: stretch;
 }
 .main-menu .menu-projects .project-link {
   display: flex;

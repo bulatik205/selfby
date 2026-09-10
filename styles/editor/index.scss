@@ -148,7 +148,7 @@ body {
 
 .delete-btn {
     background: transparent;
-    border: 2px solid #fff;
+    border: 1px solid #333;
     cursor: pointer;
     font-size: 12px;
     padding: 5px;
@@ -158,6 +158,22 @@ body {
     &:hover {
         opacity: 1;
         background: rgba(231, 76, 60, 0.1);
+        border-color: #e74c3c;
+    }
+}
+
+.i-btn {
+    background: transparent;
+    border: 2px solid #fff;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 5px;
+    border-radius: 25px;
+    transition: all 0.3s;
+
+    &:hover {
+        opacity: 1;
+        background: #fff;
     }
 }
 

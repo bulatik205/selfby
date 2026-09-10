@@ -13,6 +13,8 @@ const totalLikesEl = document.getElementById('totalLikes');
 const projectDateEl = document.getElementById('projectDate');
 const viewProjectBtn = document.getElementById('viewProjectBtn');
 const deleteProjectBtn = document.getElementById('deleteProjectBtn');
+const toggleTypeBtn = document.getElementById('toggleTypeBtn');
+const projectTypeEl = document.getElementById('projectType');
 
 const pathParts = window.location.pathname.split('/');
 const projectName = pathParts[pathParts.length - 1];
@@ -41,8 +43,45 @@ async function loadUserData() {
         if (viewProjectBtn) {
             viewProjectBtn.href = `/u/${user.username}/${projectName}`;
         }
+        
+        loadProjectType(user.username);
     } catch (error) {
         profileBtn.textContent = 'Profile';
+    }
+}
+
+async function loadProjectType(username) {
+    try {
+        const response = await fetch(`/api/v1/getPublicProject?username=${encodeURIComponent(username)}&project=${encodeURIComponent(projectName)}`);
+        if (!response.ok) return;
+        
+        const project = await response.json();
+        
+        if (toggleTypeBtn) {
+            if (project.type === 'public') {
+                toggleTypeBtn.textContent = '🔓';
+                toggleTypeBtn.title = 'Сделать закрытым';
+                toggleTypeBtn.classList.add('public');
+                toggleTypeBtn.classList.remove('private');
+            } else {
+                toggleTypeBtn.textContent = '🔒';
+                toggleTypeBtn.title = 'Сделать открытым';
+                toggleTypeBtn.classList.add('private');
+                toggleTypeBtn.classList.remove('public');
+            }
+        }
+        
+        if (projectTypeEl) {
+            if (project.type === 'public') {
+                projectTypeEl.textContent = 'Открытый';
+                projectTypeEl.className = 'topic-value public';
+            } else {
+                projectTypeEl.textContent = 'Закрытый';
+                projectTypeEl.className = 'topic-value private';
+            }
+        }
+    } catch (error) {
+        console.error('Ошибка загрузки типа проекта:', error);
     }
 }
 
@@ -259,26 +298,85 @@ async function deleteWork(slug, event) {
     }
 }
 
-if (deleteProjectBtn) {
-    deleteProjectBtn.addEventListener('click', async () => {
-        if (!confirm(`Удалить проект "${projectName}"? Все работы будут удалены. Это действие нельзя отменить.`)) {
-            return;
-        }
-        
+if (toggleTypeBtn) {
+    toggleTypeBtn.addEventListener('click', async () => {
         try {
-            const response = await fetch(`/api/v1/deleteProject?name=${encodeURIComponent(projectName)}`, {
-                method: 'DELETE'
+            const response = await fetch('/api/v1/toggleProjectType', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    project_name: projectName
+                })
             });
             
             const data = await response.json();
             
             if (response.ok) {
-                window.location.href = '/editor';
+                if (data.type === 'public') {
+                    toggleTypeBtn.textContent = '🔓';
+                    toggleTypeBtn.title = 'Сделать закрытым';
+                    toggleTypeBtn.classList.add('public');
+                    toggleTypeBtn.classList.remove('private');
+                } else {
+                    toggleTypeBtn.textContent = '🔒';
+                    toggleTypeBtn.title = 'Сделать открытым';
+                    toggleTypeBtn.classList.add('private');
+                    toggleTypeBtn.classList.remove('public');
+                }
+                
+                if (projectTypeEl) {
+                    if (data.type === 'public') {
+                        projectTypeEl.textContent = 'Открытый';
+                        projectTypeEl.className = 'topic-value public';
+                    } else {
+                        projectTypeEl.textContent = 'Закрытый';
+                        projectTypeEl.className = 'topic-value private';
+                    }
+                }
             } else {
-                alert(data.error || 'Ошибка удаления');
+                alert(data.error || 'Ошибка изменения типа');
             }
         } catch (error) {
-            console.error('Ошибка удаления:', error);
+            console.error('Ошибка:', error);
+            alert('Ошибка соединения с сервером');
+        }
+    });
+}
+
+if (toggleTypeBtn) {
+    toggleTypeBtn.addEventListener('click', async () => {
+        try {
+            const response = await fetch('/api/v1/toggleProjectType', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    project_name: projectName
+                })
+            });
+            
+            const data = await response.json();
+            
+            if (response.ok) {
+                if (data.type === 'public') {
+                    toggleTypeBtn.textContent = '🔓';
+                    toggleTypeBtn.title = 'Сделать закрытым';
+                    toggleTypeBtn.classList.add('public');
+                    toggleTypeBtn.classList.remove('private');
+                } else {
+                    toggleTypeBtn.textContent = '🔒';
+                    toggleTypeBtn.title = 'Сделать открытым';
+                    toggleTypeBtn.classList.add('private');
+                    toggleTypeBtn.classList.remove('public');
+                }
+            } else {
+                alert(data.error || 'Ошибка изменения типа');
+            }
+        } catch (error) {
+            console.error('Ошибка:', error);
             alert('Ошибка соединения с сервером');
         }
     });
