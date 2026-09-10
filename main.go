@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"time"
 
 	"selfby/config"
@@ -15,6 +16,16 @@ import (
 )
 
 var db *sql.DB
+
+func renderNotFound(w http.ResponseWriter, r *http.Request, bladeDir string) {
+	w.WriteHeader(http.StatusNotFound)
+	data, err := os.ReadFile(bladeDir + "/404.html")
+	if err != nil {
+		http.Error(w, "404 Not Found", http.StatusNotFound)
+		return
+	}
+	w.Write(data)
+}
 
 func main() {
 	cfg := config.LoadConfig()
@@ -33,18 +44,19 @@ func main() {
 	var authPath = "dashboard"
 	var bladeDir = "templates"
 
-	// Статика
 	http.Handle("/styles/", http.StripPrefix("/styles/", http.FileServer(http.Dir("styles"))))
 	http.Handle("/js/", http.StripPrefix("/js/", http.FileServer(http.Dir("js"))))
 	http.Handle("/images/", http.StripPrefix("/images/", http.FileServer(http.Dir("images"))))
 	http.Handle("/videos/", http.StripPrefix("/videos/", http.FileServer(http.Dir("videos"))))
 
-	// Главная
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path != "/" {
+			renderNotFound(w, r, bladeDir)
+			return
+		}
 		http.ServeFile(w, r, bladeDir+"/index.html")
 	})
 
-	// Регистрация & Вход
 	http.HandleFunc("/reg", func(w http.ResponseWriter, r *http.Request) {
 		if checkSession(w, r) {
 			http.Redirect(w, r, authPath, http.StatusSeeOther)
@@ -61,11 +73,9 @@ func main() {
 		}
 	})
 
-	// Обработчики Регистрации & Входа
 	http.HandleFunc("POST /auth/reg", auth.RegisterUser(db))
 	http.HandleFunc("POST /auth/login", auth.LoginUser(db))
 
-	// Дашборд
 	http.HandleFunc("/dashboard", func(w http.ResponseWriter, r *http.Request) {
 		if checkSession(w, r) {
 			http.ServeFile(w, r, bladeDir+"/dashboard.html")
@@ -74,7 +84,6 @@ func main() {
 		}
 	})
 
-	// Редактор
 	http.HandleFunc("/editor/{projectName}", func(w http.ResponseWriter, r *http.Request) {
 		if !checkSession(w, r) {
 			http.Redirect(w, r, "/reg", http.StatusSeeOther)
@@ -82,8 +91,8 @@ func main() {
 		}
 
 		projectName := r.PathValue("projectName")
-
 		userID := getCurrentUserID(r)
+
 		var projectID int64
 		err := db.QueryRow(
 			"SELECT id FROM projects WHERE owner_id = ? AND name = ?",
@@ -91,7 +100,7 @@ func main() {
 		).Scan(&projectID)
 
 		if err != nil {
-			http.NotFound(w, r)
+			renderNotFound(w, r, bladeDir)
 			return
 		}
 
@@ -106,8 +115,8 @@ func main() {
 
 		projectName := r.PathValue("projectName")
 		workSlug := r.PathValue("workSlug")
-
 		userID := getCurrentUserID(r)
+
 		var workID int64
 		err := db.QueryRow(`
 			SELECT w.id 
@@ -117,20 +126,11 @@ func main() {
 		`, userID, projectName, workSlug).Scan(&workID)
 
 		if err != nil {
-			http.NotFound(w, r)
+			renderNotFound(w, r, bladeDir)
 			return
 		}
 
 		http.ServeFile(w, r, bladeDir+"/work.html")
-	})
-
-	http.HandleFunc("/u/", func(w http.ResponseWriter, r *http.Request) {
-		if r.URL.Path == "/u/" {
-			http.ServeFile(w, r, bladeDir+"/users.html")
-			return
-		}
-
-		http.ServeFile(w, r, bladeDir+"/profile.html")
 	})
 
 	http.HandleFunc("/editor", func(w http.ResponseWriter, r *http.Request) {
@@ -139,6 +139,14 @@ func main() {
 			return
 		}
 		http.ServeFile(w, r, bladeDir+"/projects.html")
+	})
+
+	http.HandleFunc("/u/", func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path == "/u/" {
+			http.ServeFile(w, r, bladeDir+"/users.html")
+			return
+		}
+		http.ServeFile(w, r, bladeDir+"/profile.html")
 	})
 
 	http.HandleFunc("/u/{username}", func(w http.ResponseWriter, r *http.Request) {
