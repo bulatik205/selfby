@@ -57,31 +57,40 @@ async function loadProjectType(username) {
         
         const project = await response.json();
         
-        if (toggleTypeBtn) {
-            if (project.type === 'public') {
-                toggleTypeBtn.textContent = '🔓';
-                toggleTypeBtn.title = 'Сделать закрытым';
-                toggleTypeBtn.classList.add('public');
-                toggleTypeBtn.classList.remove('private');
-            } else {
-                toggleTypeBtn.textContent = '🔒';
-                toggleTypeBtn.title = 'Сделать открытым';
-                toggleTypeBtn.classList.add('private');
-                toggleTypeBtn.classList.remove('public');
-            }
-        }
+        updateProjectTypeUI(project.type);
         
-        if (projectTypeEl) {
-            if (project.type === 'public') {
-                projectTypeEl.textContent = 'Открытый';
-                projectTypeEl.className = 'topic-value public';
-            } else {
-                projectTypeEl.textContent = 'Закрытый';
-                projectTypeEl.className = 'topic-value private';
-            }
+        if (project.created_at) {
+            const createdDate = new Date(project.created_at);
+            projectDateEl.textContent = createdDate.toLocaleDateString('ru-RU');
         }
     } catch (error) {
         console.error('Ошибка загрузки типа проекта:', error);
+    }
+}
+
+function updateProjectTypeUI(type) {
+    if (toggleTypeBtn) {
+        if (type === 'public') {
+            toggleTypeBtn.textContent = '🔓';
+            toggleTypeBtn.title = 'Сделать закрытым';
+            toggleTypeBtn.classList.add('public');
+            toggleTypeBtn.classList.remove('private');
+        } else {
+            toggleTypeBtn.textContent = '🔒';
+            toggleTypeBtn.title = 'Сделать открытым';
+            toggleTypeBtn.classList.add('private');
+            toggleTypeBtn.classList.remove('public');
+        }
+    }
+    
+    if (projectTypeEl) {
+        if (type === 'public') {
+            projectTypeEl.textContent = 'Открытый';
+            projectTypeEl.className = 'topic-value public';
+        } else {
+            projectTypeEl.textContent = 'Закрытый';
+            projectTypeEl.className = 'topic-value private';
+        }
     }
 }
 
@@ -298,48 +307,26 @@ async function deleteWork(slug, event) {
     }
 }
 
-if (toggleTypeBtn) {
-    toggleTypeBtn.addEventListener('click', async () => {
+if (deleteProjectBtn) {
+    deleteProjectBtn.addEventListener('click', async () => {
+        if (!confirm(`Удалить проект "${projectName}"? Все работы будут удалены. Это действие нельзя отменить.`)) {
+            return;
+        }
+        
         try {
-            const response = await fetch('/api/v1/toggleProjectType', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    project_name: projectName
-                })
+            const response = await fetch(`/api/v1/deleteProject?name=${encodeURIComponent(projectName)}`, {
+                method: 'DELETE'
             });
             
             const data = await response.json();
             
             if (response.ok) {
-                if (data.type === 'public') {
-                    toggleTypeBtn.textContent = '🔓';
-                    toggleTypeBtn.title = 'Сделать закрытым';
-                    toggleTypeBtn.classList.add('public');
-                    toggleTypeBtn.classList.remove('private');
-                } else {
-                    toggleTypeBtn.textContent = '🔒';
-                    toggleTypeBtn.title = 'Сделать открытым';
-                    toggleTypeBtn.classList.add('private');
-                    toggleTypeBtn.classList.remove('public');
-                }
-                
-                if (projectTypeEl) {
-                    if (data.type === 'public') {
-                        projectTypeEl.textContent = 'Открытый';
-                        projectTypeEl.className = 'topic-value public';
-                    } else {
-                        projectTypeEl.textContent = 'Закрытый';
-                        projectTypeEl.className = 'topic-value private';
-                    }
-                }
+                window.location.href = '/editor';
             } else {
-                alert(data.error || 'Ошибка изменения типа');
+                alert(data.error || 'Ошибка удаления');
             }
         } catch (error) {
-            console.error('Ошибка:', error);
+            console.error('Ошибка удаления:', error);
             alert('Ошибка соединения с сервером');
         }
     });
@@ -361,17 +348,8 @@ if (toggleTypeBtn) {
             const data = await response.json();
             
             if (response.ok) {
-                if (data.type === 'public') {
-                    toggleTypeBtn.textContent = '🔓';
-                    toggleTypeBtn.title = 'Сделать закрытым';
-                    toggleTypeBtn.classList.add('public');
-                    toggleTypeBtn.classList.remove('private');
-                } else {
-                    toggleTypeBtn.textContent = '🔒';
-                    toggleTypeBtn.title = 'Сделать открытым';
-                    toggleTypeBtn.classList.add('private');
-                    toggleTypeBtn.classList.remove('public');
-                }
+                updateProjectTypeUI(data.type);
+                showToast(data.message);
             } else {
                 alert(data.error || 'Ошибка изменения типа');
             }
@@ -380,6 +358,19 @@ if (toggleTypeBtn) {
             alert('Ошибка соединения с сервером');
         }
     });
+}
+
+function showToast(message) {
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => toast.classList.add('show'), 10);
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    }, 2000);
 }
 
 function clearModalFields() {
