@@ -59,7 +59,7 @@ body {
 .main {
     width: 100%;
     max-width: 800px;
-    padding: 40px 20px;
+    padding: 40px 0px;
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -204,57 +204,41 @@ body {
     }
 }
 
-.index-work {
+.work-content {
     padding: 30px;
     background: #fff;
     border-radius: 16px;
     border: 1px solid #e0e0e0;
-    margin-bottom: 20px;
     line-height: 1.6;
     color: #333;
     overflow-wrap: break-word;
+    word-wrap: break-word;
+    overflow-x: hidden;
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
+    h1, h2, h3, h4, h5, h6 {
         margin: 10px 0 10px;
         color: #333;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
     }
 
-    h1 {
-        font-size: 28px;
-    }
-
-    h2 {
-        font-size: 24px;
-    }
-
-    h3 {
-        font-size: 20px;
-    }
-
-    h4 {
-        font-size: 18px;
-    }
-
-    h5 {
-        font-size: 16px;
-    }
-
-    h6 {
-        font-size: 14px;
-    }
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    h3 { font-size: 20px; }
+    h4 { font-size: 18px; }
+    h5 { font-size: 16px; }
+    h6 { font-size: 14px; }
 
     p {
         margin: 10px 0;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
     }
 
     a {
         color: #18A64A;
         text-decoration: none;
+        word-break: break-word;
 
         &:hover {
             text-decoration: underline;
@@ -263,7 +247,15 @@ body {
 
     img {
         max-width: 100%;
+        height: auto;
         border-radius: 8px;
+        display: block;
+        margin: 20px auto;
+
+        &.center {
+            display: block;
+            margin: 20px auto;
+        }
     }
 
     code {
@@ -272,6 +264,8 @@ body {
         border-radius: 4px;
         font-family: "Source Code Pro", monospace;
         font-size: 13px;
+        overflow-wrap: break-word;
+        word-break: break-word;
     }
 
     pre {
@@ -280,10 +274,13 @@ body {
         border-radius: 8px;
         overflow-x: auto;
         margin: 15px 0;
+        max-width: 100%;
 
         code {
             background: none;
             padding: 0;
+            white-space: pre;
+            overflow-wrap: normal;
         }
     }
 
@@ -292,44 +289,42 @@ body {
         padding-left: 15px;
         margin: 15px 0;
         color: #666;
+        overflow-wrap: break-word;
     }
 
-    ul,
-    ol {
+    ul, ol {
         margin: 10px 0;
         padding-left: 25px;
+        overflow-wrap: break-word;
     }
 
     table {
         width: 100%;
+        max-width: 100%;
         border-collapse: collapse;
         margin: 15px 0;
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        white-space: nowrap;
 
-        th,
-        td {
+        th, td {
             padding: 10px;
             border: 1px solid #ddd;
             text-align: left;
+            white-space: normal;
+            word-break: break-word;
+            min-width: 100px;
         }
 
         th {
             background: #f5f5f5;
+            font-weight: 600;
         }
     }
 
     .center {
         text-align: center;
-    }
-
-    img {
-        display: block;
-        margin: 20px auto;
-        max-width: 100%;
-    }
-
-    img.center {
-        display: block;
-        margin: 20px auto;
     }
 }
 
@@ -365,6 +360,10 @@ body {
 }
 
 @media (max-width: 768px) {
+    .work-content {
+        padding: 15px;
+    }
+
     .project-header {
         .project-title {
             font-size: 28px;
