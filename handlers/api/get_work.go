@@ -31,6 +31,12 @@ func GetWork(db *sql.DB) http.HandlerFunc {
 
 		w.Header().Set("Content-Type", "application/json")
 
+		userID, err := getUserIDFromSession(db, r)
+		if err != nil {
+			respondWithError(w, http.StatusUnauthorized, "Необходима авторизация")
+			return
+		}
+
 		projectName := r.URL.Query().Get("project")
 		workSlug := r.URL.Query().Get("slug")
 
@@ -40,7 +46,7 @@ func GetWork(db *sql.DB) http.HandlerFunc {
 		}
 
 		var work WorkDetail
-		err := db.QueryRow(`
+		err = db.QueryRow(`
 			SELECT 
 				w.id,
 				w.owner_id,
@@ -56,7 +62,7 @@ func GetWork(db *sql.DB) http.HandlerFunc {
 				COALESCE(v.views_count, 0) as views_count
 			FROM works w
 			JOIN projects p ON w.at_project = p.id
-			JOIN users u ON w.owner_id = u.id
+			JOIN users u ON p.owner_id = u.id
 			LEFT JOIN (
 				SELECT element_id, COUNT(*) as likes_count
 				FROM likes
@@ -69,8 +75,8 @@ func GetWork(db *sql.DB) http.HandlerFunc {
 				WHERE element_type = 'work'
 				GROUP BY element_id
 			) v ON v.element_id = w.id
-			WHERE p.name = ? AND w.slug = ?
-		`, projectName, workSlug).Scan(
+			WHERE p.owner_id = ? AND p.name = ? AND w.slug = ?
+		`, userID, projectName, workSlug).Scan(
 			&work.ID,
 			&work.OwnerID,
 			&work.ProjectID,
