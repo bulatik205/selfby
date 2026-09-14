@@ -184,6 +184,6 @@ go run .
 | ----- | ----- | ----- | ----- |
 | Bulatik205 | GitHub | [GitHub](https://github.com/bulatik205) |
 | Bulatik205 | Website | [Website](https://bulatik.website) |
-| Bulatik205 | Telegram | [Telegram](https://t.me/bulatik205) | Долгий ответ |
+| Bulatik205 | Telegram | [Telegram](https://t.me/bulatik205) | 
 | SelfBy | Website | [Website](https://selfby.ru) | Готовый проект |
 | SelfBy | GitHub | [GitHub](https://github.com/bulatik205/selfby) | Вы здесь |
