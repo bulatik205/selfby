@@ -1,5 +1,3 @@
-//go:build example
-
 package config
 
 import (
@@ -22,7 +20,7 @@ func LoadConfig() Config {
 		DBPassword: getEnv("DB_PASSWORD", ""),
 		DBHost:     getEnv("DB_HOST", "localhost"),
 		DBPort:     getEnv("DB_PORT", "3306"),
-		DBName:     getEnv("DB_NAME", ""),
+		DBName:     getEnv("DB_NAME", "selfby"),
 		ServerPort: getEnv("SERVER_PORT", "8080"),
 	}
 }
