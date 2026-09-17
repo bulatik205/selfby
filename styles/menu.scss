@@ -1,16 +1,19 @@
+@import 'var.scss';
+
 .header {
     width: 100%;
-    background-color: #333;
+    background-color: var(--header-bg);
+    color: var(--header-text);
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px 20px;
-    border-radius: 0 0 20px 20px;
+    border-radius: $header-radius;
     position: relative;
 
     &-logo {
         font-size: 14px;
-        color: #fff;
+        color: var(--header-text);
     }
 
     &-nav {
@@ -28,13 +31,13 @@
     border: none;
     cursor: pointer;
     padding: 5px;
-    z-index: 1001;
+    z-index: $z-burger;
 
     span {
         width: 25px;
         height: 2px;
-        background: white;
-        transition: all 0.3s;
+        background: var(--header-text);
+        transition: $transition;
         border-radius: 2px;
     }
 
@@ -60,15 +63,38 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.3);
-    z-index: 999;
-    
+    background: var(--overlay-soft);
+    z-index: $z-overlay;
+
     &.active {
         display: block;
     }
 }
 
-@media (max-width: 768px) {
+.theme-btn {
+    background: transparent;
+    color: var(--header-text);
+    border: 2px solid var(--header-text);
+    width: 36px;
+    height: 36px;
+    border-radius: $radius-circle;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: $transition;
+    flex-shrink: 0;
+
+    &:hover {
+        background: var(--header-text);
+        color: var(--header-bg);
+        transform: translateY(-1px);
+    }
+}
+
+@media (max-width: $bp-lg) {
     .burger-btn {
         display: flex;
     }
@@ -79,14 +105,14 @@
         top: calc(100% + 5px);
         right: 10px;
         width: 200px;
-        background: #333;
+        background: var(--header-bg);
         flex-direction: column;
         padding: 10px;
         gap: 8px;
-        border-radius: 12px;
-        z-index: 1000;
+        border-radius: $radius-lg;
+        z-index: $z-modal;
         align-items: stretch;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        box-shadow: var(--shadow-menu);
 
         &.active {
             display: flex;
@@ -96,12 +122,18 @@
         .save-btn,
         .view-btn,
         .edit-btn,
-        .n-btn {
+        .n-btn,
+        .theme-btn {
             width: 100%;
             text-align: center;
             justify-content: center;
             padding: 8px 15px;
             font-size: 12px;
+        }
+
+        .theme-btn {
+            height: auto;
+            border-radius: $radius-pill;
         }
     }
 }

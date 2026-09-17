@@ -1,3 +1,5 @@
+@import 'var.scss';
+
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
 
 * {
@@ -7,46 +9,48 @@
 }
 
 body {
-    font-family: "Montserrat", sans-serif;
+    font-family: $font-main;
     min-height: 100vh;
     width: 100%;
     display: flex;
     align-items: center;
     flex-direction: column;
-    max-width: 2000px;
+    max-width: $max-w-site;
     margin: 0 auto;
     padding: 0 10px;
-    background: #f5f5f5;
+    background: var(--page-bg);
+    color: var(--text);
 }
 
 .b-btn {
     background: transparent;
-    color: white;
-    border: 2px solid white;
+    color: var(--header-text);
+    border: 2px solid var(--header-text);
     padding: 5px 20px;
-    border-radius: 25px;
+    border-radius: $radius-pill;
     cursor: pointer;
     font-size: 12px;
-    transition: all 0.3s;
+    transition: $transition;
 
     &:hover {
-        background: white;
-        color: #333;
+        background: var(--header-text);
+        color: var(--header-bg);
     }
 }
 
 .header {
     width: 100%;
-    background-color: #333;
+    background-color: var(--header-bg);
+    color: var(--header-text);
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px 20px;
-    border-radius: 0 0 20px 20px;
+    border-radius: $header-radius;
 
     &-logo {
         font-size: 14px;
-        color: #fff;
+        color: var(--header-text);
     }
 
     &-nav {
@@ -58,7 +62,7 @@ body {
 
 .main {
     width: 100%;
-    max-width: 800px;
+    max-width: $max-w-content-sm;
     padding: 40px 0;
     display: flex;
     flex-direction: column;
@@ -67,7 +71,7 @@ body {
 
 .work-title {
     font-size: 36px;
-    color: #333;
+    color: var(--text);
     text-align: center;
 }
 
@@ -78,30 +82,30 @@ body {
     gap: 20px;
     flex-wrap: wrap;
     padding: 15px;
-    background: #fff;
-    border-radius: 12px;
-    border: 1px solid #e0e0e0;
+    background: var(--surface);
+    border-radius: $radius-lg;
+    border: 1px solid var(--border);
 
     span {
         font-size: 14px;
-        color: #666;
+        color: var(--text-muted);
     }
 }
 
 .edit-btn {
-    background: #18A64A;
-    color: white;
+    background: var(--accent);
+    color: var(--text-on-accent);
     border: none;
     padding: 5px 15px;
-    border-radius: 25px;
+    border-radius: $radius-pill;
     cursor: pointer;
     font-size: 12px;
     font-weight: 600;
     text-decoration: none;
-    transition: all 0.3s;
+    transition: $transition;
 
     &:hover {
-        background: #128a3a;
+        background: var(--accent-hover);
         transform: translateY(-1px);
     }
 }
@@ -112,21 +116,21 @@ body {
     margin-top: 10px;
 
     button {
-        background: #333;
-        color: white;
+        background: var(--text);
+        color: var(--surface);
         border: none;
         padding: 12px 30px;
-        border-radius: 25px;
+        border-radius: $radius-pill;
         cursor: pointer;
         font-size: 14px;
         font-weight: 600;
-        transition: all 0.3s;
-        font-family: "Montserrat", sans-serif;
+        transition: $transition;
+        font-family: $font-main;
 
         &:hover {
-            background: #555;
+            background: var(--text-muted);
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--shadow-nav);
         }
 
         &:active {
@@ -138,12 +142,12 @@ body {
 .index-work,
 .work-content {
     padding: 30px;
-    background: #fff;
-    border-radius: 16px;
-    border: 1px solid #e0e0e0;
+    background: var(--surface);
+    border-radius: $radius-xl;
+    border: 1px solid var(--border);
     margin-bottom: 20px;
     line-height: 1.6;
-    color: #333;
+    color: var(--text);
     max-width: 100%;
     overflow-wrap: break-word;
     word-wrap: break-word;
@@ -156,7 +160,7 @@ body {
     h5,
     h6 {
         margin: 10px 0;
-        color: #333;
+        color: var(--text);
         overflow-wrap: break-word;
         word-wrap: break-word;
     }
@@ -175,7 +179,7 @@ body {
     }
 
     a {
-        color: #18A64A;
+        color: var(--accent);
         text-decoration: none;
         word-break: break-word;
 
@@ -187,7 +191,7 @@ body {
     img {
         max-width: 100%;
         height: auto;
-        border-radius: 8px;
+        border-radius: $radius-md;
         display: block;
         margin: 20px auto;
 
@@ -198,19 +202,19 @@ body {
     }
 
     code {
-        background: #f5f5f5;
+        background: var(--surface-3);
         padding: 2px 6px;
-        border-radius: 4px;
-        font-family: "Source Code Pro", monospace;
+        border-radius: $radius-sm;
+        font-family: $font-mono;
         font-size: 13px;
         overflow-wrap: break-word;
         word-break: break-word;
     }
 
     pre {
-        background: #272822;
+        background: var(--code-bg);
         padding: 15px;
-        border-radius: 8px;
+        border-radius: $radius-md;
         overflow-x: auto;
         margin: 15px 0;
         max-width: 100%;
@@ -224,10 +228,10 @@ body {
     }
 
     blockquote {
-        border-left: 4px solid #18A64A;
+        border-left: 4px solid var(--accent);
         padding-left: 15px;
         margin: 15px 0;
-        color: #666;
+        color: var(--text-muted);
         overflow-wrap: break-word;
     }
 
@@ -243,7 +247,7 @@ body {
         overflow-x: auto;
         margin: 15px 0;
         -webkit-overflow-scrolling: touch;
-        border-radius: 8px;
+        border-radius: $radius-md;
 
         table {
             margin: 0;
@@ -263,7 +267,7 @@ body {
         th,
         td {
             padding: 10px;
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-strong);
             text-align: left;
             white-space: normal;
             word-break: break-word;
@@ -271,7 +275,7 @@ body {
         }
 
         th {
-            background: #f5f5f5;
+            background: var(--surface-3);
             font-weight: 600;
         }
     }
@@ -285,15 +289,15 @@ body {
 .work-content {
     .code-block {
         margin: 15px 0;
-        border-radius: 8px;
+        border-radius: $radius-md;
         overflow: hidden;
-        background: #272822;
+        background: var(--code-bg);
         max-width: 100%;
 
         pre {
             margin: 0;
             border-radius: 0;
-            background: #272822;
+            background: var(--code-bg);
         }
     }
 
@@ -302,35 +306,35 @@ body {
         justify-content: space-between;
         align-items: center;
         padding: 8px 14px;
-        background: #1e1f1c;
-        border-bottom: 1px solid #3a3a35;
-        font-family: "Source Code Pro", monospace;
+        background: var(--code-header-bg);
+        border-bottom: 1px solid var(--code-border);
+        font-family: $font-mono;
         font-size: 12px;
-        color: #bbb;
+        color: var(--code-text);
         user-select: none;
     }
 
     .code-lang {
         text-transform: lowercase;
         letter-spacing: 0.5px;
-        color: #fff;
+        color: var(--header-text);
         font-weight: 600;
     }
 
     .copy-btn {
         background: transparent;
         border: none;
-        color: #ddd;
+        color: var(--code-text-2);
         padding: 5px 15px;
         border-radius: 10px;
         cursor: pointer;
         font-size: 11px;
-        font-family: "Montserrat", sans-serif;
-        transition: all 0.3s;
+        font-family: $font-main;
+        transition: $transition;
 
         &:hover {
-            background: #777;
-            color: #fff;
+            background: var(--text-muted);
+            color: var(--header-text);
         }
 
         &:active {
@@ -339,7 +343,7 @@ body {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $bp-lg) {
     .work-title {
         font-size: 28px;
     }
@@ -350,11 +354,11 @@ body {
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: $bp-sm) {
     .index-work,
     .work-content {
         padding: 15px;
-        border-radius: 12px;
+        border-radius: $radius-lg;
 
         table th,
         table td {

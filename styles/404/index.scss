@@ -1,3 +1,5 @@
+@import '../var.scss';
+
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
 
 * {
@@ -7,7 +9,7 @@
 }
 
 body {
-    font-family: "Montserrat", sans-serif;
+    font-family: $font-main;
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -24,7 +26,7 @@ body {
 .error-code {
     font-size: 120px;
     font-weight: 900;
-    background: linear-gradient(135deg, #18A64A, #2196F3);
+    background: var(--grad-accent);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -50,22 +52,22 @@ body {
 }
 
 .primary-btn {
-    background: linear-gradient(135deg, #18A64A, #128a3a);
-    color: white;
+    background: var(--grad-green);
+    color: var(--text-on-accent);
     border: none;
     padding: 15px 30px;
-    border-radius: 30px;
+    border-radius: $radius-pill-lg;
     cursor: pointer;
     font-size: 16px;
     font-weight: 600;
     text-decoration: none;
-    transition: all 0.3s;
-    font-family: "Montserrat", sans-serif;
+    transition: $transition;
+    font-family: $font-main;
 }
 
 .primary-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(24, 166, 74, 0.3);
+    box-shadow: var(--shadow-accent);
 }
 
 .secondary-btn {
@@ -73,20 +75,20 @@ body {
     color: #fff;
     border: 2px solid rgba(255, 255, 255, 0.3);
     padding: 13px 28px;
-    border-radius: 30px;
+    border-radius: $radius-pill-lg;
     cursor: pointer;
     font-size: 16px;
     font-weight: 600;
-    transition: all 0.3s;
-    font-family: "Montserrat", sans-serif;
+    transition: $transition;
+    font-family: $font-main;
 }
 
 .secondary-btn:hover {
-    border-color: #18A64A;
+    border-color: var(--accent);
     background: rgba(255, 255, 255, 0.05);
 }
 
-@media (max-width: 768px) {
+@media (max-width: $bp-lg) {
     .error-code { font-size: 80px; }
     .error-text { font-size: 24px; }
 }
