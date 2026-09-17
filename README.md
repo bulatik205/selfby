@@ -3,7 +3,7 @@
 SelfBy - веб приложение, в котором пользователи могут создавать проекты и работы. Каждая работа - это часть проекта, написанная в формате `md`.
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-2.0.0-green.svg)]()
+[![Version](https://img.shields.io/badge/version-2.3.0-green.svg)]()
 
 ## Содержание
 - [О проекте](#-о-проекте)
