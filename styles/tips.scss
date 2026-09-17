@@ -5,8 +5,8 @@
     flex-direction: column;
     gap: 15px;
     padding: 20px;
-    background: var(--c-green-light-2);
-    border: 2px solid var(--c-green);
+    background: var(--accent-soft-2);
+    border: 2px solid var(--accent);
     border-radius: $radius-xl;
     margin-bottom: 20px;
 
@@ -15,17 +15,17 @@
         justify-content: space-between;
         align-items: center;
         padding-bottom: 10px;
-        border-bottom: 1px solid var(--c-green-light-3);
+        border-bottom: 1px solid var(--accent-soft-3);
 
         h3 {
             font-size: 18px;
-            color: var(--c-dark);
+            color: var(--text);
         }
 
         .tips-close {
             background: transparent;
-            color: var(--c-gray);
-            border: 1px solid var(--c-gray-3);
+            color: var(--text-muted);
+            border: 1px solid var(--border-strong);
             padding: 5px 15px;
             border-radius: $radius-2xl;
             cursor: pointer;
@@ -34,9 +34,9 @@
             font-family: $font-main;
 
             &:hover {
-                background: var(--c-white);
-                border-color: var(--c-gray-2);
-                color: var(--c-dark);
+                background: var(--surface);
+                border-color: var(--text-subtle);
+                color: var(--text);
             }
         }
     }
@@ -46,9 +46,9 @@
         align-items: flex-start;
         gap: 15px;
         padding: 15px;
-        background: var(--c-white);
+        background: var(--surface);
         border-radius: $radius-lg;
-        border: 1px solid var(--c-gray-5);
+        border: 1px solid var(--border);
 
         .tip-icon {
             font-size: 24px;
@@ -57,7 +57,7 @@
 
         p {
             font-size: 14px;
-            color: #555;
+            color: var(--text-muted);
             line-height: 1.6;
             margin: 0;
 

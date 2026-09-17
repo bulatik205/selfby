@@ -18,13 +18,14 @@ body {
     max-width: $max-w-site;
     margin: 0 auto;
     padding: 0 10px;
-    background: var(--c-light);
+    background: var(--page-bg);
+    color: var(--text);
 }
 
 .b-btn {
     background: transparent;
-    color: var(--c-white);
-    border: $border-white;
+    color: var(--header-text);
+    border: 2px solid var(--header-text);
     padding: 5px 20px;
     border-radius: $radius-pill;
     cursor: pointer;
@@ -32,14 +33,14 @@ body {
     transition: $transition;
 
     &:hover {
-        background: var(--c-white);
-        color: var(--c-dark);
+        background: var(--header-text);
+        color: var(--header-bg);
     }
 }
 
 .save-btn {
-    background: var(--c-green);
-    color: var(--c-white);
+    background: var(--accent);
+    color: var(--text-on-accent);
     border: none;
     padding: 5px 20px;
     border-radius: $radius-pill;
@@ -49,15 +50,16 @@ body {
     transition: $transition;
 
     &:hover {
-        background: var(--c-green-dark);
+        background: var(--accent-hover);
         transform: translateY(-1px);
-        box-shadow: var(--shadow-green-sm);
+        box-shadow: var(--shadow-accent-sm);
     }
 }
 
 .header {
     width: 100%;
-    background-color: var(--c-dark);
+    background-color: var(--header-bg);
+    color: var(--header-text);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -66,7 +68,7 @@ body {
 
     &-logo {
         font-size: 14px;
-        color: var(--c-white);
+        color: var(--header-text);
     }
 
     &-nav {
@@ -87,15 +89,15 @@ body {
 
 .work-title {
     font-size: 32px;
-    color: var(--c-dark);
+    color: var(--text);
     text-align: center;
     margin-bottom: 10px;
 }
 
 .view-btn {
     background: transparent;
-    color: var(--c-white);
-    border: $border-green;
+    color: var(--header-text);
+    border: $border-accent;
     padding: 5px 20px;
     border-radius: $radius-pill;
     cursor: pointer;
@@ -105,14 +107,15 @@ body {
     transition: $transition;
 
     &:hover {
-        background: var(--c-green);
+        background: var(--accent);
+        color: var(--text-on-accent);
         transform: translateY(-1px);
     }
 }
 
 .delete-btn {
     background: transparent;
-    border: $border-white;
+    border: 2px solid var(--border-on-dark);
     cursor: pointer;
     font-size: 12px;
     padding: 5px;
@@ -121,7 +124,7 @@ body {
 
     &:hover {
         opacity: 1;
-        background: var(--c-danger-bg);
+        background: var(--danger-bg);
     }
 }
 
@@ -148,20 +151,20 @@ body {
         flex-direction: column;
         align-items: center;
         padding: 10px 20px;
-        background: var(--c-white);
-        border: 1px solid var(--c-gray-5);
+        background: var(--surface);
+        border: 1px solid var(--border);
         border-radius: $radius-lg;
         min-width: 100px;
         transition: $transition;
 
         &:hover {
-            border-color: var(--c-green);
-            box-shadow: var(--shadow-sm);
+            border-color: var(--accent);
+            box-shadow: var(--shadow-xs);
         }
 
         &-label {
             font-size: 11px;
-            color: var(--c-gray-2);
+            color: var(--text-subtle);
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 4px;
@@ -169,15 +172,15 @@ body {
 
         &-value {
             font-size: 14px;
-            color: var(--c-dark);
+            color: var(--text);
             font-weight: 500;
         }
     }
 
     .view-btn {
         background: transparent;
-        color: var(--c-dark);
-        border: $border-green;
+        color: var(--text);
+        border: $border-accent;
         padding: 8px 20px;
         border-radius: $radius-pill;
         cursor: pointer;
@@ -188,8 +191,8 @@ body {
         white-space: nowrap;
 
         &:hover {
-            background: var(--c-green);
-            color: var(--c-white);
+            background: var(--accent);
+            color: var(--text-on-accent);
         }
     }
 }
@@ -202,18 +205,19 @@ body {
         width: 100%;
         min-height: 400px;
         padding: 20px;
-        border: 2px solid var(--c-gray-4);
+        border: 2px solid var(--border-strong);
         border-radius: $radius-xl;
         font-family: $font-mono;
         font-size: 14px;
         line-height: 1.6;
         resize: vertical;
         transition: border-color 0.3s;
-        background: var(--c-white);
+        background: var(--surface);
+        color: var(--text);
 
         &:focus {
             outline: none;
-            border-color: var(--c-green);
+            border-color: var(--accent);
         }
     }
 }

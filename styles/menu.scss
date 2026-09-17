@@ -2,7 +2,8 @@
 
 .header {
     width: 100%;
-    background-color: var(--c-dark);
+    background-color: var(--header-bg);
+    color: var(--header-text);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -12,7 +13,7 @@
 
     &-logo {
         font-size: 14px;
-        color: var(--c-white);
+        color: var(--header-text);
     }
 
     &-nav {
@@ -35,7 +36,7 @@
     span {
         width: 25px;
         height: 2px;
-        background: var(--c-white);
+        background: var(--header-text);
         transition: $transition;
         border-radius: 2px;
     }
@@ -62,11 +63,34 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: var(--c-overlay-soft);
+    background: var(--overlay-soft);
     z-index: $z-overlay;
 
     &.active {
         display: block;
+    }
+}
+
+.theme-btn {
+    background: transparent;
+    color: var(--header-text);
+    border: 2px solid var(--header-text);
+    width: 36px;
+    height: 36px;
+    border-radius: $radius-circle;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: $transition;
+    flex-shrink: 0;
+
+    &:hover {
+        background: var(--header-text);
+        color: var(--header-bg);
+        transform: translateY(-1px);
     }
 }
 
@@ -81,7 +105,7 @@
         top: calc(100% + 5px);
         right: 10px;
         width: 200px;
-        background: var(--c-dark);
+        background: var(--header-bg);
         flex-direction: column;
         padding: 10px;
         gap: 8px;
@@ -98,12 +122,18 @@
         .save-btn,
         .view-btn,
         .edit-btn,
-        .n-btn {
+        .n-btn,
+        .theme-btn {
             width: 100%;
             text-align: center;
             justify-content: center;
             padding: 8px 15px;
             font-size: 12px;
+        }
+
+        .theme-btn {
+            height: auto;
+            border-radius: $radius-pill;
         }
     }
 }

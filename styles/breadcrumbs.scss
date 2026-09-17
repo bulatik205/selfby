@@ -10,20 +10,20 @@
 }
 
 .breadcrumb-link {
-    color: var(--c-gray);
+    color: var(--text-muted);
     text-decoration: none;
     transition: color 0.3s;
 }
 
 .breadcrumb-link:hover {
-    color: var(--c-green);
+    color: var(--accent);
 }
 
 .breadcrumb-sep {
-    color: var(--c-gray-3);
+    color: var(--border-strong);
 }
 
 .breadcrumb-current {
-    color: var(--c-dark);
+    color: var(--text);
     font-weight: 600;
 }

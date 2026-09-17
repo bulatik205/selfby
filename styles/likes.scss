@@ -5,28 +5,28 @@
     align-items: center;
     gap: 8px;
     background: transparent;
-    border: 1px solid var(--c-gray-4);
+    border: 1px solid var(--border-strong);
     padding: 8px 15px;
     border-radius: $radius-pill;
     cursor: pointer;
     transition: $transition;
     font-size: 14px;
-    color: var(--c-gray);
+    color: var(--text-muted);
     font-family: $font-main;
 }
 
 .like-btn:hover {
-    border-color: var(--c-red);
-    background: var(--c-red-light);
+    border-color: var(--danger);
+    background: var(--danger-soft);
     transform: translateY(-1px);
 }
 
 .like-btn.liked {
-    border-color: var(--c-red);
-    background: var(--c-red-light);
-    color: var(--c-red);
+    border-color: var(--danger);
+    background: var(--danger-soft);
+    color: var(--danger);
 }
 
 .like-btn.liked:hover {
-    background: var(--c-red-light-2);
+    background: var(--danger-soft-2);
 }

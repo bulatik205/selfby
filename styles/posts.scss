@@ -18,13 +18,14 @@ body {
     max-width: $max-w-site;
     margin: 0 auto;
     padding: 0 10px;
-    background: var(--c-light);
+    background: var(--page-bg);
+    color: var(--text);
 }
 
 .b-btn {
     background: transparent;
-    color: var(--c-white);
-    border: $border-white;
+    color: var(--header-text);
+    border: 2px solid var(--header-text);
     padding: 5px 20px;
     border-radius: $radius-pill;
     cursor: pointer;
@@ -32,14 +33,15 @@ body {
     transition: $transition;
 
     &:hover {
-        background: var(--c-white);
-        color: var(--c-dark);
+        background: var(--header-text);
+        color: var(--header-bg);
     }
 }
 
 .header {
     width: 100%;
-    background-color: var(--c-dark);
+    background-color: var(--header-bg);
+    color: var(--header-text);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -48,7 +50,7 @@ body {
 
     &-logo {
         font-size: 14px;
-        color: var(--c-white);
+        color: var(--header-text);
     }
 
     &-nav {
@@ -69,7 +71,7 @@ body {
 
 .work-title {
     font-size: 36px;
-    color: var(--c-dark);
+    color: var(--text);
     text-align: center;
 }
 
@@ -80,19 +82,19 @@ body {
     gap: 20px;
     flex-wrap: wrap;
     padding: 15px;
-    background: var(--c-white);
+    background: var(--surface);
     border-radius: $radius-lg;
-    border: 1px solid var(--c-gray-5);
+    border: 1px solid var(--border);
 
     span {
         font-size: 14px;
-        color: var(--c-gray);
+        color: var(--text-muted);
     }
 }
 
 .edit-btn {
-    background: var(--c-green);
-    color: var(--c-white);
+    background: var(--accent);
+    color: var(--text-on-accent);
     border: none;
     padding: 5px 15px;
     border-radius: $radius-pill;
@@ -103,7 +105,7 @@ body {
     transition: $transition;
 
     &:hover {
-        background: var(--c-green-dark);
+        background: var(--accent-hover);
         transform: translateY(-1px);
     }
 }
@@ -114,8 +116,8 @@ body {
     margin-top: 10px;
 
     button {
-        background: var(--c-dark);
-        color: var(--c-white);
+        background: var(--text);
+        color: var(--surface);
         border: none;
         padding: 12px 30px;
         border-radius: $radius-pill;
@@ -126,7 +128,7 @@ body {
         font-family: $font-main;
 
         &:hover {
-            background: var(--c-gray);
+            background: var(--text-muted);
             transform: translateY(-2px);
             box-shadow: var(--shadow-nav);
         }
@@ -140,12 +142,12 @@ body {
 .index-work,
 .work-content {
     padding: 30px;
-    background: var(--c-white);
+    background: var(--surface);
     border-radius: $radius-xl;
-    border: 1px solid var(--c-gray-5);
+    border: 1px solid var(--border);
     margin-bottom: 20px;
     line-height: 1.6;
-    color: var(--c-dark);
+    color: var(--text);
     max-width: 100%;
     overflow-wrap: break-word;
     word-wrap: break-word;
@@ -158,7 +160,7 @@ body {
     h5,
     h6 {
         margin: 10px 0;
-        color: var(--c-dark);
+        color: var(--text);
         overflow-wrap: break-word;
         word-wrap: break-word;
     }
@@ -177,7 +179,7 @@ body {
     }
 
     a {
-        color: var(--c-green);
+        color: var(--accent);
         text-decoration: none;
         word-break: break-word;
 
@@ -200,7 +202,7 @@ body {
     }
 
     code {
-        background: var(--c-light);
+        background: var(--surface-3);
         padding: 2px 6px;
         border-radius: $radius-sm;
         font-family: $font-mono;
@@ -210,7 +212,7 @@ body {
     }
 
     pre {
-        background: var(--c-code-bg);
+        background: var(--code-bg);
         padding: 15px;
         border-radius: $radius-md;
         overflow-x: auto;
@@ -226,10 +228,10 @@ body {
     }
 
     blockquote {
-        border-left: 4px solid var(--c-green);
+        border-left: 4px solid var(--accent);
         padding-left: 15px;
         margin: 15px 0;
-        color: var(--c-gray);
+        color: var(--text-muted);
         overflow-wrap: break-word;
     }
 
@@ -265,7 +267,7 @@ body {
         th,
         td {
             padding: 10px;
-            border: 1px solid var(--c-gray-4);
+            border: 1px solid var(--border-strong);
             text-align: left;
             white-space: normal;
             word-break: break-word;
@@ -273,7 +275,7 @@ body {
         }
 
         th {
-            background: var(--c-light);
+            background: var(--surface-3);
             font-weight: 600;
         }
     }
@@ -289,13 +291,13 @@ body {
         margin: 15px 0;
         border-radius: $radius-md;
         overflow: hidden;
-        background: var(--c-code-bg);
+        background: var(--code-bg);
         max-width: 100%;
 
         pre {
             margin: 0;
             border-radius: 0;
-            background: var(--c-code-bg);
+            background: var(--code-bg);
         }
     }
 
@@ -304,25 +306,25 @@ body {
         justify-content: space-between;
         align-items: center;
         padding: 8px 14px;
-        background: var(--c-code-header);
-        border-bottom: 1px solid var(--c-code-border);
+        background: var(--code-header-bg);
+        border-bottom: 1px solid var(--code-border);
         font-family: $font-mono;
         font-size: 12px;
-        color: var(--c-code-text);
+        color: var(--code-text);
         user-select: none;
     }
 
     .code-lang {
         text-transform: lowercase;
         letter-spacing: 0.5px;
-        color: var(--c-white);
+        color: var(--header-text);
         font-weight: 600;
     }
 
     .copy-btn {
         background: transparent;
         border: none;
-        color: var(--c-code-text-2);
+        color: var(--code-text-2);
         padding: 5px 15px;
         border-radius: 10px;
         cursor: pointer;
@@ -331,8 +333,8 @@ body {
         transition: $transition;
 
         &:hover {
-            background: var(--c-gray);
-            color: var(--c-white);
+            background: var(--text-muted);
+            color: var(--header-text);
         }
 
         &:active {

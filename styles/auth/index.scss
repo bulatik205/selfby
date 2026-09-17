@@ -19,14 +19,14 @@ body {
     display: flex;
     flex-direction: column;
     margin: 0 auto;
-    background-color: var(--c-dark);
+    background-color: var(--surface-3);
     box-shadow: var(--shadow-wrapper);
 }
 
 .b-btn {
     background: transparent;
-    color: var(--c-white);
-    border: $border-white;
+    color: var(--header-text);
+    border: 2px solid var(--header-text);
     padding: 10px 25px;
     border-radius: $radius-pill;
     cursor: pointer;
@@ -34,14 +34,14 @@ body {
     transition: $transition;
 
     &:hover {
-        background: var(--c-white);
-        color: var(--c-dark);
+        background: var(--header-text);
+        color: var(--header-bg);
     }
 }
 
 .l-btn {
-    background: var(--c-white);
-    color: var(--c-dark);
+    background: var(--surface);
+    color: var(--text);
     border: $border-dark;
     padding: 10px 25px;
     border-radius: $radius-pill;
@@ -50,14 +50,14 @@ body {
     transition: $transition;
 
     &:hover {
-        background: var(--c-dark);
-        color: var(--c-white);
+        background: var(--text);
+        color: var(--surface);
     }
 }
 
 .header {
-    background: var(--c-dark-2);
-    color: var(--c-white);
+    background: var(--header-bg);
+    color: var(--header-text);
     padding: 20px 30px;
     display: flex;
     justify-content: space-between;
@@ -79,7 +79,7 @@ body {
 }
 
 .welcome-block {
-    background: var(--c-white);
+    background: var(--surface);
     border-radius: $radius-lg;
     padding: 60px 50px;
     text-align: center;
@@ -88,7 +88,7 @@ body {
 
     .welcome-title {
         font-size: 36px;
-        color: var(--c-dark);
+        color: var(--text);
         margin-bottom: 20px;
         font-weight: bold;
     }
@@ -96,7 +96,7 @@ body {
     .welcome-text {
         font-size: 18px;
         line-height: 1.6;
-        color: var(--c-gray);
+        color: var(--text-muted);
         margin-bottom: 10px;
     }
 
@@ -132,27 +132,29 @@ body {
             display: block;
             font-size: 14px;
             font-weight: 500;
-            color: var(--c-dark);
+            color: var(--text);
             margin-bottom: 8px;
         }
 
         input {
             width: 100%;
             padding: 12px 15px;
-            border: 2px solid var(--c-gray-4);
+            border: 2px solid var(--border-strong);
             border-radius: $radius-md;
             font-size: 16px;
             font-family: $font-main;
             transition: $transition;
+            background: var(--surface);
+            color: var(--text);
 
             &:focus {
                 outline: none;
-                border-color: var(--c-dark);
-                box-shadow: 0 0 0 3px var(--c-focus-ring);
+                border-color: var(--text);
+                box-shadow: 0 0 0 3px var(--focus-ring);
             }
 
             &::placeholder {
-                color: var(--c-gray-2);
+                color: var(--text-subtle);
             }
         }
     }
@@ -181,10 +183,10 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
-    background: var(--c-red-light-3);
-    border: 1px solid var(--c-red-border);
+    background: var(--danger-soft-3);
+    border: 1px solid var(--danger-border);
     border-radius: $radius-md;
-    color: var(--c-red-2);
+    color: var(--danger);
     padding: 12px 15px;
     font-size: 14px;
     flex: 1;
@@ -203,7 +205,7 @@ body {
     .error-close {
         background: none;
         border: none;
-        color: var(--c-red-2);
+        color: var(--danger);
         font-size: 20px;
         cursor: pointer;
         padding: 0 5px;
@@ -212,7 +214,7 @@ body {
 
         &:hover {
             transform: scale(1.2);
-            color: var(--c-red-3);
+            color: var(--text);
         }
     }
 }
@@ -221,10 +223,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--c-red-light-3);
-    border: 1px solid var(--c-red-border);
+    background: var(--danger-soft-3);
+    border: 1px solid var(--danger-border);
     border-radius: $radius-md;
-    color: var(--c-red-2);
+    color: var(--danger);
     min-width: 50px;
     padding: 12px 10px;
     font-size: 18px;
