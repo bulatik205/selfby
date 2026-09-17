@@ -259,7 +259,7 @@ body {
   margin: 20px auto;
 }
 .index-work code {
-  background: #272822;
+  background: #f5f5f5;
   padding: 2px 6px;
   border-radius: 4px;
   font-family: "Source Code Pro", monospace;
@@ -268,7 +268,7 @@ body {
   word-break: break-word;
 }
 .index-work pre {
-  background: #f5f5f5;
+  background: #272822;
   padding: 15px;
   border-radius: 8px;
   overflow-x: auto;
