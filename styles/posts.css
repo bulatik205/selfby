@@ -377,26 +377,4 @@ body {
     min-width: 80px;
     font-size: 13px;
   }
-}
-.breadcrumbs {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 14px;
-  flex-wrap: wrap;
-}
-.breadcrumbs .breadcrumb-link {
-  color: #666;
-  text-decoration: none;
-  transition: color 0.3s;
-}
-.breadcrumbs .breadcrumb-link:hover {
-  color: #18A64A;
-}
-.breadcrumbs .breadcrumb-sep {
-  color: #ccc;
-}
-.breadcrumbs .breadcrumb-current {
-  color: #333;
-  font-weight: 600;
-}/*# sourceMappingURL=index.css.map */
+}/*# sourceMappingURL=posts.css.map */
