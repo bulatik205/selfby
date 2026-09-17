@@ -2,7 +2,7 @@
 
 .header {
     width: 100%;
-    background-color: $c-dark;
+    background-color: var(--c-dark);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -12,7 +12,7 @@
 
     &-logo {
         font-size: 14px;
-        color: $c-white;
+        color: var(--c-white);
     }
 
     &-nav {
@@ -35,7 +35,7 @@
     span {
         width: 25px;
         height: 2px;
-        background: $c-white;
+        background: var(--c-white);
         transition: $transition;
         border-radius: 2px;
     }
@@ -62,7 +62,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.3);
+    background: var(--c-overlay-soft);
     z-index: $z-overlay;
 
     &.active {
@@ -81,14 +81,14 @@
         top: calc(100% + 5px);
         right: 10px;
         width: 200px;
-        background: $c-dark;
+        background: var(--c-dark);
         flex-direction: column;
         padding: 10px;
         gap: 8px;
         border-radius: $radius-lg;
         z-index: $z-modal;
         align-items: stretch;
-        box-shadow: $shadow-menu;
+        box-shadow: var(--shadow-menu);
 
         &.active {
             display: flex;

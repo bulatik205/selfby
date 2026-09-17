@@ -27,7 +27,7 @@ body {
 
 .b-btn {
     background: transparent;
-    color: $c-white;
+    color: var(--c-white);
     border: $border-white;
     padding: 5px 20px;
     border-radius: $radius-pill;
@@ -36,14 +36,14 @@ body {
     transition: $transition;
 
     &:hover {
-        background: $c-white;
-        color: $c-dark;
+        background: var(--c-white);
+        color: var(--c-dark);
     }
 }
 
 .l-btn {
-    background: $c-white;
-    color: $c-dark;
+    background: var(--c-white);
+    color: var(--c-dark);
     border: $border-dark;
     padding: 10px 25px;
     border-radius: $radius-pill;
@@ -52,14 +52,14 @@ body {
     transition: $transition;
 
     &:hover {
-        background: $c-dark;
-        color: $c-white;
+        background: var(--c-dark);
+        color: var(--c-white);
     }
 }
 
 .n-btn {
     background: transparent;
-    color: $c-white;
+    color: var(--c-white);
     border: $border-green;
     padding: 5px 20px;
     border-radius: $radius-pill;
@@ -68,14 +68,14 @@ body {
     transition: $transition;
 
     &:hover {
-        background: $c-green;
+        background: var(--c-green);
     }
 }
 
 .header {
     width: 100%;
     max-width: $max-w-site;
-    background-color: $c-dark;
+    background-color: var(--c-dark);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -85,7 +85,7 @@ body {
 
     &-logo {
         font-size: 14px;
-        color: $c-white;
+        color: var(--c-white);
     }
 }
 
@@ -102,14 +102,14 @@ body {
         height: fit-content;
         padding: 10px;
         border-radius: $radius-2xl;
-        background-color: $c-dark;
+        background-color: var(--c-dark);
 
         .menu-title {
             display: flex;
             justify-content: center;
             align-items: center;
             width: 100%;
-            color: $c-white;
+            color: var(--c-white);
         }
 
         hr {
@@ -131,11 +131,11 @@ body {
                     align-items: center;
                     justify-content: center;
                     padding: 12px 16px;
-                    border: 1px solid $c-white;
+                    border: 1px solid var(--c-white);
                     border-radius: $radius-md;
                     text-decoration: none;
-                    color: $c-white;
-                    background: $c-dark;
+                    color: var(--c-white);
+                    background: var(--c-dark);
                     font-size: 14px;
                     font-weight: 500;
                     cursor: pointer;
@@ -156,8 +156,8 @@ body {
                     }
 
                     &:hover {
-                        background: $c-white;
-                        color: $c-dark;
+                        background: var(--c-white);
+                        color: var(--c-dark);
 
                         img {
                             filter: invert(1);
@@ -169,7 +169,7 @@ body {
     }
 
     &-base {
-        border: 1px solid $c-dark;
+        border: 1px solid var(--c-dark);
         border-radius: $radius-2xl;
         padding: 20px;
 
@@ -192,7 +192,7 @@ body {
             gap: 10px;
 
             div {
-                border: 1px solid $c-dark;
+                border: 1px solid var(--c-dark);
                 border-radius: $radius-2xl;
                 padding: 20px;
             }
@@ -200,10 +200,10 @@ body {
             h3 {
                 font-size: 16px;
                 font-weight: 700;
-                color: $c-dark;
+                color: var(--c-dark);
                 margin-bottom: 15px;
                 padding-bottom: 10px;
-                border-bottom: 1px solid $c-gray-6;
+                border-bottom: 1px solid var(--c-gray-6);
             }
 
             p {
@@ -211,10 +211,10 @@ body {
                 justify-content: space-between;
                 align-items: center;
                 font-size: 14px;
-                color: $c-gray;
+                color: var(--c-gray);
                 padding: 8px 0;
                 margin: 0;
-                border-bottom: 1px dashed $c-gray-7;
+                border-bottom: 1px dashed var(--c-gray-7);
 
                 &:last-child {
                     border-bottom: none;
@@ -222,7 +222,7 @@ body {
 
                 span {
                     font-weight: 700;
-                    color: $c-green;
+                    color: var(--c-green);
                     font-size: 15px;
                 }
             }
@@ -231,7 +231,7 @@ body {
                 display: inline-flex;
                 align-items: center;
                 gap: 6px;
-                color: $c-dark;
+                color: var(--c-dark);
                 text-decoration: none;
                 font-size: 14px;
                 font-weight: 500;
@@ -241,13 +241,13 @@ body {
 
                 &::before {
                     content: '→';
-                    color: $c-green;
+                    color: var(--c-green);
                     font-weight: 700;
                     transition: transform 0.3s;
                 }
 
                 &:hover {
-                    color: $c-green;
+                    color: var(--c-green);
 
                     &::before {
                         transform: translateX(4px);
@@ -265,17 +265,17 @@ body {
     margin-top: 10px;
 
     .widget {
-        border: 1px solid $c-dark;
+        border: 1px solid var(--c-dark);
         border-radius: $radius-2xl;
         padding: 20px;
 
         h3 {
             font-size: 16px;
             font-weight: 700;
-            color: $c-dark;
+            color: var(--c-dark);
             margin-bottom: 15px;
             padding-bottom: 10px;
-            border-bottom: 1px solid $c-gray-6;
+            border-bottom: 1px solid var(--c-gray-6);
         }
 
         .widget-list {
@@ -290,18 +290,18 @@ body {
                 padding: 8px 10px;
                 border-radius: $radius-md;
                 text-decoration: none;
-                color: $c-dark;
+                color: var(--c-dark);
                 font-size: 13px;
                 transition: $transition;
                 background: transparent;
 
                 &:hover {
-                    background: $c-light;
+                    background: var(--c-light);
                 }
 
                 .widget-rank {
                     font-weight: 700;
-                    color: $c-gray-2;
+                    color: var(--c-gray-2);
                     min-width: 24px;
                     text-align: center;
                     font-size: 14px;
@@ -309,12 +309,12 @@ body {
 
                 .widget-title {
                     font-weight: 600;
-                    color: $c-dark;
+                    color: var(--c-dark);
                     flex-shrink: 0;
                 }
 
                 .widget-subtitle {
-                    color: $c-gray-2;
+                    color: var(--c-gray-2);
                     font-size: 12px;
                     flex: 1;
                     overflow: hidden;
@@ -327,19 +327,19 @@ body {
                     gap: 8px;
                     margin-left: auto;
                     font-size: 12px;
-                    color: $c-gray;
+                    color: var(--c-gray);
                 }
 
                 .widget-date {
                     margin-left: auto;
                     font-size: 11px;
-                    color: $c-gray-2;
+                    color: var(--c-gray-2);
                 }
             }
 
             .widget-empty {
                 text-align: center;
-                color: $c-gray-2;
+                color: var(--c-gray-2);
                 font-size: 13px;
                 padding: 20px 0;
             }
@@ -381,7 +381,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: var(--c-overlay);
     z-index: $z-modal;
     justify-content: center;
     align-items: center;
@@ -391,7 +391,7 @@ body {
     }
 
     &-content {
-        background: $c-white;
+        background: var(--c-white);
         border-radius: $radius-2xl;
         padding: 20px;
         width: 90%;
@@ -411,7 +411,7 @@ body {
         border: none;
         font-size: 24px;
         cursor: pointer;
-        color: $c-dark;
+        color: var(--c-dark);
     }
 
     &-body {
@@ -440,7 +440,7 @@ body {
 
             &:focus {
                 outline: none;
-                border-color: $c-green-primary;
+                border-color: var(--c-green-primary);
             }
         }
 
@@ -555,4 +555,4 @@ body {
         transform: translateX(0);
         opacity: 1;
     }
-}
+} 

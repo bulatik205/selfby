@@ -5,8 +5,8 @@
     flex-direction: column;
     gap: 15px;
     padding: 20px;
-    background: $c-green-light-2;
-    border: 2px solid $c-green;
+    background: var(--c-green-light-2);
+    border: 2px solid var(--c-green);
     border-radius: $radius-xl;
     margin-bottom: 20px;
 
@@ -15,17 +15,17 @@
         justify-content: space-between;
         align-items: center;
         padding-bottom: 10px;
-        border-bottom: 1px solid $c-green-light-3;
+        border-bottom: 1px solid var(--c-green-light-3);
 
         h3 {
             font-size: 18px;
-            color: $c-dark;
+            color: var(--c-dark);
         }
 
         .tips-close {
             background: transparent;
-            color: $c-gray;
-            border: 1px solid $c-gray-3;
+            color: var(--c-gray);
+            border: 1px solid var(--c-gray-3);
             padding: 5px 15px;
             border-radius: $radius-2xl;
             cursor: pointer;
@@ -34,9 +34,9 @@
             font-family: $font-main;
 
             &:hover {
-                background: $c-white;
-                border-color: $c-gray-2;
-                color: $c-dark;
+                background: var(--c-white);
+                border-color: var(--c-gray-2);
+                color: var(--c-dark);
             }
         }
     }
@@ -46,9 +46,9 @@
         align-items: flex-start;
         gap: 15px;
         padding: 15px;
-        background: $c-white;
+        background: var(--c-white);
         border-radius: $radius-lg;
-        border: 1px solid $c-gray-5;
+        border: 1px solid var(--c-gray-5);
 
         .tip-icon {
             font-size: 24px;

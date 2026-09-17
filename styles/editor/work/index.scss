@@ -18,12 +18,12 @@ body {
     max-width: $max-w-site;
     margin: 0 auto;
     padding: 0 10px;
-    background: $c-light;
+    background: var(--c-light);
 }
 
 .b-btn {
     background: transparent;
-    color: $c-white;
+    color: var(--c-white);
     border: $border-white;
     padding: 5px 20px;
     border-radius: $radius-pill;
@@ -32,14 +32,14 @@ body {
     transition: $transition;
 
     &:hover {
-        background: $c-white;
-        color: $c-dark;
+        background: var(--c-white);
+        color: var(--c-dark);
     }
 }
 
 .save-btn {
-    background: $c-green;
-    color: $c-white;
+    background: var(--c-green);
+    color: var(--c-white);
     border: none;
     padding: 5px 20px;
     border-radius: $radius-pill;
@@ -49,15 +49,15 @@ body {
     transition: $transition;
 
     &:hover {
-        background: $c-green-dark;
+        background: var(--c-green-dark);
         transform: translateY(-1px);
-        box-shadow: $shadow-green-sm;
+        box-shadow: var(--shadow-green-sm);
     }
 }
 
 .header {
     width: 100%;
-    background-color: $c-dark;
+    background-color: var(--c-dark);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -66,7 +66,7 @@ body {
 
     &-logo {
         font-size: 14px;
-        color: $c-white;
+        color: var(--c-white);
     }
 
     &-nav {
@@ -87,14 +87,14 @@ body {
 
 .work-title {
     font-size: 32px;
-    color: $c-dark;
+    color: var(--c-dark);
     text-align: center;
     margin-bottom: 10px;
 }
 
 .view-btn {
     background: transparent;
-    color: $c-white;
+    color: var(--c-white);
     border: $border-green;
     padding: 5px 20px;
     border-radius: $radius-pill;
@@ -105,7 +105,7 @@ body {
     transition: $transition;
 
     &:hover {
-        background: $c-green;
+        background: var(--c-green);
         transform: translateY(-1px);
     }
 }
@@ -121,7 +121,7 @@ body {
 
     &:hover {
         opacity: 1;
-        background: rgba(231, 76, 60, 0.1);
+        background: var(--c-danger-bg);
     }
 }
 
@@ -148,20 +148,20 @@ body {
         flex-direction: column;
         align-items: center;
         padding: 10px 20px;
-        background: $c-white;
-        border: 1px solid $c-gray-5;
+        background: var(--c-white);
+        border: 1px solid var(--c-gray-5);
         border-radius: $radius-lg;
         min-width: 100px;
         transition: $transition;
 
         &:hover {
-            border-color: $c-green;
-            box-shadow: $shadow-sm;
+            border-color: var(--c-green);
+            box-shadow: var(--shadow-sm);
         }
 
         &-label {
             font-size: 11px;
-            color: $c-gray-2;
+            color: var(--c-gray-2);
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 4px;
@@ -169,14 +169,14 @@ body {
 
         &-value {
             font-size: 14px;
-            color: $c-dark;
+            color: var(--c-dark);
             font-weight: 500;
         }
     }
 
     .view-btn {
         background: transparent;
-        color: $c-dark;
+        color: var(--c-dark);
         border: $border-green;
         padding: 8px 20px;
         border-radius: $radius-pill;
@@ -188,8 +188,8 @@ body {
         white-space: nowrap;
 
         &:hover {
-            background: $c-green;
-            color: $c-white;
+            background: var(--c-green);
+            color: var(--c-white);
         }
     }
 }
@@ -202,18 +202,18 @@ body {
         width: 100%;
         min-height: 400px;
         padding: 20px;
-        border: 2px solid $c-gray-4;
+        border: 2px solid var(--c-gray-4);
         border-radius: $radius-xl;
         font-family: $font-mono;
         font-size: 14px;
         line-height: 1.6;
         resize: vertical;
         transition: border-color 0.3s;
-        background: $c-white;
+        background: var(--c-white);
 
         &:focus {
             outline: none;
-            border-color: $c-green;
+            border-color: var(--c-green);
         }
     }
 }

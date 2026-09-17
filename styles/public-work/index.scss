@@ -1,29 +1,2 @@
 @import '../var.scss';
 @import "../posts.scss";
-
-.breadcrumbs {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 14px;
-    flex-wrap: wrap;
-
-    .breadcrumb-link {
-        color: $c-gray;
-        text-decoration: none;
-        transition: color 0.3s;
-
-        &:hover {
-            color: $c-green;
-        }
-    }
-
-    .breadcrumb-sep {
-        color: $c-gray-3;
-    }
-
-    .breadcrumb-current {
-        color: $c-dark;
-        font-weight: 600;
-    }
-}

@@ -19,13 +19,13 @@ body {
     display: flex;
     flex-direction: column;
     margin: 0 auto;
-    background-color: $c-dark;
-    box-shadow: $shadow-wrapper;
+    background-color: var(--c-dark);
+    box-shadow: var(--shadow-wrapper);
 }
 
 .b-btn {
     background: transparent;
-    color: $c-white;
+    color: var(--c-white);
     border: $border-white;
     padding: 10px 25px;
     border-radius: $radius-pill;
@@ -34,14 +34,14 @@ body {
     transition: $transition;
 
     &:hover {
-        background: $c-white;
-        color: $c-dark;
+        background: var(--c-white);
+        color: var(--c-dark);
     }
 }
 
 .l-btn {
-    background: $c-white;
-    color: $c-dark;
+    background: var(--c-white);
+    color: var(--c-dark);
     border: $border-dark;
     padding: 10px 25px;
     border-radius: $radius-pill;
@@ -50,14 +50,14 @@ body {
     transition: $transition;
 
     &:hover {
-        background: $c-dark;
-        color: $c-white;
+        background: var(--c-dark);
+        color: var(--c-white);
     }
 }
 
 .header {
-    background: $c-dark-2;
-    color: $c-white;
+    background: var(--c-dark-2);
+    color: var(--c-white);
     padding: 20px 30px;
     display: flex;
     justify-content: space-between;
@@ -79,16 +79,16 @@ body {
 }
 
 .welcome-block {
-    background: $c-white;
+    background: var(--c-white);
     border-radius: $radius-lg;
     padding: 60px 50px;
     text-align: center;
     max-width: 600px;
-    box-shadow: $shadow-xl;
+    box-shadow: var(--shadow-xl);
 
     .welcome-title {
         font-size: 36px;
-        color: $c-dark;
+        color: var(--c-dark);
         margin-bottom: 20px;
         font-weight: bold;
     }
@@ -96,7 +96,7 @@ body {
     .welcome-text {
         font-size: 18px;
         line-height: 1.6;
-        color: $c-gray;
+        color: var(--c-gray);
         margin-bottom: 10px;
     }
 
@@ -132,14 +132,14 @@ body {
             display: block;
             font-size: 14px;
             font-weight: 500;
-            color: $c-dark;
+            color: var(--c-dark);
             margin-bottom: 8px;
         }
 
         input {
             width: 100%;
             padding: 12px 15px;
-            border: 2px solid $c-gray-4;
+            border: 2px solid var(--c-gray-4);
             border-radius: $radius-md;
             font-size: 16px;
             font-family: $font-main;
@@ -147,12 +147,12 @@ body {
 
             &:focus {
                 outline: none;
-                border-color: $c-dark;
-                box-shadow: 0 0 0 3px rgba(51, 51, 51, 0.1);
+                border-color: var(--c-dark);
+                box-shadow: 0 0 0 3px var(--c-focus-ring);
             }
 
             &::placeholder {
-                color: $c-gray-2;
+                color: var(--c-gray-2);
             }
         }
     }
@@ -181,10 +181,10 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
-    background: $c-red-light-3;
-    border: 1px solid $c-red-border;
+    background: var(--c-red-light-3);
+    border: 1px solid var(--c-red-border);
     border-radius: $radius-md;
-    color: $c-red-2;
+    color: var(--c-red-2);
     padding: 12px 15px;
     font-size: 14px;
     flex: 1;
@@ -203,7 +203,7 @@ body {
     .error-close {
         background: none;
         border: none;
-        color: $c-red-2;
+        color: var(--c-red-2);
         font-size: 20px;
         cursor: pointer;
         padding: 0 5px;
@@ -212,7 +212,7 @@ body {
 
         &:hover {
             transform: scale(1.2);
-            color: $c-red-3;
+            color: var(--c-red-3);
         }
     }
 }
@@ -221,10 +221,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: $c-red-light-3;
-    border: 1px solid $c-red-border;
+    background: var(--c-red-light-3);
+    border: 1px solid var(--c-red-border);
     border-radius: $radius-md;
-    color: $c-red-2;
+    color: var(--c-red-2);
     min-width: 50px;
     padding: 12px 10px;
     font-size: 18px;

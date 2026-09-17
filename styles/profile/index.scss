@@ -12,8 +12,8 @@
         width: 100px;
         height: 100px;
         border-radius: $radius-circle;
-        background: $c-green;
-        color: $c-white;
+        background: var(--c-green);
+        color: var(--c-white);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -23,7 +23,7 @@
 
     .username {
         font-size: 32px;
-        color: $c-dark;
+        color: var(--c-dark);
     }
 }
 
@@ -38,20 +38,20 @@
         flex-direction: column;
         align-items: center;
         padding: 15px 25px;
-        background: $c-white;
-        border: 1px solid $c-gray-5;
+        background: var(--c-white);
+        border: 1px solid var(--c-gray-5);
         border-radius: $radius-lg;
         min-width: 150px;
         transition: $transition;
 
         &:hover {
-            border-color: $c-green;
-            box-shadow: $shadow-sm;
+            border-color: var(--c-green);
+            box-shadow: var(--shadow-sm);
         }
 
         .info-label {
             font-size: 11px;
-            color: $c-gray-2;
+            color: var(--c-gray-2);
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 4px;
@@ -59,7 +59,7 @@
 
         .info-value {
             font-size: 14px;
-            color: $c-dark;
+            color: var(--c-dark);
             font-weight: 500;
         }
     }
@@ -75,25 +75,25 @@
         flex-direction: column;
         align-items: center;
         padding: 30px 20px;
-        background: $c-white;
+        background: var(--c-white);
         border-radius: $radius-xl;
         transition: $transition;
 
         &:hover {
             transform: translateY(-3px);
-            box-shadow: $shadow-lg-2;
+            box-shadow: var(--shadow-lg-2);
         }
 
         .stat-number {
             font-size: 36px;
             font-weight: bold;
-            color: $c-dark;
+            color: var(--c-dark);
             margin-bottom: 5px;
         }
 
         .stat-label {
             font-size: 14px;
-            color: $c-gray-2;
+            color: var(--c-gray-2);
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 10px;
@@ -109,7 +109,7 @@
                 align-items: center;
                 gap: 5px;
                 font-size: 12px;
-                color: $c-gray;
+                color: var(--c-gray);
 
                 .dot {
                     width: 8px;
@@ -118,11 +118,11 @@
                 }
 
                 &.public .dot {
-                    background: $c-green;
+                    background: var(--c-green);
                 }
 
                 &.private .dot {
-                    background: $c-orange;
+                    background: var(--c-orange);
                 }
             }
         }
@@ -136,7 +136,7 @@
 
     .section-title {
         font-size: 24px;
-        color: $c-dark;
+        color: var(--c-dark);
         margin-bottom: 20px;
         text-align: center;
     }
@@ -155,15 +155,15 @@
             flex-direction: column;
             gap: 15px;
             padding: 20px;
-            background: $c-white;
-            border: 1px solid $c-gray-5;
+            background: var(--c-white);
+            border: 1px solid var(--c-gray-5);
             border-radius: $radius-xl;
             transition: $transition;
             min-height: 200px;
 
             &:hover {
-                border-color: $c-green;
-                box-shadow: $shadow-lg;
+                border-color: var(--c-green);
+                box-shadow: var(--shadow-lg);
                 transform: translateY(-2px);
             }
 
@@ -174,20 +174,20 @@
                     display: block;
                     font-size: 18px;
                     font-weight: 700;
-                    color: $c-dark;
+                    color: var(--c-dark);
                     text-decoration: none;
                     margin-bottom: 8px;
                     word-break: break-word;
 
                     &:hover {
-                        color: $c-green;
+                        color: var(--c-green);
                     }
                 }
 
                 .project-description {
                     display: block;
                     font-size: 13px;
-                    color: $c-gray;
+                    color: var(--c-gray);
                     line-height: 1.5;
                     word-break: break-word;
                 }
@@ -199,7 +199,7 @@
                 justify-content: space-between;
                 gap: 10px;
                 padding: 12px 0;
-                border-top: 1px solid $c-gray-6;
+                border-top: 1px solid var(--c-gray-6);
 
                 .project-type {
                     padding: 4px 10px;
@@ -209,35 +209,35 @@
                     white-space: nowrap;
 
                     &.public {
-                        background: $c-green-light;
-                        color: $c-green;
+                        background: var(--c-green-light);
+                        color: var(--c-green);
                     }
 
                     &.private {
-                        background: $c-orange-light;
-                        color: $c-orange;
+                        background: var(--c-orange-light);
+                        color: var(--c-orange);
                     }
                 }
 
                 .project-works {
                     font-size: 13px;
-                    color: $c-gray;
+                    color: var(--c-gray);
                     white-space: nowrap;
                 }
             }
 
             .project-date {
                 font-size: 12px;
-                color: $c-gray-2;
+                color: var(--c-gray-2);
             }
         }
 
         .empty-state {
             grid-column: 1 / -1;
             text-align: center;
-            color: $c-gray-2;
+            color: var(--c-gray-2);
             padding: 30px;
-            background: $c-light-2;
+            background: var(--c-light-2);
             border-radius: $radius-lg;
             font-size: 14px;
         }

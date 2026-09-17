@@ -27,7 +27,7 @@ body {
 
 .b-btn {
     background: transparent;
-    color: $c-white;
+    color: var(--c-white);
     border: $border-white;
     padding: 5px 20px;
     border-radius: $radius-pill;
@@ -36,14 +36,14 @@ body {
     transition: $transition;
 
     &:hover {
-        background: $c-white;
-        color: $c-dark;
+        background: var(--c-white);
+        color: var(--c-dark);
     }
 }
 
 .l-btn {
-    background: $c-white;
-    color: $c-dark;
+    background: var(--c-white);
+    color: var(--c-dark);
     border: $border-dark;
     padding: 10px 25px;
     border-radius: $radius-pill;
@@ -52,14 +52,14 @@ body {
     transition: $transition;
 
     &:hover {
-        background: $c-dark;
-        color: $c-white;
+        background: var(--c-dark);
+        color: var(--c-white);
     }
 }
 
 .n-btn {
     background: transparent;
-    color: $c-white;
+    color: var(--c-white);
     border: $border-green;
     padding: 5px 20px;
     border-radius: $radius-pill;
@@ -68,14 +68,14 @@ body {
     transition: $transition;
 
     &:hover {
-        background: $c-green;
+        background: var(--c-green);
     }
 }
 
 .header {
     width: 100%;
     max-width: $max-w-site;
-    background-color: $c-dark;
+    background-color: var(--c-dark);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -85,13 +85,13 @@ body {
 
     &-logo {
         font-size: 14px;
-        color: $c-white;
+        color: var(--c-white);
     }
 }
 
 .project-title {
     font-size: 32px;
-    color: $c-dark;
+    color: var(--c-dark);
     text-align: center;
     margin-bottom: 10px;
     word-break: break-word;
@@ -115,20 +115,20 @@ body {
         flex-direction: column;
         align-items: center;
         padding: 10px 20px;
-        background: $c-white;
-        border: 1px solid $c-gray-5;
+        background: var(--c-white);
+        border: 1px solid var(--c-gray-5);
         border-radius: $radius-lg;
         min-width: 100px;
         transition: $transition;
 
         &:hover {
-            border-color: $c-green;
-            box-shadow: $shadow-sm;
+            border-color: var(--c-green);
+            box-shadow: var(--shadow-sm);
         }
 
         &-label {
             font-size: 11px;
-            color: $c-gray-2;
+            color: var(--c-gray-2);
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 4px;
@@ -136,7 +136,7 @@ body {
 
         &-value {
             font-size: 14px;
-            color: $c-dark;
+            color: var(--c-dark);
             font-weight: 500;
         }
     }
@@ -144,7 +144,7 @@ body {
 
 .delete-btn {
     background: transparent;
-    border: 1px solid $c-dark;
+    border: 1px solid var(--c-dark);
     cursor: pointer;
     font-size: 12px;
     padding: 5px;
@@ -153,8 +153,8 @@ body {
 
     &:hover {
         opacity: 1;
-        background: rgba(231, 76, 60, 0.1);
-        border-color: $c-red;
+        background: var(--c-danger-bg);
+        border-color: var(--c-red);
     }
 }
 
@@ -169,7 +169,7 @@ body {
 
     &:hover {
         opacity: 1;
-        background: $c-white;
+        background: var(--c-white);
     }
 }
 
@@ -185,7 +185,7 @@ body {
 
 .view-btn {
     background: transparent;
-    color: $c-white;
+    color: var(--c-white);
     border: $border-green;
     padding: 5px 20px;
     border-radius: $radius-pill;
@@ -196,8 +196,8 @@ body {
     transition: $transition;
 
     &:hover {
-        background: $c-green;
-        color: $c-white;
+        background: var(--c-green);
+        color: var(--c-white);
     }
 }
 
@@ -218,15 +218,15 @@ body {
             flex-direction: column;
             gap: 10px;
             padding: 20px;
-            background: $c-white;
-            border: 2px solid $c-dark;
+            background: var(--c-white);
+            border: 2px solid var(--c-dark);
             border-radius: $radius-xl;
             transition: $transition;
 
             &:hover {
                 transform: translateY(-2px);
-                box-shadow: $shadow-lg-2;
-                border-color: $c-green;
+                box-shadow: var(--shadow-lg-2);
+                border-color: var(--c-green);
             }
 
             .work-link {
@@ -234,18 +234,18 @@ body {
                 flex-direction: column;
                 gap: 8px;
                 text-decoration: none;
-                color: $c-dark;
+                color: var(--c-dark);
                 flex: 1;
 
                 .work-title {
                     font-size: 18px;
                     font-weight: 600;
-                    color: $c-dark;
+                    color: var(--c-dark);
                 }
 
                 .work-slug {
                     font-size: 14px;
-                    color: $c-gray;
+                    color: var(--c-gray);
                     font-family: $font-mono;
                 }
             }
@@ -254,11 +254,11 @@ body {
                 display: flex;
                 gap: 15px;
                 padding-top: 10px;
-                border-top: 1px solid $c-gray-6;
+                border-top: 1px solid var(--c-gray-6);
 
                 span {
                     font-size: 13px;
-                    color: $c-gray;
+                    color: var(--c-gray);
                 }
             }
         }
@@ -269,10 +269,10 @@ body {
             justify-content: center;
             align-items: center;
             padding: 40px;
-            background: $c-light-2;
-            border: 2px dashed $c-gray-4;
+            background: var(--c-light-2);
+            border: 2px dashed var(--c-gray-4);
             border-radius: $radius-xl;
-            color: $c-gray-2;
+            color: var(--c-gray-2);
             font-size: 15px;
         }
     }
@@ -285,7 +285,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: var(--c-overlay);
     z-index: $z-modal;
     justify-content: center;
     align-items: center;
@@ -295,7 +295,7 @@ body {
     }
 
     &-content {
-        background: $c-white;
+        background: var(--c-white);
         border-radius: $radius-2xl;
         padding: 30px;
         width: 90%;
@@ -311,7 +311,7 @@ body {
 
         h3 {
             font-size: 20px;
-            color: $c-dark;
+            color: var(--c-dark);
         }
     }
 
@@ -320,11 +320,11 @@ body {
         border: none;
         font-size: 28px;
         cursor: pointer;
-        color: $c-gray-2;
+        color: var(--c-gray-2);
         transition: color 0.3s;
 
         &:hover {
-            color: $c-dark;
+            color: var(--c-dark);
         }
     }
 
@@ -343,32 +343,32 @@ body {
 
             &:focus {
                 outline: none;
-                border-color: $c-green-primary;
+                border-color: var(--c-green-primary);
             }
         }
 
         #work-slug {
             font-size: 13px;
-            color: $c-gray;
+            color: var(--c-gray);
             padding: 8px 12px;
-            background: $c-light;
+            background: var(--c-light);
             border-radius: $radius-md;
             margin: 0;
             transition: $transition;
 
             &.available {
-                color: $c-green-primary;
-                background: #f0f9f0;
+                color: var(--c-green-primary);
+                background: var(--c-green-light-2);
             }
 
             &.unavailable {
-                color: $c-orange;
-                background: #fff8f0;
+                color: var(--c-orange);
+                background: var(--c-orange-light);
             }
 
             &.error {
-                color: $c-red;
-                background: $c-red-light-4;
+                color: var(--c-red);
+                background: var(--c-red-light-4);
             }
         }
     }
@@ -382,10 +382,10 @@ body {
 }
 
 .error-message {
-    color: $c-red;
+    color: var(--c-red);
     font-size: 12px;
     padding: 10px;
-    background: #fde8e8;
+    background: var(--c-red-light-2);
     border-radius: $radius-md;
     text-align: center;
     animation: fadeIn 0.3s ease;

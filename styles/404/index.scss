@@ -14,8 +14,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: $c-bg-dark;
-    color: $c-white;
+    background: var(--c-bg-dark);
+    color: var(--c-white);
 }
 
 .main {
@@ -26,7 +26,7 @@ body {
 .error-code {
     font-size: 120px;
     font-weight: 900;
-    background: linear-gradient(135deg, $c-green, $c-blue);
+    background: var(--grad-accent);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -40,7 +40,7 @@ body {
 
 .error-hint {
     font-size: 16px;
-    color: $c-gray-2;
+    color: var(--c-gray-2);
     margin-bottom: 40px;
 }
 
@@ -52,8 +52,8 @@ body {
 }
 
 .primary-btn {
-    background: linear-gradient(135deg, $c-green, $c-green-dark);
-    color: $c-white;
+    background: var(--grad-green);
+    color: var(--c-white);
     border: none;
     padding: 15px 30px;
     border-radius: $radius-pill-lg;
@@ -67,12 +67,12 @@ body {
 
 .primary-btn:hover {
     transform: translateY(-2px);
-    box-shadow: $shadow-green;
+    box-shadow: var(--shadow-green);
 }
 
 .secondary-btn {
     background: transparent;
-    color: $c-white;
+    color: var(--c-white);
     border: $border-white-soft;
     padding: 13px 28px;
     border-radius: $radius-pill-lg;
@@ -84,8 +84,8 @@ body {
 }
 
 .secondary-btn:hover {
-    border-color: $c-green;
-    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--c-green);
+    background: var(--c-hover-bg);
 }
 
 @media (max-width: $bp-lg) {

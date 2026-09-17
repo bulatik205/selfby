@@ -6,7 +6,7 @@
 
     .project-title {
         font-size: 36px;
-        color: $c-dark;
+        color: var(--c-dark);
         margin-bottom: 15px;
         overflow-wrap: break-word;
         word-wrap: break-word;
@@ -14,7 +14,7 @@
 
     .project-description {
         font-size: 16px;
-        color: $c-gray;
+        color: var(--c-gray);
         line-height: 1.6;
         overflow-wrap: break-word;
         word-wrap: break-word;
@@ -33,14 +33,14 @@
         align-items: center;
         gap: 10px;
         text-decoration: none;
-        color: $c-dark;
+        color: var(--c-dark);
 
         .owner-avatar {
             width: 40px;
             height: 40px;
             border-radius: $radius-circle;
-            background: $c-green;
-            color: $c-white;
+            background: var(--c-green);
+            color: var(--c-white);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -54,7 +54,7 @@
             word-break: break-word;
 
             &:hover {
-                color: $c-green;
+                color: var(--c-green);
             }
         }
     }
@@ -67,19 +67,19 @@
         white-space: nowrap;
 
         &.public {
-            background: $c-green-light;
-            color: $c-green;
+            background: var(--c-green-light);
+            color: var(--c-green);
         }
 
         &.private {
-            background: $c-orange-light;
-            color: $c-orange;
+            background: var(--c-orange-light);
+            color: var(--c-orange);
         }
     }
 
     .project-date {
         font-size: 13px;
-        color: $c-gray-2;
+        color: var(--c-gray-2);
         white-space: nowrap;
     }
 }
@@ -87,7 +87,7 @@
 .works-section {
     .section-title {
         font-size: 24px;
-        color: $c-dark;
+        color: var(--c-dark);
         margin-bottom: 20px;
         text-align: center;
     }
@@ -102,16 +102,16 @@
             flex-direction: column;
             gap: 15px;
             padding: 20px;
-            background: $c-white;
-            border: 1px solid $c-gray-5;
+            background: var(--c-white);
+            border: 1px solid var(--c-gray-5);
             border-radius: $radius-xl;
             transition: $transition;
             text-decoration: none;
-            color: $c-dark;
+            color: var(--c-dark);
 
             &:hover {
-                border-color: $c-green;
-                box-shadow: $shadow-lg;
+                border-color: var(--c-green);
+                box-shadow: var(--shadow-lg);
                 transform: translateY(-2px);
             }
 
@@ -125,9 +125,9 @@
                 display: flex;
                 gap: 15px;
                 font-size: 13px;
-                color: $c-gray;
+                color: var(--c-gray);
                 padding-top: 10px;
-                border-top: 1px solid $c-gray-6;
+                border-top: 1px solid var(--c-gray-6);
                 flex-wrap: wrap;
             }
         }
@@ -135,9 +135,9 @@
         .empty-state {
             grid-column: 1 / -1;
             text-align: center;
-            color: $c-gray-2;
+            color: var(--c-gray-2);
             padding: 40px;
-            background: $c-light-2;
+            background: var(--c-light-2);
             border-radius: $radius-xl;
             font-size: 15px;
         }
