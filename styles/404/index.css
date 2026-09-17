@@ -50,7 +50,7 @@ body {
 
 .primary-btn {
   background: linear-gradient(135deg, #18A64A, #128a3a);
-  color: white;
+  color: #fff;
   border: none;
   padding: 15px 30px;
   border-radius: 30px;

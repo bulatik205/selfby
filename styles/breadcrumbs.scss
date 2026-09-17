@@ -1,3 +1,5 @@
+@import 'var.scss';
+
 .breadcrumbs {
     display: flex;
     align-items: center;
@@ -8,20 +10,20 @@
 }
 
 .breadcrumb-link {
-    color: #666;
+    color: $c-gray;
     text-decoration: none;
     transition: color 0.3s;
 }
 
 .breadcrumb-link:hover {
-    color: #18A64A;
+    color: $c-green;
 }
 
 .breadcrumb-sep {
-    color: #ccc;
+    color: $c-gray-3;
 }
 
 .breadcrumb-current {
-    color: #333;
+    color: $c-dark;
     font-weight: 600;
 }

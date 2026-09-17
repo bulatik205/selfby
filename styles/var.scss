@@ -1,0 +1,96 @@
+$font-main: "Montserrat", sans-serif;
+$font-mono: "Source Code Pro", monospace;
+$font-import: url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+
+$c-white: #fff;
+$c-black: #000;
+$c-dark: #333;
+$c-dark-2: #111;
+$c-light: #f5f5f5;
+$c-light-2: #f9f9f9;
+$c-gray: #666;
+$c-gray-2: #999;
+$c-gray-3: #ccc;
+$c-gray-4: #ddd;
+$c-gray-5: #e0e0e0;
+$c-gray-6: #eee;
+$c-gray-7: #f0f0f0;
+$c-bg-dark: #0a0a0a;
+
+$c-green: #18A64A;
+$c-green-dark: #128a3a;
+$c-green-primary: #4CAF50;
+$c-green-light: #e8f5e9;
+$c-green-light-2: #f0f8f0;
+$c-green-light-3: #c8e6c9;
+
+$c-blue: #2196F3;
+$c-orange: #ff9800;
+$c-orange-light: #fff3e0;
+
+$c-red: #e74c3c;
+$c-red-2: #cc0000;
+$c-red-3: #ff0000;
+$c-red-light: #fef5f5;
+$c-red-light-2: #fde8e8;
+$c-red-light-3: #fff3f3;
+$c-red-light-4: #fdf0f0;
+$c-red-light-5: #fde8e8;
+$c-red-border: #ffcccc;
+
+$c-code-bg: #272822;
+$c-code-header: #1e1f1c;
+$c-code-border: #3a3a35;
+$c-code-text: #bbb;
+$c-code-text-2: #ddd;
+
+$c-gold: #ffd700;
+$c-silver: #c0c0c0;
+$c-bronze: #cd7f32;
+
+$radius-sm: 4px;
+$radius-md: 8px;
+$radius-lg: 12px;
+$radius-xl: 16px;
+$radius-2xl: 20px;
+$radius-pill: 25px;
+$radius-pill-lg: 30px;
+$radius-circle: 50%;
+
+$shadow-sm: 0 4px 8px rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+$shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.08);
+$shadow-lg-2: 0 8px 16px rgba(0, 0, 0, 0.1);
+$shadow-xl: 0 10px 30px rgba(0, 0, 0, 0.1);
+$shadow-wrapper: 0 0 30px rgba(0, 0, 0, 0.1);
+$shadow-green: 0 10px 20px rgba(24, 166, 74, 0.3);
+$shadow-green-sm: 0 4px 8px rgba(24, 166, 74, 0.3);
+$shadow-menu: 0 4px 12px rgba(0, 0, 0, 0.3);
+$shadow-nav: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+$border-thin: 1px solid $c-gray-5;
+$border-base: 1px solid $c-gray-4;
+$border-dark: 2px solid $c-dark;
+$border-white: 2px solid $c-white;
+$border-green: 2px solid $c-green;
+$border-white-soft: 2px solid rgba(255, 255, 255, 0.3);
+
+$transition: all 0.3s;
+$transition-fast: all 0.2s;
+
+$bp-sm: 480px;
+$bp-md: 640px;
+$bp-lg: 768px;
+$bp-xl: 1024px;
+$bp-xxl: 1025px;
+
+$z-overlay: 999;
+$z-modal: 1000;
+$z-burger: 1001;
+
+$max-w-site: 2000px;
+$max-w-content: 900px;
+$max-w-content-sm: 800px;
+$max-w-modal: 500px;
+
+$header-radius: 0 0 20px 20px;

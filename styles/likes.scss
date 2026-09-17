@@ -1,30 +1,32 @@
+@import 'var.scss';
+
 .like-btn {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     background: transparent;
-    border: 1px solid #ddd;
+    border: 1px solid $c-gray-4;
     padding: 8px 15px;
-    border-radius: 25px;
+    border-radius: $radius-pill;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: $transition;
     font-size: 14px;
-    color: #666;
-    font-family: "Montserrat", sans-serif;
+    color: $c-gray;
+    font-family: $font-main;
 }
 
 .like-btn:hover {
-    border-color: #e74c3c;
-    background: #fef5f5;
+    border-color: $c-red;
+    background: $c-red-light;
     transform: translateY(-1px);
 }
 
 .like-btn.liked {
-    border-color: #e74c3c;
-    background: #fef5f5;
-    color: #e74c3c;
+    border-color: $c-red;
+    background: $c-red-light;
+    color: $c-red;
 }
 
 .like-btn.liked:hover {
-    background: #fde8e8;
+    background: $c-red-light-2;
 }

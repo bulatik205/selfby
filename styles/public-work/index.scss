@@ -1,6 +1,5 @@
+@import '../var.scss';
 @import "../posts.scss";
-
-.work-meta {}
 
 .breadcrumbs {
     display: flex;
@@ -10,21 +9,21 @@
     flex-wrap: wrap;
 
     .breadcrumb-link {
-        color: #666;
+        color: $c-gray;
         text-decoration: none;
         transition: color 0.3s;
 
         &:hover {
-            color: #18A64A;
+            color: $c-green;
         }
     }
 
     .breadcrumb-sep {
-        color: #ccc;
+        color: $c-gray-3;
     }
 
     .breadcrumb-current {
-        color: #333;
+        color: $c-dark;
         font-weight: 600;
     }
 }

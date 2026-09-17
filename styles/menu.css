@@ -31,7 +31,7 @@
 .burger-btn span {
   width: 25px;
   height: 2px;
-  background: white;
+  background: #fff;
   transition: all 0.3s;
   border-radius: 2px;
 }

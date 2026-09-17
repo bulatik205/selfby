@@ -20,8 +20,8 @@ body {
 
 .b-btn {
   background: transparent;
-  color: white;
-  border: 2px solid white;
+  color: #fff;
+  border: 2px solid #fff;
   padding: 5px 20px;
   border-radius: 25px;
   cursor: pointer;
@@ -29,7 +29,7 @@ body {
   transition: all 0.3s;
 }
 .b-btn:hover {
-  background: white;
+  background: #fff;
   color: #333;
 }
 
@@ -85,7 +85,7 @@ body {
 
 .edit-btn {
   background: #18A64A;
-  color: white;
+  color: #fff;
   border: none;
   padding: 5px 15px;
   border-radius: 25px;
@@ -107,7 +107,7 @@ body {
 }
 .nav-footer button {
   background: #333;
-  color: white;
+  color: #fff;
   border: none;
   padding: 12px 30px;
   border-radius: 25px;

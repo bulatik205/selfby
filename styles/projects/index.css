@@ -20,8 +20,8 @@ body {
 
 .b-btn, .n-btn {
   background: transparent;
-  color: white;
-  border: 2px solid white;
+  color: #fff;
+  border: 2px solid #fff;
   padding: 5px 20px;
   border-radius: 25px;
   cursor: pointer;
@@ -29,7 +29,7 @@ body {
   transition: all 0.3s;
 }
 .b-btn:hover, .n-btn:hover {
-  background: white;
+  background: #fff;
   color: #333;
 }
 
@@ -38,7 +38,7 @@ body {
 }
 .n-btn:hover {
   background: #18A64A;
-  color: white;
+  color: #fff;
 }
 
 .l-btn {
@@ -89,7 +89,7 @@ body {
 .burger-btn span {
   width: 25px;
   height: 2px;
-  background: white;
+  background: #fff;
   transition: all 0.3s;
   border-radius: 2px;
 }
@@ -142,7 +142,7 @@ body {
 }
 .sort-tabs .sort-tab.active {
   background: #18A64A;
-  color: white;
+  color: #fff;
   border-color: #18A64A;
 }
 

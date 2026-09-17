@@ -1,10 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+@import '../var.scss';
 
-$primary-color: #4CAF50;
-$secondary-color: #2196F3;
-$dark-color: #333;
-$light-color: #f5f5f5;
-$border-radius: 12px;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
 
 * {
     margin: 0;
@@ -19,77 +15,77 @@ html {
 }
 
 body {
-    font-family: "Montserrat", sans-serif;
+    font-family: $font-main;
     min-height: 100vh;
     width: 100%;
     display: flex;
     align-items: center;
     flex-direction: column;
-    max-width: 2000px;
+    max-width: $max-w-site;
     padding: 0 10px 0 10px;
 }
 
 .b-btn {
     background: transparent;
-    color: white;
-    border: 2px solid white;
+    color: $c-white;
+    border: $border-white;
     padding: 5px 20px;
-    border-radius: 25px;
+    border-radius: $radius-pill;
     cursor: pointer;
     font-size: 12px;
-    transition: all 0.3s;
+    transition: $transition;
 
     &:hover {
-        background: white;
-        color: $dark-color;
+        background: $c-white;
+        color: $c-dark;
     }
 }
 
 .l-btn {
-    background: #fff;
-    color: #333;
-    border: 2px solid #333;
+    background: $c-white;
+    color: $c-dark;
+    border: $border-dark;
     padding: 10px 25px;
-    border-radius: 25px;
+    border-radius: $radius-pill;
     cursor: pointer;
     font-size: 16px;
-    transition: all 0.3s;
+    transition: $transition;
 
     &:hover {
-        background: #333;
-        color: #fff;
+        background: $c-dark;
+        color: $c-white;
     }
 }
 
 .n-btn {
     background: transparent;
-    color: #fff;
-    border: 2px solid #18A64A;
+    color: $c-white;
+    border: $border-green;
     padding: 5px 20px;
-    border-radius: 25px;
+    border-radius: $radius-pill;
     cursor: pointer;
     font-size: 12px;
-    transition: all 0.3s;
+    transition: $transition;
 
     &:hover {
-        background: #18A64A;
+        background: $c-green;
     }
 }
 
 .header {
     width: 100%;
-    max-width: 2000px;
-    background-color: #333;
+    max-width: $max-w-site;
+    background-color: $c-dark;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
     padding: 20px;
-    border-radius: 0px 0px 20px 20px;
+    border-radius: $header-radius;
 
     &-logo {
         font-size: 14px;
-        color: #fff;
+        color: $c-white;
     }
 }
 
@@ -105,15 +101,15 @@ body {
         align-self: start;
         height: fit-content;
         padding: 10px;
-        border-radius: 20px;
-        background-color: #333;
+        border-radius: $radius-2xl;
+        background-color: $c-dark;
 
         .menu-title {
             display: flex;
             justify-content: center;
             align-items: center;
             width: 100%;
-            color: #fff;
+            color: $c-white;
         }
 
         hr {
@@ -135,15 +131,15 @@ body {
                     align-items: center;
                     justify-content: center;
                     padding: 12px 16px;
-                    border: 1px solid #fff;
-                    border-radius: 8px;
+                    border: 1px solid $c-white;
+                    border-radius: $radius-md;
                     text-decoration: none;
-                    color: #fff;
-                    background: #333;
+                    color: $c-white;
+                    background: $c-dark;
                     font-size: 14px;
                     font-weight: 500;
                     cursor: pointer;
-                    transition: all 0.3s;
+                    transition: $transition;
                     flex: 1;
                     min-height: 42px;
 
@@ -160,8 +156,8 @@ body {
                     }
 
                     &:hover {
-                        background: #fff;
-                        color: #333;
+                        background: $c-white;
+                        color: $c-dark;
 
                         img {
                             filter: invert(1);
@@ -173,8 +169,8 @@ body {
     }
 
     &-base {
-        border: 1px solid #333;
-        border-radius: 20px;
+        border: 1px solid $c-dark;
+        border-radius: $radius-2xl;
         padding: 20px;
 
         hr {
@@ -196,18 +192,18 @@ body {
             gap: 10px;
 
             div {
-                border: 1px solid #333;
-                border-radius: 20px;
+                border: 1px solid $c-dark;
+                border-radius: $radius-2xl;
                 padding: 20px;
             }
 
             h3 {
                 font-size: 16px;
                 font-weight: 700;
-                color: #333;
+                color: $c-dark;
                 margin-bottom: 15px;
                 padding-bottom: 10px;
-                border-bottom: 1px solid #eee;
+                border-bottom: 1px solid $c-gray-6;
             }
 
             p {
@@ -215,10 +211,10 @@ body {
                 justify-content: space-between;
                 align-items: center;
                 font-size: 14px;
-                color: #666;
+                color: $c-gray;
                 padding: 8px 0;
                 margin: 0;
-                border-bottom: 1px dashed #f0f0f0;
+                border-bottom: 1px dashed $c-gray-7;
 
                 &:last-child {
                     border-bottom: none;
@@ -226,7 +222,7 @@ body {
 
                 span {
                     font-weight: 700;
-                    color: #18A64A;
+                    color: $c-green;
                     font-size: 15px;
                 }
             }
@@ -235,23 +231,23 @@ body {
                 display: inline-flex;
                 align-items: center;
                 gap: 6px;
-                color: #333;
+                color: $c-dark;
                 text-decoration: none;
                 font-size: 14px;
                 font-weight: 500;
                 padding: 6px 0;
-                transition: all 0.3s;
+                transition: $transition;
                 position: relative;
 
                 &::before {
                     content: '→';
-                    color: #18A64A;
+                    color: $c-green;
                     font-weight: 700;
                     transition: transform 0.3s;
                 }
 
                 &:hover {
-                    color: #18A64A;
+                    color: $c-green;
 
                     &::before {
                         transform: translateX(4px);
@@ -269,17 +265,17 @@ body {
     margin-top: 10px;
 
     .widget {
-        border: 1px solid #333;
-        border-radius: 20px;
+        border: 1px solid $c-dark;
+        border-radius: $radius-2xl;
         padding: 20px;
 
         h3 {
             font-size: 16px;
             font-weight: 700;
-            color: #333;
+            color: $c-dark;
             margin-bottom: 15px;
             padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid $c-gray-6;
         }
 
         .widget-list {
@@ -292,20 +288,20 @@ body {
                 align-items: center;
                 gap: 10px;
                 padding: 8px 10px;
-                border-radius: 8px;
+                border-radius: $radius-md;
                 text-decoration: none;
-                color: #333;
+                color: $c-dark;
                 font-size: 13px;
-                transition: all 0.3s;
+                transition: $transition;
                 background: transparent;
 
                 &:hover {
-                    background: #f5f5f5;
+                    background: $c-light;
                 }
 
                 .widget-rank {
                     font-weight: 700;
-                    color: #999;
+                    color: $c-gray-2;
                     min-width: 24px;
                     text-align: center;
                     font-size: 14px;
@@ -313,12 +309,12 @@ body {
 
                 .widget-title {
                     font-weight: 600;
-                    color: #333;
+                    color: $c-dark;
                     flex-shrink: 0;
                 }
 
                 .widget-subtitle {
-                    color: #999;
+                    color: $c-gray-2;
                     font-size: 12px;
                     flex: 1;
                     overflow: hidden;
@@ -331,19 +327,19 @@ body {
                     gap: 8px;
                     margin-left: auto;
                     font-size: 12px;
-                    color: #666;
+                    color: $c-gray;
                 }
 
                 .widget-date {
                     margin-left: auto;
                     font-size: 11px;
-                    color: #999;
+                    color: $c-gray-2;
                 }
             }
 
             .widget-empty {
                 text-align: center;
-                color: #999;
+                color: $c-gray-2;
                 font-size: 13px;
                 padding: 20px 0;
             }
@@ -351,7 +347,7 @@ body {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $bp-lg) {
     .dashboard-widgets {
         grid-template-columns: 1fr;
 
@@ -386,7 +382,7 @@ body {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
+    z-index: $z-modal;
     justify-content: center;
     align-items: center;
 
@@ -395,11 +391,11 @@ body {
     }
 
     &-content {
-        background: #fff;
-        border-radius: 20px;
+        background: $c-white;
+        border-radius: $radius-2xl;
         padding: 20px;
         width: 90%;
-        max-width: 500px;
+        max-width: $max-w-modal;
         animation: slideIn 0.3s ease;
     }
 
@@ -415,7 +411,7 @@ body {
         border: none;
         font-size: 24px;
         cursor: pointer;
-        color: #333;
+        color: $c-dark;
     }
 
     &-body {
@@ -426,8 +422,8 @@ body {
         input,
         textarea {
             padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            border: $border-base;
+            border-radius: $radius-md;
             font-family: inherit;
             font-size: 14px;
         }
@@ -436,15 +432,15 @@ body {
         textarea {
             width: 100%;
             padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            border: $border-base;
+            border-radius: $radius-md;
             font-family: inherit;
             font-size: 14px;
             transition: border-color 0.3s;
 
             &:focus {
                 outline: none;
-                border-color: #4CAF50;
+                border-color: $c-green-primary;
             }
         }
 
@@ -472,7 +468,7 @@ body {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $bp-lg) {
     .main {
         grid-template-columns: 1fr;
         grid-template-rows: auto auto;
@@ -498,7 +494,7 @@ body {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $bp-lg) {
     .main {
         &-base {
             .simple {
@@ -519,7 +515,7 @@ body {
     }
 }
 
-@media (min-width: 769px) and (max-width: 1024px) {
+@media (min-width: 769px) and (max-width: $bp-xl) {
     .main {
         grid-template-columns: 1fr 2fr;
     }

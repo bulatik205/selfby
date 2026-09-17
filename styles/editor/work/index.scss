@@ -1,3 +1,5 @@
+@import '../../var.scss';
+
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
 
 * {
@@ -7,64 +9,64 @@
 }
 
 body {
-    font-family: "Montserrat", sans-serif;
+    font-family: $font-main;
     min-height: 100vh;
     width: 100%;
     display: flex;
     align-items: center;
     flex-direction: column;
-    max-width: 2000px;
+    max-width: $max-w-site;
     margin: 0 auto;
     padding: 0 10px;
-    background: #f5f5f5;
+    background: $c-light;
 }
 
 .b-btn {
     background: transparent;
-    color: white;
-    border: 2px solid white;
+    color: $c-white;
+    border: $border-white;
     padding: 5px 20px;
-    border-radius: 25px;
+    border-radius: $radius-pill;
     cursor: pointer;
     font-size: 12px;
-    transition: all 0.3s;
+    transition: $transition;
 
     &:hover {
-        background: white;
-        color: #333;
+        background: $c-white;
+        color: $c-dark;
     }
 }
 
 .save-btn {
-    background: #18A64A;
-    color: white;
+    background: $c-green;
+    color: $c-white;
     border: none;
     padding: 5px 20px;
-    border-radius: 25px;
+    border-radius: $radius-pill;
     cursor: pointer;
     font-size: 12px;
     font-weight: 600;
-    transition: all 0.3s;
+    transition: $transition;
 
     &:hover {
-        background: #128a3a;
+        background: $c-green-dark;
         transform: translateY(-1px);
-        box-shadow: 0 4px 8px rgba(24, 166, 74, 0.3);
+        box-shadow: $shadow-green-sm;
     }
 }
 
 .header {
     width: 100%;
-    background-color: #333;
+    background-color: $c-dark;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px 20px;
-    border-radius: 0 0 20px 20px;
+    border-radius: $header-radius;
 
     &-logo {
         font-size: 14px;
-        color: #fff;
+        color: $c-white;
     }
 
     &-nav {
@@ -76,7 +78,7 @@ body {
 
 .main {
     width: 100%;
-    max-width: 900px;
+    max-width: $max-w-content;
     padding: 30px 20px;
     display: flex;
     flex-direction: column;
@@ -85,37 +87,37 @@ body {
 
 .work-title {
     font-size: 32px;
-    color: #333;
+    color: $c-dark;
     text-align: center;
     margin-bottom: 10px;
 }
 
 .view-btn {
     background: transparent;
-    color: white;
-    border: 2px solid #18A64A;
+    color: $c-white;
+    border: $border-green;
     padding: 5px 20px;
-    border-radius: 25px;
+    border-radius: $radius-pill;
     cursor: pointer;
     font-size: 12px;
     font-weight: 600;
     text-decoration: none;
-    transition: all 0.3s;
+    transition: $transition;
 
     &:hover {
-        background: #18A64A;
+        background: $c-green;
         transform: translateY(-1px);
     }
 }
 
 .delete-btn {
     background: transparent;
-    border: 2px solid #fff;
+    border: $border-white;
     cursor: pointer;
     font-size: 12px;
     padding: 5px;
-    border-radius: 25px;
-    transition: all 0.3s;
+    border-radius: $radius-pill;
+    transition: $transition;
 
     &:hover {
         opacity: 1;
@@ -125,7 +127,7 @@ body {
 
 .work {
     position: relative;
-    
+
     .delete-btn {
         position: absolute;
         top: 10px;
@@ -146,20 +148,20 @@ body {
         flex-direction: column;
         align-items: center;
         padding: 10px 20px;
-        background: #fff;
-        border: 1px solid #e0e0e0;
-        border-radius: 12px;
+        background: $c-white;
+        border: 1px solid $c-gray-5;
+        border-radius: $radius-lg;
         min-width: 100px;
-        transition: all 0.3s;
+        transition: $transition;
 
         &:hover {
-            border-color: #18A64A;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            border-color: $c-green;
+            box-shadow: $shadow-sm;
         }
 
         &-label {
             font-size: 11px;
-            color: #999;
+            color: $c-gray-2;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 4px;
@@ -167,27 +169,27 @@ body {
 
         &-value {
             font-size: 14px;
-            color: #333;
+            color: $c-dark;
             font-weight: 500;
         }
     }
 
     .view-btn {
         background: transparent;
-        color: #333;
-        border: 2px solid #18A64A;
+        color: $c-dark;
+        border: $border-green;
         padding: 8px 20px;
-        border-radius: 25px;
+        border-radius: $radius-pill;
         cursor: pointer;
         font-size: 14px;
         font-weight: 600;
         text-decoration: none;
-        transition: all 0.3s;
+        transition: $transition;
         white-space: nowrap;
 
         &:hover {
-            background: #18A64A;
-            color: white;
+            background: $c-green;
+            color: $c-white;
         }
     }
 }
@@ -200,23 +202,23 @@ body {
         width: 100%;
         min-height: 400px;
         padding: 20px;
-        border: 2px solid #ddd;
-        border-radius: 16px;
-        font-family: "Source Code Pro", monospace;
+        border: 2px solid $c-gray-4;
+        border-radius: $radius-xl;
+        font-family: $font-mono;
         font-size: 14px;
         line-height: 1.6;
         resize: vertical;
         transition: border-color 0.3s;
-        background: #fff;
+        background: $c-white;
 
         &:focus {
             outline: none;
-            border-color: #18A64A;
+            border-color: $c-green;
         }
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $bp-lg) {
     .work-title {
         font-size: 24px;
     }
