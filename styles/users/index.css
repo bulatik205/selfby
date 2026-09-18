@@ -123,63 +123,6 @@
   --shadow-accent-sm: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
-.theme-btn {
-  background: transparent;
-  color: var(--c-white);
-  border: 2px solid var(--c-white);
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 16px;
-  line-height: 1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s;
-  flex-shrink: 0;
-}
-.theme-btn:hover {
-  background: var(--c-white);
-  color: var(--c-dark);
-  transform: translateY(-1px);
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: "Montserrat", sans-serif;
-  min-height: 100vh;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  max-width: 2000px;
-  margin: 0 auto;
-  padding: 0 10px;
-  background: var(--page-bg);
-  color: var(--text);
-}
-
-.b-btn {
-  background: transparent;
-  color: var(--header-text);
-  border: 2px solid var(--header-text);
-  padding: 5px 20px;
-  border-radius: 25px;
-  cursor: pointer;
-  font-size: 12px;
-  transition: all 0.3s;
-}
-.b-btn:hover {
-  background: var(--header-text);
-  color: var(--header-bg);
-}
-
 .header {
   width: 100%;
   background-color: var(--header-bg);
@@ -190,6 +133,8 @@ body {
   padding: 15px 20px;
   border-radius: 0 0 20px 20px;
   position: relative;
+  box-shadow: 0 0px 50px rgba(255, 255, 255, 0);
+  transition: box-shadow all 0.3s, background-color all 0.3s, color all 0.3s;
 }
 .header-logo {
   font-size: 14px;
@@ -199,6 +144,18 @@ body {
   display: flex;
   gap: 10px;
   align-items: center;
+}
+.header .logo {
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+[data-theme=bw] .header {
+  border-left: 1px solid rgba(255, 255, 255, 0.3333333333);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3333333333);
+  border-right: 1px solid rgba(255, 255, 255, 0.3333333333);
+  box-shadow: 0 0px 50px rgba(255, 255, 255, 0.2);
 }
 
 .burger-btn {
@@ -235,11 +192,107 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: var(--overlay);
+  background: var(--overlay-soft);
   z-index: 999;
 }
 .overlay.active {
   display: block;
+}
+
+.theme-btn {
+  background: transparent;
+  color: var(--header-text);
+  border: 2px solid var(--header-text);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  flex-shrink: 0;
+}
+.theme-btn:hover {
+  background: var(--header-text);
+  color: var(--header-bg);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .burger-btn {
+    display: flex;
+  }
+  .header-nav {
+    display: none;
+    position: absolute;
+    top: calc(100% + 5px);
+    right: 10px;
+    width: 200px;
+    background: var(--header-bg);
+    flex-direction: column;
+    padding: 10px;
+    gap: 8px;
+    border-radius: 12px;
+    z-index: 1000;
+    align-items: stretch;
+    box-shadow: var(--shadow-menu);
+  }
+  .header-nav.active {
+    display: flex;
+  }
+  .header-nav .b-btn,
+  .header-nav .save-btn,
+  .header-nav .view-btn,
+  .header-nav .edit-btn,
+  .header-nav .n-btn,
+  .header-nav .theme-btn {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    padding: 8px 15px;
+    font-size: 12px;
+  }
+  .header-nav .theme-btn {
+    height: auto;
+    border-radius: 25px;
+  }
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  max-width: 2000px;
+  margin: 0 auto;
+  padding: 0 10px;
+  background: var(--page-bg);
+  color: var(--text);
+}
+
+.b-btn {
+  background: transparent;
+  color: var(--header-text);
+  border: 2px solid var(--header-text);
+  padding: 5px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.3s;
+}
+.b-btn:hover {
+  background: var(--header-text);
+  color: var(--header-bg);
 }
 
 .main {
@@ -361,33 +414,6 @@ body {
 }
 
 @media (max-width: 768px) {
-  .burger-btn {
-    display: flex;
-  }
-  .header-nav {
-    display: none;
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 250px;
-    height: 100vh;
-    background: var(--header-bg);
-    flex-direction: column;
-    padding: 80px 20px 20px;
-    gap: 15px;
-    transition: right 0.3s ease;
-    z-index: 1000;
-    align-items: stretch;
-  }
-  .header-nav.active {
-    right: 0;
-    display: flex;
-  }
-  .header-nav .b-btn {
-    width: 100%;
-    text-align: center;
-    justify-content: center;
-  }
   .page-title {
     font-size: 28px;
   }

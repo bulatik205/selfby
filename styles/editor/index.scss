@@ -75,24 +75,6 @@ body {
     }
 }
 
-.header {
-    width: 100%;
-    max-width: $max-w-site;
-    background-color: var(--header-bg);
-    color: var(--header-text);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: row;
-    padding: 20px;
-    border-radius: $header-radius;
-
-    &-logo {
-        font-size: 14px;
-        color: var(--header-text);
-    }
-}
-
 .project-title {
     font-size: 32px;
     color: var(--text);
