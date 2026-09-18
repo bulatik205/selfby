@@ -122,28 +122,6 @@
   --shadow-accent-sm: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
-.theme-btn {
-  background: transparent;
-  color: var(--c-white);
-  border: 2px solid var(--c-white);
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 16px;
-  line-height: 1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s;
-  flex-shrink: 0;
-}
-.theme-btn:hover {
-  background: var(--c-white);
-  color: var(--c-dark);
-  transform: translateY(-1px);
-}
-
 .header {
   width: 100%;
   background-color: var(--header-bg);
@@ -154,6 +132,8 @@
   padding: 15px 20px;
   border-radius: 0 0 20px 20px;
   position: relative;
+  box-shadow: 0 0px 50px rgba(255, 255, 255, 0);
+  transition: box-shadow all 0.3s, background-color all 0.3s, color all 0.3s;
 }
 .header-logo {
   font-size: 14px;
@@ -163,6 +143,18 @@
   display: flex;
   gap: 10px;
   align-items: center;
+}
+.header .logo {
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+[data-theme=bw] .header {
+  border-left: 1px solid rgba(255, 255, 255, 0.3333333333);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3333333333);
+  border-right: 1px solid rgba(255, 255, 255, 0.3333333333);
+  box-shadow: 0 0px 50px rgba(255, 255, 255, 0.2);
 }
 
 .burger-btn {

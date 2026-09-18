@@ -38,28 +38,6 @@ body {
     }
 }
 
-.header {
-    width: 100%;
-    background-color: var(--header-bg);
-    color: var(--header-text);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    border-radius: $header-radius;
-
-    &-logo {
-        font-size: 14px;
-        color: var(--header-text);
-    }
-
-    &-nav {
-        display: flex;
-        gap: 10px;
-        align-items: center;
-    }
-}
-
 .main {
     width: 100%;
     max-width: $max-w-content-sm;

@@ -12,6 +12,7 @@ $radius-circle: 50%;
 
 $transition: all 0.3s;
 $transition-fast: all 0.2s;
+$transition-long: all 0.5s;
 
 $bp-sm: 480px;
 $bp-md: 640px;
@@ -182,25 +183,4 @@ $border-white:      2px solid var(--border-on-dark);
 $border-accent:     2px solid var(--accent);
 $border-white-soft: 2px solid var(--border-soft);
 
-.theme-btn {
-    background: transparent;
-    color: var(--c-white);
-    border: 2px solid var(--c-white);
-    width: 36px;
-    height: 36px;
-    border-radius: $radius-circle;
-    cursor: pointer;
-    font-size: 16px;
-    line-height: 1;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    transition: $transition;
-    flex-shrink: 0;
-
-    &:hover {
-        background: var(--c-white);
-        color: var(--c-dark);
-        transform: translateY(-1px);
-    }
-}
+@import 'header';

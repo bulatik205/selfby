@@ -38,77 +38,6 @@ body {
     }
 }
 
-.header {
-    width: 100%;
-    background-color: var(--header-bg);
-    color: var(--header-text);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    border-radius: $header-radius;
-    position: relative;
-
-    &-logo {
-        font-size: 14px;
-        color: var(--header-text);
-    }
-
-    &-nav {
-        display: flex;
-        gap: 10px;
-        align-items: center;
-    }
-}
-
-.burger-btn {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 5px;
-    z-index: $z-burger;
-
-    span {
-        width: 25px;
-        height: 2px;
-        background: var(--header-text);
-        transition: $transition;
-        border-radius: 2px;
-    }
-
-    &.active {
-        span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        span:nth-child(2) {
-            opacity: 0;
-        }
-
-        span:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
-        }
-    }
-}
-
-.overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--overlay);
-    z-index: $z-overlay;
-
-    &.active {
-        display: block;
-    }
-}
-
 .main {
     width: 100%;
     max-width: $max-w-content-sm;
@@ -234,37 +163,6 @@ body {
 }
 
 @media (max-width: $bp-lg) {
-    .burger-btn {
-        display: flex;
-    }
-
-    .header-nav {
-        display: none;
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 250px;
-        height: 100vh;
-        background: var(--header-bg);
-        flex-direction: column;
-        padding: 80px 20px 20px;
-        gap: 15px;
-        transition: right 0.3s ease;
-        z-index: $z-modal;
-        align-items: stretch;
-
-        &.active {
-            right: 0;
-            display: flex;
-        }
-
-        .b-btn {
-            width: 100%;
-            text-align: center;
-            justify-content: center;
-        }
-    }
-
     .page-title {
         font-size: 28px;
     }
