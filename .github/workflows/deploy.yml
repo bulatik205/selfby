@@ -24,14 +24,23 @@ jobs:
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan -p ${{ secrets.SSH_PORT }} -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Rsync to server
+      - name: Deploy binary
+        run: |
+          rsync -avz \
+            -e "ssh -p ${{ secrets.SSH_PORT }} -i ~/.ssh/id_ed25519" \
+            ./selfby \
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/opt/selfby/selfby
+
+          ssh -p ${{ secrets.SSH_PORT }} -i ~/.ssh/id_ed25519 \
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+            'chmod +x /opt/selfby/selfby'
+
+      - name: Deploy static
         run: |
           rsync -avz --delete \
             -e "ssh -p ${{ secrets.SSH_PORT }} -i ~/.ssh/id_ed25519" \
-            --exclude='.git' \
-            --exclude='.github' \
-            --exclude='selfby' \
-            ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/opt/selfby/
+            ./templates/ ./styles/ ./js/ ./images/ ./videos/ \
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/opt/selfby/
 
       - name: Restart service
         run: |
