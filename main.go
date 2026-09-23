@@ -251,5 +251,3 @@ func deleteSessionCookie(w http.ResponseWriter) {
 func clearSessionToken(token string) {
 	db.Exec("UPDATE users SET session_token = NULL, session_expires = NULL WHERE session_token = ?", token)
 }
-
-// TEST CI
