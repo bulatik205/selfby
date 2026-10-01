@@ -161,6 +161,10 @@ func main() {
 		http.ServeFile(w, r, bladeDir+"/public-work.html")
 	})
 
+	http.HandleFunc("/u/{username}/{projectName}/{workSlug}/print", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, bladeDir+"/print-work.html")
+	})
+
 	http.HandleFunc("POST /api/v1/newProject", api.NewProject(db))
 	http.HandleFunc("GET /api/v1/getProjects", api.GetProjects(db))
 	http.HandleFunc("GET /api/v1/getPublicProject", api.GetPublicProject(db))

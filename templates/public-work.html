@@ -61,10 +61,24 @@
             </div>
         </div>
 
-        <div class="work-content" id="workContent">
+        <div class="work">
+            <div class="work-tabs" data-tabs role="tablist">
+                <button class="work-tab work-tab--active" data-tab-target="workContent" role="tab" aria-selected="true">
+                    Просмотр
+                </button>
+                <button class="work-tab" data-tab-target="printContent" role="tab" aria-selected="false">
+                    Печать
+                </button>
+            </div>
 
+            <div class="work-content" id="workContent"></div>
+
+            <div class="work-content work-content--print" id="printContent" hidden>
+                <div class="print-controls">
+                    <button type="button" class="print-btn" id="printBtn">Распечатать оригинал</button>
+                </div>
+            </div>
         </div>
-
         <div class="nav-footer">
             <button onclick="window.history.back()">Вернуться назад</button>
         </div>
@@ -79,6 +93,7 @@
     <script src="../../../js/highlight.js"></script>
     <script src="../../../js/theme.js"></script>
     <script src="../../../js/menu.js"></script>
+    <script src="../../../js/work-tab.js"></script>
     <script src="../../../js/public-work/index.js"></script>
 </body>
 

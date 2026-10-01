@@ -171,13 +171,26 @@ func GetProfile(db *sql.DB) http.HandlerFunc {
 			profile.TotalViews = 0
 		}
 
+		var queryIndex string
+		if isOwner {
+			queryIndex = `
+        SELECT w.id, w.title, w.slug, w.content_html
+        FROM works w
+        JOIN projects p ON w.at_project = p.id
+        WHERE p.owner_id = ? AND p.name = 'index' AND w.slug = 'index'
+    `
+		} else {
+			queryIndex = `
+        SELECT w.id, w.title, w.slug, w.content_html
+        FROM works w
+        JOIN projects p ON w.at_project = p.id
+        WHERE p.owner_id = ? AND p.name = 'index' AND w.slug = 'index'
+          AND p.type = 'public'
+    `
+		}
+
 		var indexWork IndexWork
-		err = db.QueryRow(`
-			SELECT w.id, w.title, w.slug, w.content_html
-			FROM works w
-			JOIN projects p ON w.at_project = p.id
-			WHERE p.owner_id = ? AND p.name = 'index' AND w.slug = 'index'
-		`, profile.ID).Scan(
+		err = db.QueryRow(queryIndex, profile.ID).Scan(
 			&indexWork.ID,
 			&indexWork.Title,
 			&indexWork.Slug,
