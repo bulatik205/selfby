@@ -3,6 +3,7 @@ const workViews = document.getElementById('workViews');
 const workDate = document.getElementById('workDate');
 const workContent = document.getElementById('workContent');
 const editBtn = document.getElementById('editBtn');
+const printBtn = document.getElementById('printBtn');
 
 const pathParts = window.location.pathname.split('/');
 const workSlug = pathParts[pathParts.length - 1];
@@ -84,3 +85,8 @@ function showError(message) {
     
     editBtn.style.display = 'none';
 }
+
+printBtn.addEventListener('click', () => {
+    if (!currentWork) return;
+    window.open(`/u/${username}/${projectNameFromUrl}/${workSlug}/print`, '_blank');
+});

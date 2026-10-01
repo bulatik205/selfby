@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Печать</title>
+    <link rel="stylesheet" href="/styles/print-work/index.css">
+</head>
+
+<body>
+    <div class="print-loading" id="printLoading">Загрузка...</div>
+
+    <article class="print-article" id="printArticle" hidden>
+        <header>
+            <h1>SelfBy</h1>
+            <p id="link"></p>
+        </header>
+
+        <div class="print-body" id="printBody"></div>
+    </article>
+
+    <div class="print-toolbar" id="printToolbar" hidden>
+        <button type="button" class="print-action" id="printActionBtn">Печать</button>
+        <button type="button" class="print-action print-action--secondary" id="closeBtn">Закрыть</button>
+    </div>
+
+    <script src="/js/print-work/index.js"></script>
+</body>
+
+</html>

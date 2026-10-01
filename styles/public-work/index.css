@@ -631,8 +631,7 @@ body {
 }
 
 .index-work,
-.work-content {
-  padding: 30px;
+.work {
   background: var(--surface);
   border-radius: 16px;
   border: 1px solid var(--border);
@@ -644,65 +643,135 @@ body {
   word-wrap: break-word;
   overflow-x: hidden;
 }
+.index-work .work-tabs,
+.work .work-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  margin-top: -1px;
+}
+.index-work .work-tab,
+.work .work-tab {
+  background: transparent;
+  border: 1px solid transparent;
+  border-bottom: none;
+  padding: 10px 18px;
+  color: var(--text-muted);
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 16px 16px 0 0;
+  margin-bottom: -1px;
+}
+.index-work .work-tab:first-child,
+.work .work-tab:first-child {
+  margin-left: -1px;
+}
+.index-work .work-tab--active,
+.work .work-tab--active {
+  border-color: var(--border);
+  border-bottom-color: var(--surface);
+  color: var(--text);
+  background: var(--surface);
+}
+.index-work .work-content--print .print-controls,
+.work .work-content--print .print-controls {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+.index-work .work-content--print .print-btn,
+.work .work-content--print .print-btn {
+  background: var(--text);
+  color: var(--surface);
+  border: none;
+  padding: 12px 30px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif;
+  transition: all 0.3s;
+}
+.index-work .work-content--print .print-btn:hover,
+.work .work-content--print .print-btn:hover {
+  background: var(--text-muted);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-nav);
+}
+.index-work .work-content--print .print-btn:active,
+.work .work-content--print .print-btn:active {
+  transform: translateY(0);
+}
+.index-work .work-content--print .print-btn:disabled,
+.work .work-content--print .print-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+.index-work .work-content,
+.work .work-content {
+  padding: 15px;
+}
 .index-work h1,
 .index-work h2,
 .index-work h3,
 .index-work h4,
 .index-work h5,
 .index-work h6,
-.work-content h1,
-.work-content h2,
-.work-content h3,
-.work-content h4,
-.work-content h5,
-.work-content h6 {
+.work h1,
+.work h2,
+.work h3,
+.work h4,
+.work h5,
+.work h6 {
   margin: 10px 0;
   color: var(--text);
   overflow-wrap: break-word;
   word-wrap: break-word;
 }
 .index-work h1,
-.work-content h1 {
+.work h1 {
   font-size: 28px;
 }
 .index-work h2,
-.work-content h2 {
+.work h2 {
   font-size: 24px;
 }
 .index-work h3,
-.work-content h3 {
+.work h3 {
   font-size: 20px;
 }
 .index-work h4,
-.work-content h4 {
+.work h4 {
   font-size: 18px;
 }
 .index-work h5,
-.work-content h5 {
+.work h5 {
   font-size: 16px;
 }
 .index-work h6,
-.work-content h6 {
+.work h6 {
   font-size: 14px;
 }
 .index-work p,
-.work-content p {
+.work p {
   margin: 10px 0;
   overflow-wrap: break-word;
   word-wrap: break-word;
 }
 .index-work a,
-.work-content a {
+.work a {
   color: var(--accent);
   text-decoration: none;
   word-break: break-word;
 }
 .index-work a:hover,
-.work-content a:hover {
+.work a:hover {
   text-decoration: underline;
 }
 .index-work img,
-.work-content img {
+.work img {
   max-width: 100%;
   height: auto;
   border-radius: 8px;
@@ -710,12 +779,12 @@ body {
   margin: 20px auto;
 }
 .index-work img.center,
-.work-content img.center {
+.work img.center {
   display: block;
   margin: 20px auto;
 }
 .index-work code,
-.work-content code {
+.work code {
   background: var(--surface-3);
   padding: 2px 6px;
   border-radius: 4px;
@@ -725,7 +794,7 @@ body {
   word-break: break-word;
 }
 .index-work pre,
-.work-content pre {
+.work pre {
   background: var(--code-bg);
   padding: 15px;
   border-radius: 8px;
@@ -734,14 +803,14 @@ body {
   max-width: 100%;
 }
 .index-work pre code,
-.work-content pre code {
+.work pre code {
   background: none;
   padding: 0;
   white-space: pre;
   overflow-wrap: normal;
 }
 .index-work blockquote,
-.work-content blockquote {
+.work blockquote {
   border-left: 4px solid var(--accent);
   padding-left: 15px;
   margin: 15px 0;
@@ -750,14 +819,14 @@ body {
 }
 .index-work ul,
 .index-work ol,
-.work-content ul,
-.work-content ol {
+.work ul,
+.work ol {
   margin: 10px 0;
   padding-left: 25px;
   overflow-wrap: break-word;
 }
 .index-work .table-wrap,
-.work-content .table-wrap {
+.work .table-wrap {
   width: 100%;
   overflow-x: auto;
   margin: 15px 0;
@@ -765,12 +834,12 @@ body {
   border-radius: 8px;
 }
 .index-work .table-wrap table,
-.work-content .table-wrap table {
+.work .table-wrap table {
   margin: 0;
   min-width: 100%;
 }
 .index-work table,
-.work-content table {
+.work table {
   max-width: 100%;
   border-collapse: collapse;
   margin: 15px 0;
@@ -781,8 +850,8 @@ body {
 }
 .index-work table th,
 .index-work table td,
-.work-content table th,
-.work-content table td {
+.work table th,
+.work table td {
   padding: 10px;
   border: 1px solid var(--border-strong);
   text-align: left;
@@ -791,17 +860,17 @@ body {
   min-width: 100px;
 }
 .index-work table th,
-.work-content table th {
+.work table th {
   background: var(--surface-3);
   font-weight: 600;
 }
 .index-work .center,
-.work-content .center {
+.work .center {
   text-align: center;
 }
 
 .index-work .code-block,
-.work-content .code-block {
+.work .code-block {
   margin: 15px 0;
   border-radius: 8px;
   overflow: hidden;
@@ -809,13 +878,13 @@ body {
   max-width: 100%;
 }
 .index-work .code-block pre,
-.work-content .code-block pre {
+.work .code-block pre {
   margin: 0;
   border-radius: 0;
   background: var(--code-bg);
 }
 .index-work .code-header,
-.work-content .code-header {
+.work .code-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -830,14 +899,14 @@ body {
           user-select: none;
 }
 .index-work .code-lang,
-.work-content .code-lang {
+.work .code-lang {
   text-transform: lowercase;
   letter-spacing: 0.5px;
   color: var(--header-text);
   font-weight: 600;
 }
 .index-work .copy-btn,
-.work-content .copy-btn {
+.work .copy-btn {
   background: transparent;
   border: none;
   color: var(--code-text-2);
@@ -849,12 +918,12 @@ body {
   transition: all 0.3s;
 }
 .index-work .copy-btn:hover,
-.work-content .copy-btn:hover {
+.work .copy-btn:hover {
   background: var(--text-muted);
   color: var(--header-text);
 }
 .index-work .copy-btn:active,
-.work-content .copy-btn:active {
+.work .copy-btn:active {
   transform: scale(0.96);
 }
 
@@ -863,20 +932,20 @@ body {
     font-size: 28px;
   }
   .index-work,
-  .work-content {
+  .work {
     padding: 20px;
   }
 }
 @media (max-width: 480px) {
   .index-work,
-  .work-content {
+  .work {
     padding: 15px;
     border-radius: 12px;
   }
   .index-work table th,
   .index-work table td,
-  .work-content table th,
-  .work-content table td {
+  .work table th,
+  .work table td {
     padding: 8px;
     min-width: 80px;
     font-size: 13px;
