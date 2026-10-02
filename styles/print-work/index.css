@@ -417,6 +417,9 @@ header {
   background: #f5f5f5;
   font-weight: 600;
 }
+.print-body .center {
+  text-align: center;
+}
 .print-body .code-block {
   margin: 15px 0;
   border-radius: 6px;
