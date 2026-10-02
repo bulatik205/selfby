@@ -630,6 +630,10 @@ body {
   transform: translateY(0);
 }
 
+.index-work {
+  padding: 10px 20px;
+}
+
 .index-work,
 .work {
   background: var(--surface);

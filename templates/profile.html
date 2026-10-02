@@ -70,17 +70,28 @@
             </div>
         </div>
 
-        <div class="index-work" id="indexContent" style="display: none;"></div>
-    </main>
+        <div class="work">
+            <div class="work-tabs" data-tabs role="tablist">
+                <button class="work-tab work-tab--active" data-tab-target="projectContent" role="tab"
+                    aria-selected="true">
+                    Просмотр
+                </button>
+                <button class="work-tab" data-tab-target="worksContent" role="tab" aria-selected="false">
+                    Проекты
+                </button>
+            </div>
 
-    
+            <div class="work-content" id="projectContent">
+            </div>
 
-    <div class="projects-section">
-        <h2 class="section-title">Проекты пользователя</h2>
-        <div class="projects-list" id="projectsList">
-
+            <div class="work-content" id="worksContent" hidden>
+                <div class="projects-section">
+                    <h2 class="section-title">Проекты пользователя</h2>
+                    <div class="projects-list" id="projectsList"></div>
+                </div>
+            </div>
         </div>
-    </div>
+    </main>
 
     <script src="../js/profile/index.js"></script>
     <script>const pageName = "profile";</script>
@@ -88,6 +99,7 @@
     <script src="../js/breadcrumbs.js"></script>
     <script src="../js/highlight.js"></script>
     <script src="../js/theme.js"></script>
+    <script src="../js/work-tab.js"></script>
     <script src="../js/profile.js"></script>
 </body>
 
