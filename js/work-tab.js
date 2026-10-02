@@ -26,4 +26,22 @@
             c.hidden = c.id !== targetId;
         });
     }
+
+    window.activateTab = function (targetId) {
+        const container = document.querySelector('[data-tabs]');
+        if (!container) return;
+
+        const btn = container.querySelector(`.work-tab[data-tab-target="${targetId}"]`);
+        if (!btn) return;
+
+        switchTab(container, btn, targetId);
+    };
+
+    window.hideTab = function (targetId) {
+        const container = document.querySelector('[data-tabs]');
+        if (!container) return;
+
+        const btn = container.querySelector(`.work-tab[data-tab-target="${targetId}"]`);
+        if (btn) btn.style.display = 'none';
+    };
 })();

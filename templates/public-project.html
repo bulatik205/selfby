@@ -42,24 +42,41 @@
             </button>
         </div>
 
-        <div class="works-section">
-            <div class="index-work" id="indexContent" style="display: none;"></div>
-
-            <h2 class="section-title">Работы</h2>
-
-            <div class="tips" id="tipsBlock" style="display: none;">
-                <div class="tips-header">
-                    <h3>Подсказка</h3>
-                    <button class="tips-close" onclick="closeTips()">Закрыть подсказки</button>
-                </div>
-
-                <div class="tip">
-                    <span class="tip-icon">🏛️</span>
-                    <p>Это проект пользователя. Здесь собраны все работы принадлежащие этому проекту</p>
-                </div>
+        <div class="tips" id="tipsBlock" style="display: none;">
+            <div class="tips-header">
+                <h3>Подсказка</h3>
+                <button class="tips-close" onclick="closeTips()">Закрыть подсказки</button>
             </div>
 
+            <div class="tip">
+                <span class="tip-icon">🏛️</span>
+                <p>Это проект пользователя. Здесь собраны все работы принадлежащие этому проекту</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">Работы</h2>
+
+        <div class="work">
+            <div class="work-tabs" data-tabs role="tablist">
+                <button class="work-tab work-tab--active" data-tab-target="projectContent" ...>Просмотр</button>
+                <button class="work-tab" data-tab-target="worksContent" ...>Проекты</button>
+            </div>
+
+            <div class="work-content" id="projectContent"></div>
+
+            <div class="work-content" id="worksContent" hidden>
+                <div class="works-section">
+                    <h2 class="section-title">Работы</h2>
+                    <div class="works-list" id="worksList"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="work-content" id="projectContent"></div>
+
+        <div class="work-content" id="worksContent" hidden>
             <div class="works-list" id="worksList"></div>
+        </div>
         </div>
 
         <div class="nav-footer">
@@ -74,6 +91,7 @@
     <script src="../../js/breadcrumbs.js"></script>
     <script src="../../js/highlight.js"></script>
     <script src="../../js/theme.js"></script>
+    <script src="../../js/work-tab.js"></script>
     <script src="../../js/public-project/index.js"></script>
 </body>
 
