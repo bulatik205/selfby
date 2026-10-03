@@ -39,9 +39,9 @@ jobs:
 
       - name: Deploy static
         run: |
-          rsync -avz \
+          rsync -avz --ignore-missing-args \
             -e "ssh -p ${{ secrets.SSH_PORT }} -i ~/.ssh/id_ed25519" \
-            ./templates ./styles ./js ./images ./videos \
+            ./templates ./styles ./js ./images ./videos ./favicon.ico \
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/opt/selfby/
 
       - name: Restart service
