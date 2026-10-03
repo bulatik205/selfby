@@ -260,6 +260,10 @@
     border-radius: 25px;
   }
 }
+html {
+  scrollbar-gutter: stable;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -367,10 +371,6 @@ body {
 }
 .nav-footer button:active {
   transform: translateY(0);
-}
-
-.index-work {
-  padding: 10px 20px;
 }
 
 .index-work,

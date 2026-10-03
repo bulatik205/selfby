@@ -258,4 +258,7 @@
     height: auto;
     border-radius: 25px;
   }
+}
+html {
+  scrollbar-gutter: stable;
 }/*# sourceMappingURL=menu.css.map */

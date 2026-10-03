@@ -184,3 +184,7 @@ $border-accent:     2px solid var(--accent);
 $border-white-soft: 2px solid var(--border-soft);
 
 @import 'header';
+
+html {
+  scrollbar-gutter: stable;
+}

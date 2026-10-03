@@ -261,6 +261,10 @@
     border-radius: 25px;
   }
 }
+html {
+  scrollbar-gutter: stable;
+}
+
 * {
   margin: 0;
   padding: 0;

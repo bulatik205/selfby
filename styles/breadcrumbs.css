@@ -259,6 +259,10 @@
     border-radius: 25px;
   }
 }
+html {
+  scrollbar-gutter: stable;
+}
+
 .breadcrumbs {
   display: flex;
   align-items: center;

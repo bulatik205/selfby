@@ -259,6 +259,10 @@
     border-radius: 25px;
   }
 }
+html {
+  scrollbar-gutter: stable;
+}
+
 .like-btn {
   display: inline-flex;
   align-items: center;

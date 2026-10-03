@@ -259,6 +259,10 @@
     border-radius: 25px;
   }
 }
+html {
+  scrollbar-gutter: stable;
+}
+
 .tips {
   display: flex;
   flex-direction: column;
