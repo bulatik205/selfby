@@ -196,6 +196,10 @@ func main() {
 
 	http.HandleFunc("GET /api/v1/getDashboardStats", api.GetDashboardStats(db))
 
+	http.HandleFunc("/favicon.ico", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "favicon.ico")
+	})
+
 	fmt.Printf("Сервер запущен на http://localhost:%s\n", cfg.ServerPort)
 	http.ListenAndServe(":"+cfg.ServerPort, nil)
 }
