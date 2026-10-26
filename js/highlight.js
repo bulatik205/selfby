@@ -1,4 +1,6 @@
 (function () {
+    let isMathJaxLoaded = false;
+
     function wrapCodeBlocks(root) {
         const scope = root || document;
         scope.querySelectorAll('pre > code').forEach(code => {
@@ -56,10 +58,13 @@
     }
 
     function renderMath() {
-        if (window.MathJax && window.MathJax.typesetPromise) {
-            window.MathJax.typesetPromise().catch(function (err) {
-                console.error('MathJax error:', err.message);
-            });
+        if (isMathJaxLoaded && window.MathJax && window.MathJax.typesetPromise) {
+            const targets = document.querySelectorAll('#workContent, .index-work, .project-content');
+            if (targets.length > 0) {
+                window.MathJax.typesetPromise(Array.from(targets)).catch(function (err) {
+                    console.error('MathJax error:', err.message);
+                });
+            }
         }
     }
 
@@ -77,6 +82,7 @@
             startup: {
                 pageReady: () => {
                     return window.MathJax.startup.defaultPageReady().then(() => {
+                        isMathJaxLoaded = true;
                         renderMath();
                     });
                 }
@@ -117,21 +123,21 @@
                                 wrapCodeBlocks(node);
                             }
                         }
-                        
-                        if (node.matches && (node.matches('#workContent') || node.matches('.index-work') || node.querySelector('#workContent'))) {
+
+                        if (node.matches && (node.matches('#workContent') || node.matches('.index-work'))) {
+                            shouldRenderMath = true;
+                        } else if (node.querySelector('#workContent, .index-work')) {
                             shouldRenderMath = true;
                         }
                     }
                 }
                 
                 if (shouldRenderMath) {
-                    setTimeout(renderMath, 50); 
+                    renderMath();
                 }
             });
 
             observer.observe(document.body, { childList: true, subtree: true });
-            
-            renderMath();
         };
 
         script.onerror = function () {
