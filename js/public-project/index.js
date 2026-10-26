@@ -73,6 +73,16 @@ function renderIndexWork(project) {
     if (hasIndexWork) {
         if (projectContent) {
             projectContent.innerHTML = project.index_work.content_html;
+            
+            const renderFormulas = () => {
+                if (window.MathJax && window.MathJax.typesetPromise) {
+                    window.MathJax.typesetPromise([projectContent]).catch(console.error);
+                } else {
+                    setTimeout(renderFormulas, 500);
+                }
+            };
+            renderFormulas();
+
         }
     } else {
         if (window.hideTab) {
@@ -117,7 +127,6 @@ function displayWorks(works) {
     });
 }
 
-// === Ошибка ===
 function showError(message) {
     projectTitle.textContent = message;
     projectDescription.textContent = '';

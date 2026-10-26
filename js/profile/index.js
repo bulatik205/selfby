@@ -62,6 +62,16 @@ function renderIndexWork(profile) {
     if (hasIndexWork) {
         if (projectContent) {
             projectContent.innerHTML = profile.index_work.content_html;
+            
+            const renderFormulas = () => {
+                if (window.MathJax && window.MathJax.typesetPromise) {
+                    window.MathJax.typesetPromise([projectContent]).catch(console.error);
+                } else {
+                    setTimeout(renderFormulas, 500);
+                }
+            };
+            renderFormulas();
+
         }
     } else {
         if (window.hideTab) {
