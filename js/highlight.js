@@ -55,10 +55,9 @@
         });
     }
 
-    function renderMath(root) {
-        const scope = root || document;
+    function renderMath() {
         if (window.MathJax && window.MathJax.typesetPromise) {
-            window.MathJax.typesetPromise([scope]).catch(function (err) {
+            window.MathJax.typesetPromise().catch(function (err) {
                 console.error('MathJax error:', err.message);
             });
         }
@@ -102,6 +101,7 @@
             wrapCodeBlocks();
 
             const observer = new MutationObserver(mutations => {
+                let shouldRenderMath = false;
                 for (const m of mutations) {
                     for (const node of m.addedNodes) {
                         if (node.nodeType !== 1) continue;
@@ -117,11 +117,21 @@
                                 wrapCodeBlocks(node);
                             }
                         }
+                        
+                        if (node.matches && (node.matches('#workContent') || node.matches('.index-work') || node.querySelector('#workContent'))) {
+                            shouldRenderMath = true;
+                        }
                     }
+                }
+                
+                if (shouldRenderMath) {
+                    setTimeout(renderMath, 50); 
                 }
             });
 
             observer.observe(document.body, { childList: true, subtree: true });
+            
+            renderMath();
         };
 
         script.onerror = function () {

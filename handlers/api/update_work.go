@@ -7,7 +7,6 @@ import (
 	"net/http"
 	"strings"
 
-	mathjax "github.com/litao91/goldmark-mathjax"
 	"github.com/yuin/goldmark"
 	"github.com/yuin/goldmark/extension"
 	"github.com/yuin/goldmark/parser"
@@ -66,7 +65,6 @@ func UpdateWork(db *sql.DB) http.HandlerFunc {
 				extension.Footnote,
 				extension.Typographer,
 				extension.CJK,
-				mathjax.MathJax,
 			),
 			goldmark.WithParserOptions(
 				parser.WithAutoHeadingID(),
@@ -78,8 +76,14 @@ func UpdateWork(db *sql.DB) http.HandlerFunc {
 			),
 		)
 
+		contentMD := req.ContentMD
+		contentMD = strings.ReplaceAll(contentMD, "\\[", "$$")
+		contentMD = strings.ReplaceAll(contentMD, "\\]", "$$")
+		contentMD = strings.ReplaceAll(contentMD, "\\(", "$")
+		contentMD = strings.ReplaceAll(contentMD, "\\)", "$")
+
 		var buf strings.Builder
-		if err := md.Convert([]byte(req.ContentMD), &buf); err != nil {
+		if err := md.Convert([]byte(contentMD), &buf); err != nil {
 			log.Println("Ошибка конвертации Markdown:", err)
 			respondWithError(w, http.StatusInternalServerError, "Ошибка обработки Markdown")
 			return
