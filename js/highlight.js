@@ -55,7 +55,40 @@
         });
     }
 
+    function renderMath(root) {
+        const scope = root || document;
+        if (window.MathJax && window.MathJax.typesetPromise) {
+            window.MathJax.typesetPromise([scope]).catch(function (err) {
+                console.error('MathJax error:', err.message);
+            });
+        }
+    }
+
     function boot() {
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            startup: {
+                pageReady: () => {
+                    return window.MathJax.startup.defaultPageReady().then(() => {
+                        renderMath();
+                    });
+                }
+            }
+        };
+
+        const mathJaxScript = document.createElement('script');
+        mathJaxScript.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+        mathJaxScript.async = true;
+        document.head.appendChild(mathJaxScript);
+
         const link = document.createElement('link');
         link.rel = 'stylesheet';
         link.href = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css';

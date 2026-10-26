@@ -409,6 +409,19 @@ body {
     }
 }
 
+mjx-container {
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: 100%;
+    padding: 5px 0;
+}
+
+mjx-container[display="true"] {
+    display: block;
+    text-align: center;
+    margin: 15px 0;
+}
+
 @media (max-width: $bp-lg) {
     .work-title {
         font-size: 28px;

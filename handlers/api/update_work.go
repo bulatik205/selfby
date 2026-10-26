@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"strings"
 
+	mathjax "github.com/litao91/goldmark-mathjax"
 	"github.com/yuin/goldmark"
 	"github.com/yuin/goldmark/extension"
 	"github.com/yuin/goldmark/parser"
@@ -65,6 +66,7 @@ func UpdateWork(db *sql.DB) http.HandlerFunc {
 				extension.Footnote,
 				extension.Typographer,
 				extension.CJK,
+				mathjax.MathJax,
 			),
 			goldmark.WithParserOptions(
 				parser.WithAutoHeadingID(),
