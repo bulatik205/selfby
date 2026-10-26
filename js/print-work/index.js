@@ -43,7 +43,7 @@
     function renderWork(work) {
         document.title = work.title;
 
-        linkFull = "selfby.ru/u/" + username + "/" + project + "/" + slug;
+        let linkFull = "selfby.ru/u/" + username + "/" + project + "/" + slug;
         link.innerHTML = linkFull;
         bodyEl.innerHTML = work.content_html || '<p>Нет контента</p>';
 
@@ -51,9 +51,19 @@
         articleEl.hidden = false;
         toolbarEl.hidden = false;
 
-        waitForResources().then(() => {
-            window.print();
-        });
+        const renderAndPrint = () => {
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                window.MathJax.typesetPromise([bodyEl]).then(() => {
+                    waitForResources().then(() => {
+                        window.print();
+                    });
+                }).catch(console.error);
+            } else {
+                setTimeout(renderAndPrint, 500);
+            }
+        };
+
+        renderAndPrint();
     }
 
     function waitForResources() {
@@ -74,12 +84,6 @@
         loadingEl.hidden = false;
         articleEl.hidden = true;
         toolbarEl.hidden = true;
-    }
-
-    function formatDate(iso) {
-        return new Date(iso).toLocaleDateString('ru-RU', {
-            year: 'numeric', month: 'long', day: 'numeric'
-        });
     }
 
     printBtn.addEventListener('click', () => {
