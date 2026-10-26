@@ -1,6 +1,4 @@
 (function () {
-    let isMathJaxLoaded = false;
-
     function wrapCodeBlocks(root) {
         const scope = root || document;
         scope.querySelectorAll('pre > code').forEach(code => {
@@ -57,35 +55,12 @@
         });
     }
 
-    function renderMath() {
-        if (isMathJaxLoaded && window.MathJax && window.MathJax.typesetPromise) {
-            const targets = document.querySelectorAll('#workContent, .index-work, .project-content');
-            if (targets.length > 0) {
-                window.MathJax.typesetPromise(Array.from(targets)).catch(function (err) {
-                    console.error('MathJax error:', err.message);
-                });
-            }
-        }
-    }
-
     function boot() {
         window.MathJax = {
             tex: {
                 inlineMath: [['$', '$'], ['\\(', '\\)']],
                 displayMath: [['$$', '$$'], ['\\[', '\\]']],
                 processEscapes: true
-            },
-            options: {
-                ignoreHtmlClass: 'tex2jax_ignore',
-                processHtmlClass: 'tex2jax_process'
-            },
-            startup: {
-                pageReady: () => {
-                    return window.MathJax.startup.defaultPageReady().then(() => {
-                        isMathJaxLoaded = true;
-                        renderMath();
-                    });
-                }
             }
         };
 
@@ -105,43 +80,12 @@
         script.onload = function () {
             highlightAll();
             wrapCodeBlocks();
-
-            const observer = new MutationObserver(mutations => {
-                let shouldRenderMath = false;
-                for (const m of mutations) {
-                    for (const node of m.addedNodes) {
-                        if (node.nodeType !== 1) continue;
-
-                        if (node.matches && node.matches('pre, pre code')) {
-                            const scope = node.closest('pre')?.parentElement || node.parentElement || node;
-                            highlightAll(scope);
-                            wrapCodeBlocks(scope);
-                        } else if (node.querySelectorAll) {
-                            const codes = node.querySelectorAll('pre code:not(.hljs)');
-                            if (codes.length) {
-                                highlightAll(node);
-                                wrapCodeBlocks(node);
-                            }
-                        }
-
-                        if (node.matches && (node.matches('#workContent') || node.matches('.index-work'))) {
-                            shouldRenderMath = true;
-                        } else if (node.querySelector('#workContent, .index-work')) {
-                            shouldRenderMath = true;
-                        }
-                    }
-                }
-                
-                if (shouldRenderMath) {
-                    renderMath();
-                }
+            
+            const observer = new MutationObserver(() => {
+                highlightAll();
+                wrapCodeBlocks();
             });
-
             observer.observe(document.body, { childList: true, subtree: true });
-        };
-
-        script.onerror = function () {
-            wrapCodeBlocks();
         };
 
         document.head.appendChild(script);

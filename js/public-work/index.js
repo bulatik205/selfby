@@ -22,14 +22,8 @@ async function loadWork() {
         const response = await fetch(`/api/v1/getPublicWork?username=${encodeURIComponent(username)}&project=${encodeURIComponent(projectNameFromUrl)}&slug=${encodeURIComponent(workSlug)}`);
 
         if (!response.ok) {
-            if (response.status === 403) {
-                showError('Это приватная работа');
-                return;
-            }
-            if (response.status === 404) {
-                showError('Работа не найдена');
-                return;
-            }
+            if (response.status === 403) { showError('Это приватная работа'); return; }
+            if (response.status === 404) { showError('Работа не найдена'); return; }
             throw new Error('Ошибка загрузки работы');
         }
 
@@ -38,18 +32,25 @@ async function loadWork() {
 
         document.title = `SelfBy: ${work.owner_name} - ${work.project_name} - ${work.title}`;
         workTitleMain.textContent = work.title;
-
         workViews.textContent = work.views;
 
         const createdDate = new Date(work.created_at);
         workDate.textContent = createdDate.toLocaleDateString('ru-RU', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
+            year: 'numeric', month: 'long', day: 'numeric'
         });
 
         if (work.content_html) {
             workContent.innerHTML = work.content_html;
+
+            const renderFormulas = () => {
+                if (window.MathJax && window.MathJax.typesetPromise) {
+                    window.MathJax.typesetPromise([workContent]).catch(console.error);
+                } else {
+                    setTimeout(renderFormulas, 500);
+                }
+            };
+            renderFormulas();
+
         } else {
             workContent.innerHTML = '<p>Нет контента</p>';
         }
@@ -71,7 +72,7 @@ async function checkEditAccess() {
             editBtn.style.display = 'block';
             editBtn.href = `/editor/${projectNameFromUrl}/${workSlug}`;
         }
-    } catch (error) {}
+    } catch (error) { }
 }
 
 function showError(message) {
@@ -79,10 +80,10 @@ function showError(message) {
     workViews.textContent = '0';
     workDate.textContent = '-';
     workContent.innerHTML = '';
-    
+
     const workMeta = document.querySelector('.work-meta');
     if (workMeta) workMeta.style.display = 'none';
-    
+
     editBtn.style.display = 'none';
 }
 
