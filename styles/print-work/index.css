@@ -506,14 +506,14 @@ header {
     color: #000;
     text-decoration: none;
   }
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  h1, h2, h3, h4, h5, h6 {
     -moz-column-break-after: avoid;
          break-after: avoid;
+  }
+  .code-block {
+    -moz-column-break-inside: avoid;
+         break-inside: avoid;
+    page-break-inside: avoid;
   }
   pre,
   blockquote,
@@ -521,6 +521,7 @@ header {
   img {
     -moz-column-break-inside: avoid;
          break-inside: avoid;
+    page-break-inside: avoid;
   }
   img {
     page-break-inside: avoid;

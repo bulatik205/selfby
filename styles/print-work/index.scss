@@ -276,13 +276,13 @@ header {
         text-decoration: none;
     }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
+    h1, h2, h3, h4, h5, h6 {
         break-after: avoid;
+    }
+    
+    .code-block {
+        break-inside: avoid;
+        page-break-inside: avoid;
     }
 
     pre,
@@ -290,6 +290,7 @@ header {
     table,
     img {
         break-inside: avoid;
+        page-break-inside: avoid;
     }
 
     img {
